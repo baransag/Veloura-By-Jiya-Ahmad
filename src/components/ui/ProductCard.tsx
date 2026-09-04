@@ -106,7 +106,7 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
     >
       <Link href={`/product/${product.slug}`} className="block">
         <div
-          className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-[#F6F3EE] border border-[#E8E1D5] transition-all duration-300 shadow-sm group-hover:shadow-xl group-hover:border-[#C5A880]/60"
+          className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-[#FAF3F5] border border-[#F0D5DE] transition-all duration-300 shadow-sm group-hover:shadow-xl group-hover:border-[#D45B7B]/70"
           style={{
             transform: isHovered
               ? `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(1.02, 1.02, 1.02)`
@@ -134,12 +134,12 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
           {/* Luxury Tags & Badges */}
           <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
             {hasDiscount && (
-              <span className="bg-[#121012] text-[#FAF9F6] text-[9px] font-bold px-2.5 py-0.5 rounded-full tracking-wider uppercase border border-[#C5A880]/40 shadow-sm">
+              <span className="bg-gradient-to-r from-[#8E1E3B] to-[#D45B7B] text-white text-[9px] font-bold px-2.5 py-0.5 rounded-full tracking-wider uppercase shadow-sm">
                 {discountPercent}% OFF
               </span>
             )}
             {product.stock <= 0 && (
-              <span className="bg-[#6B2835] text-white text-[9px] font-bold px-2.5 py-0.5 rounded-full tracking-wider uppercase shadow-sm">
+              <span className="bg-[#420D1A] text-white text-[9px] font-bold px-2.5 py-0.5 rounded-full tracking-wider uppercase shadow-sm">
                 Sold Out
               </span>
             )}
@@ -150,7 +150,7 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
             <button
               onClick={handleAddToCart}
               disabled={product.stock <= 0}
-              className="flex-1 py-2.5 px-3 bg-[#FAF9F6] text-[#121012] hover:bg-[#C5A880] hover:text-[#121012] rounded-xl text-[11px] font-bold tracking-wider uppercase transition-colors flex items-center justify-center gap-1.5 disabled:opacity-50 shadow-md"
+              className="flex-1 py-2.5 px-3 bg-white text-[#1A1014] hover:bg-gradient-to-r hover:from-[#8E1E3B] hover:to-[#D45B7B] hover:text-white rounded-xl text-[11px] font-bold tracking-wider uppercase transition-all flex items-center justify-center gap-1.5 disabled:opacity-50 shadow-md"
             >
               <ShoppingBag className="w-3.5 h-3.5" />
               <span>{product.stock > 0 ? "Add to Bag" : "Sold Out"}</span>
@@ -170,15 +170,15 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
       {/* Product Details */}
       <div className="mt-3.5 flex flex-col space-y-1">
         {product.category?.name && (
-          <span className="text-[10px] uppercase tracking-[0.22em] text-[#C5A880] font-semibold">
+          <span className="text-[10px] uppercase tracking-[0.22em] text-[#A62B4A] font-semibold">
             {product.category.name}
           </span>
         )}
-        <Link href={`/product/${product.slug}`} className="hover:text-[#C5A880] transition-colors">
-          <h3 className="text-sm font-medium text-[#121012] line-clamp-1">{product.name}</h3>
+        <Link href={`/product/${product.slug}`} className="hover:text-[#8E1E3B] transition-colors">
+          <h3 className="text-sm font-medium text-[#1A1014] line-clamp-1">{product.name}</h3>
         </Link>
         <div className="flex items-center gap-2 pt-0.5">
-          <span className="text-sm font-bold text-[#121012]">
+          <span className="text-sm font-bold text-[#8E1E3B]">
             Rs. {activePrice.toLocaleString()}
           </span>
           {hasDiscount && (

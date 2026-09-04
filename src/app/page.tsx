@@ -27,27 +27,27 @@ export default async function HomePage() {
   const whatsAppUrl = getBaseWhatsAppUrl(OFFICIAL_WHATSAPP_NUMBER);
 
   return (
-    <div className="space-y-16 sm:space-y-24 bg-[#FAF9F6] text-[#121012]">
+    <div className="space-y-16 sm:space-y-24 bg-[#FCF8F9] text-[#1A1014]">
       {/* ── 1. 3D Animated Hero Banner with Picture Slides ─────────────────── */}
       <HeroBanner />
 
       {/* ── 2. Luxury Atelier Marquee Strip ────────────────────────────────── */}
-      <div className="border-y border-[#E8E1D5] bg-white py-4 overflow-hidden shadow-xs">
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-around text-[11px] uppercase tracking-[0.25em] text-[#6B5E55] font-medium whitespace-nowrap overflow-x-auto gap-8">
+      <div className="border-y border-[#F0D5DE] bg-white py-4 overflow-hidden shadow-xs">
+        <div className="max-w-7xl mx-auto px-4 flex items-center justify-around text-[11px] uppercase tracking-[0.25em] text-[#8E1E3B] font-medium whitespace-nowrap overflow-x-auto gap-8">
           <div className="flex items-center gap-2">
-            <Gem className="w-3.5 h-3.5 text-[#C5A880]" />
+            <Gem className="w-3.5 h-3.5 text-[#D45B7B]" />
             <span>18K Real Gold Plated</span>
           </div>
           <div className="hidden sm:flex items-center gap-2">
-            <Sparkles className="w-3.5 h-3.5 text-[#C5A880]" />
+            <Sparkles className="w-3.5 h-3.5 text-[#D45B7B]" />
             <span>Bio-Fermented Silk Peptides</span>
           </div>
           <div className="flex items-center gap-2">
-            <Award className="w-3.5 h-3.5 text-[#C5A880]" />
+            <Award className="w-3.5 h-3.5 text-[#D45B7B]" />
             <span>Signature Velvet Gift Box</span>
           </div>
           <div className="hidden md:flex items-center gap-2">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#C5A880]" />
+            <ShieldCheck className="w-3.5 h-3.5 text-[#D45B7B]" />
             <span>Cash on Delivery Across Pakistan</span>
           </div>
         </div>
@@ -56,10 +56,10 @@ export default async function HomePage() {
       {/* ── 3. Curated Atelier Universes (Visual Category Portals) ─────────── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-2 mb-12">
-          <span className="text-[11px] uppercase tracking-[0.3em] text-[#C5A880] font-bold block">
+          <span className="text-[11px] uppercase tracking-[0.3em] text-[#D45B7B] font-bold block">
             Signature Curation
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#121012] font-light tracking-wide">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#1A1014] font-light tracking-wide">
             The Atelier Universes
           </h2>
           <p className="text-xs sm:text-sm text-zinc-500 max-w-md mx-auto font-light">
@@ -174,19 +174,19 @@ export default async function HomePage() {
 
       {/* ── 5. French Haute Craftsmanship Showcase ─────────────────────────── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        <div className="rounded-3xl bg-gradient-to-r from-[#141214] via-[#1E191C] to-[#141214] text-white p-8 sm:p-14 border border-[#C5A880]/30 relative overflow-hidden shadow-2xl">
-          <div className="absolute right-0 bottom-0 w-[500px] h-[500px] bg-[#C5A880]/15 rounded-full blur-[140px] pointer-events-none" />
+        <div className="rounded-3xl bg-gradient-to-r from-[#2E0B14] via-[#4A1220] to-[#2E0B14] text-white p-8 sm:p-14 border border-[#D45B7B]/30 relative overflow-hidden shadow-2xl">
+          <div className="absolute right-0 bottom-0 w-[500px] h-[500px] bg-[#D45B7B]/15 rounded-full blur-[140px] pointer-events-none" />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-[#C5A880]/30 text-[#E8D4B5] text-[10px] uppercase tracking-widest font-semibold">
-                <Sparkles className="w-3 h-3 text-[#C5A880]" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-[#D45B7B]/30 text-[#FDE8EF] text-[10px] uppercase tracking-widest font-semibold">
+                <Sparkles className="w-3 h-3 text-[#E8A5B7]" />
                 <span>The Veloura Standard</span>
               </div>
 
               <h2 className="font-serif text-3xl sm:text-5xl font-light leading-[1.2] text-[#FAF9F6]">
                 Hypoallergenic 18K Real Gold, <br />
-                <span className="italic font-extralight text-[#E8D4B5]">
+                <span className="italic font-extralight text-[#E8A5B7]">
                   Bio-Silk Peptides & Keepsake Velvet
                 </span>
               </h2>
@@ -198,13 +198,13 @@ export default async function HomePage() {
               <div className="pt-2 flex flex-wrap gap-4">
                 <Link
                   href="/shop?category=fine-jewelry"
-                  className="px-7 py-3.5 bg-[#C5A880] hover:bg-[#D4B991] text-[#121012] text-xs uppercase tracking-widest font-bold rounded-lg transition-colors shadow-lg"
+                  className="px-7 py-3.5 bg-gradient-to-r from-[#8E1E3B] to-[#D45B7B] hover:brightness-110 text-white text-xs uppercase tracking-widest font-bold rounded-xl transition-all shadow-lg"
                 >
                   Explore Fine Jewels
                 </Link>
                 <Link
                   href="/shop?category=luxe-makeup"
-                  className="px-7 py-3.5 bg-white/10 hover:bg-white/20 text-white text-xs uppercase tracking-widest font-medium rounded-lg border border-white/20 transition-colors"
+                  className="px-7 py-3.5 bg-white/10 hover:bg-white/20 text-white text-xs uppercase tracking-widest font-medium rounded-xl border border-white/20 transition-colors"
                 >
                   Explore Lip Elixirs
                 </Link>
@@ -212,7 +212,7 @@ export default async function HomePage() {
             </div>
 
             <div className="lg:col-span-5 flex justify-center">
-              <div className="relative w-72 aspect-[3/4] rounded-2xl overflow-hidden border border-[#C5A880]/40 shadow-2xl">
+              <div className="relative w-72 aspect-[3/4] rounded-2xl overflow-hidden border border-[#D45B7B]/40 shadow-2xl">
                 <img
                   src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=800&auto=format&fit=crop"
                   alt="Veloura Craftsmanship"
@@ -220,7 +220,7 @@ export default async function HomePage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 p-3 bg-black/60 backdrop-blur-md rounded-xl border border-white/10 text-center">
-                  <span className="text-[10px] uppercase tracking-widest text-[#C5A880] block font-semibold">
+                  <span className="text-[10px] uppercase tracking-widest text-[#E8A5B7] block font-semibold">
                     100% Guaranteed Satisfaction
                   </span>
                   <span className="text-xs text-white font-serif">7-Day Easy Concierge Exchange</span>

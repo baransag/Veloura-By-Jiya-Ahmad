@@ -31,8 +31,8 @@ export function Navbar() {
   return (
     <>
       {/* Top Silk Luxury Announcement Bar */}
-      <div className="bg-[#121012] text-[#FAF9F6] text-[11px] tracking-[0.22em] py-2 px-4 text-center uppercase font-medium flex items-center justify-between border-b border-[#C5A880]/25">
-        <div className="hidden md:flex items-center gap-2 w-48 text-left text-[10px] text-[#C5A880]">
+      <div className="bg-[#420D1A] text-[#FDE8EF] text-[11px] tracking-[0.22em] py-2 px-4 text-center uppercase font-medium flex items-center justify-between border-b border-[#D45B7B]/30">
+        <div className="hidden md:flex items-center gap-2 w-48 text-left text-[10px] text-[#E8A5B7]">
           <Sparkles className="w-3 h-3" />
           <span>Atelier Concierge</span>
         </div>
@@ -44,7 +44,7 @@ export function Navbar() {
             href={whatsAppUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-[#FAF9F6] hover:text-[#C5A880] transition-colors"
+            className="flex items-center gap-1.5 text-[#FDE8EF] hover:text-[#E8A5B7] transition-colors"
           >
             <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
             <span>+92 321 9954325</span>
@@ -56,38 +56,38 @@ export function Navbar() {
       <header
         className={`sticky top-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? "bg-[#FAF9F6]/95 backdrop-blur-md shadow-sm py-3.5 border-b border-[#E8E1D5]"
-            : "bg-[#FAF9F6] py-5 border-b border-[#E8E1D5]"
+            ? "bg-[#FCF8F9]/95 backdrop-blur-md shadow-sm py-3.5 border-b border-[#F0D5DE]"
+            : "bg-[#FCF8F9] py-5 border-b border-[#F0D5DE]"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-[#121012] hover:text-[#C5A880]"
+            className="lg:hidden p-2 text-[#1A1014] hover:text-[#8E1E3B]"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-7 text-xs tracking-[0.16em] uppercase font-medium text-[#121012]">
-            <Link href="/" className="hover:text-[#C5A880] transition-colors">
+          <nav className="hidden lg:flex items-center space-x-7 text-xs tracking-[0.16em] uppercase font-medium text-[#1A1014]">
+            <Link href="/" className="hover:text-[#8E1E3B] transition-colors">
               Home
             </Link>
-            <Link href="/shop?category=luxe-makeup" className="hover:text-[#C5A880] transition-colors">
+            <Link href="/shop?category=luxe-makeup" className="hover:text-[#8E1E3B] transition-colors">
               Makeup & Lips
             </Link>
-            <Link href="/shop?category=fine-jewelry" className="hover:text-[#C5A880] transition-colors">
+            <Link href="/shop?category=fine-jewelry" className="hover:text-[#8E1E3B] transition-colors">
               Fine Jewelry
             </Link>
-            <Link href="/shop?category=silk-skincare" className="hover:text-[#C5A880] transition-colors">
+            <Link href="/shop?category=silk-skincare" className="hover:text-[#8E1E3B] transition-colors">
               Silk Skincare
             </Link>
-            <Link href="/shop?category=hair-fragrance" className="hover:text-[#C5A880] transition-colors">
+            <Link href="/shop?category=hair-fragrance" className="hover:text-[#8E1E3B] transition-colors">
               Hair & Mist
             </Link>
-            <Link href="/order-tracking" className="hover:text-[#C5A880] transition-colors text-zinc-500">
+            <Link href="/order-tracking" className="hover:text-[#8E1E3B] transition-colors text-zinc-500">
               Track Order
             </Link>
           </nav>
@@ -95,20 +95,20 @@ export function Navbar() {
           {/* Brand Wordmark */}
           <div className="text-center">
             <Link href="/" className="inline-block group">
-              <span className="font-serif text-2xl sm:text-3xl tracking-[0.28em] font-light text-[#121012] group-hover:text-[#C5A880] transition-colors">
+              <span className="font-serif text-2xl sm:text-3xl tracking-[0.28em] font-light text-[#1A1014] group-hover:text-[#8E1E3B] transition-colors">
                 VELOURA
               </span>
-              <span className="block text-[8px] tracking-[0.45em] text-[#C5A880] uppercase -mt-1 font-sans">
+              <span className="block text-[8px] tracking-[0.45em] text-[#8E1E3B] uppercase -mt-1 font-sans font-semibold">
                 Beauty & Fine Jewels
               </span>
             </Link>
           </div>
 
           {/* Right Action Icons */}
-          <div className="flex items-center space-x-5 text-[#1E191B]">
+          <div className="flex items-center space-x-5 text-[#1A1014]">
             <Link
               href="/shop"
-              className="p-1 hover:text-[#632839] transition-colors hidden sm:block"
+              className="p-1 hover:text-[#8E1E3B] transition-colors hidden sm:block"
               title="Search Atelier"
             >
               <Search className="w-5 h-5" />
@@ -127,14 +127,14 @@ export function Navbar() {
             {user?.role === "ADMIN" ? (
               <Link
                 href="/admin"
-                className="text-[11px] tracking-wider uppercase font-semibold text-[#632839] border border-[#632839]/50 px-2.5 py-1 rounded hover:bg-[#632839] hover:text-white transition-colors"
+                className="text-[11px] tracking-wider uppercase font-semibold text-[#8E1E3B] border border-[#8E1E3B]/50 px-2.5 py-1 rounded-full hover:bg-[#8E1E3B] hover:text-white transition-colors"
               >
                 Admin
               </Link>
             ) : user ? (
               <Link
                 href="/account"
-                className="p-1 hover:text-[#632839] transition-colors flex items-center gap-1.5"
+                className="p-1 hover:text-[#8E1E3B] transition-colors flex items-center gap-1.5"
                 title="My Account"
               >
                 <User className="w-5 h-5" />
@@ -143,7 +143,7 @@ export function Navbar() {
             ) : (
               <Link
                 href="/account/login"
-                className="p-1 hover:text-[#632839] transition-colors flex items-center gap-1"
+                className="p-1 hover:text-[#8E1E3B] transition-colors flex items-center gap-1"
                 title="Customer Sign In"
               >
                 <User className="w-5 h-5" />
@@ -154,12 +154,12 @@ export function Navbar() {
             {/* Shopping Bag */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className="relative p-1 hover:text-[#632839] transition-colors group flex items-center"
+              className="relative p-1 hover:text-[#8E1E3B] transition-colors group flex items-center"
               aria-label="Open Cart"
             >
-              <ShoppingBag className="w-5 h-5 text-[#1E191B] group-hover:text-[#632839]" />
+              <ShoppingBag className="w-5 h-5 text-[#1A1014] group-hover:text-[#8E1E3B]" />
               {totalItems > 0 && (
-                <span className="absolute -top-1 -right-2 bg-[#632839] text-[#FAF8F5] text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-2 bg-[#8E1E3B] text-[#FCF8F9] text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center shadow">
                   {totalItems}
                 </span>
               )}

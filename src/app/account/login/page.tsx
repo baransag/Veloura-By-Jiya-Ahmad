@@ -39,7 +39,11 @@ export default function CustomerLoginPage() {
         throw new Error(data.error || "Authentication failed");
       }
 
-      router.push("/account");
+      if (data.user?.role === "ADMIN") {
+        window.location.href = "/admin";
+      } else {
+        window.location.href = "/account";
+      }
     } catch (err: any) {
       setError(err.message || "An error occurred during authentication");
     } finally {
@@ -51,6 +55,13 @@ export default function CustomerLoginPage() {
     setIsRegister(false);
     setEmail("sarah@veloura.com");
     setPassword("password123");
+    setError("");
+  };
+
+  const fillAdminDemo = () => {
+    setIsRegister(false);
+    setEmail("admin@veloura.pk");
+    setPassword("admin123");
     setError("");
   };
 
@@ -143,14 +154,22 @@ export default function CustomerLoginPage() {
           </button>
 
           {/* Quick Demo Pre-fill */}
-          <div className="pt-2">
+          <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <button
+              type="button"
+              onClick={fillAdminDemo}
+              className="w-full py-2 px-3 bg-[#FAF8F5] hover:bg-[#F3ECE2] border border-[#C5A880]/50 text-[#1E191B] rounded-lg text-[10px] font-semibold flex items-center justify-center gap-1.5 transition-colors"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-[#C5A880]" />
+              <span>Fill Admin (admin@veloura.pk)</span>
+            </button>
             <button
               type="button"
               onClick={fillCustomerDemo}
-              className="w-full py-2 px-3 bg-[#FAF8F5] hover:bg-[#F3ECE2] border border-[#EAE2D5] text-[#1E191B] rounded-lg text-[11px] font-medium flex items-center justify-center gap-2 transition-colors"
+              className="w-full py-2 px-3 bg-[#FAF8F5] hover:bg-[#F3ECE2] border border-[#EAE2D5] text-[#1E191B] rounded-lg text-[10px] font-medium flex items-center justify-center gap-1.5 transition-colors"
             >
-              <Sparkles className="w-3.5 h-3.5 text-[#C9A464]" />
-              <span>Fill Demo Customer (sarah@veloura.com)</span>
+              <Sparkles className="w-3.5 h-3.5 text-[#C5A880]" />
+              <span>Fill Client (sarah@veloura.com)</span>
             </button>
           </div>
 

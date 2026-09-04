@@ -120,13 +120,13 @@ export function HeroBanner() {
 
       {/* Ambient Liquid Silk Glow Orbs */}
       <div
-        className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-[#C5A880]/15 rounded-full blur-[140px] pointer-events-none z-10 transition-transform duration-700"
+        className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-[#D45B7B]/20 rounded-full blur-[140px] pointer-events-none z-10 transition-transform duration-700"
         style={{
           transform: `translate3d(${mousePos.x * 40}px, ${mousePos.y * 40}px, 0)`,
         }}
       />
       <div
-        className="absolute bottom-10 right-10 w-[450px] h-[450px] bg-[#7A3E4D]/20 rounded-full blur-[130px] pointer-events-none z-10 transition-transform duration-700"
+        className="absolute bottom-10 right-10 w-[450px] h-[450px] bg-[#8E1E3B]/30 rounded-full blur-[130px] pointer-events-none z-10 transition-transform duration-700"
         style={{
           transform: `translate3d(${mousePos.x * -35}px, ${mousePos.y * -35}px, 0)`,
         }}
@@ -144,15 +144,15 @@ export function HeroBanner() {
             }}
           >
             {/* Atelier Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-[#C5A880]/40 text-[#E8D4B5] text-[11px] uppercase tracking-[0.28em] font-medium shadow-lg">
-              <Sparkles className="w-3.5 h-3.5 text-[#C5A880]" />
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-[#E8A5B7]/40 text-[#FDE8EF] text-[11px] uppercase tracking-[0.28em] font-medium shadow-lg">
+              <Sparkles className="w-3.5 h-3.5 text-[#E8A5B7]" />
               <span>{slide.tag}</span>
             </div>
 
             {/* Main Headline */}
             <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-light tracking-[0.04em] text-[#FAF9F6] leading-[1.12]">
               {slide.headingMain} <br />
-              <span className="italic font-extralight text-transparent bg-clip-text bg-gradient-to-r from-[#F4ECE4] via-[#E8D4B5] to-[#C5A880]">
+              <span className="italic font-extralight text-transparent bg-clip-text bg-gradient-to-r from-[#FFF0F4] via-[#F4B2C2] to-[#E8A5B7]">
                 {slide.headingAccent}
               </span>
             </h1>
@@ -166,7 +166,7 @@ export function HeroBanner() {
             <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <Link
                 href={slide.primaryCta.href}
-                className="px-8 py-4 bg-gradient-to-r from-[#C5A880] to-[#AF8B5B] hover:from-[#D4B991] hover:to-[#BD9867] text-[#0F0D0E] text-xs uppercase tracking-[0.25em] font-bold rounded-lg shadow-2xl hover:shadow-[0_0_25px_rgba(197,168,128,0.4)] transition-all flex items-center justify-center gap-2"
+                className="px-8 py-4 bg-gradient-to-r from-[#8E1E3B] via-[#A62B4A] to-[#D45B7B] hover:from-[#A62B4A] hover:to-[#E8A5B7] text-white text-xs uppercase tracking-[0.25em] font-bold rounded-lg shadow-2xl hover:shadow-[0_0_30px_rgba(212,91,123,0.45)] transition-all flex items-center justify-center gap-2"
               >
                 <span>{slide.primaryCta.text}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -195,15 +195,15 @@ export function HeroBanner() {
             {/* Value Highlights */}
             <div className="pt-8 grid grid-cols-3 gap-4 border-t border-white/10 text-[11px] text-zinc-400 font-light tracking-wider max-w-lg">
               <div className="flex items-center gap-2">
-                <Gem className="w-3.5 h-3.5 text-[#C5A880] flex-shrink-0" />
+                <Gem className="w-3.5 h-3.5 text-[#E8A5B7] flex-shrink-0" />
                 <span>18K Real Plated</span>
               </div>
               <div className="flex items-center gap-2">
-                <Award className="w-3.5 h-3.5 text-[#C5A880] flex-shrink-0" />
+                <Award className="w-3.5 h-3.5 text-[#E8A5B7] flex-shrink-0" />
                 <span>Velvet Keepsake Box</span>
               </div>
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#C5A880] flex-shrink-0" />
+                <ShieldCheck className="w-3.5 h-3.5 text-[#E8A5B7] flex-shrink-0" />
                 <span>Cash on Delivery</span>
               </div>
             </div>
@@ -212,7 +212,7 @@ export function HeroBanner() {
           {/* Right Column: 3D Floating Interactive Spotlight Card */}
           <div className="lg:col-span-5 hidden lg:flex justify-center">
             <div
-              className="relative w-80 rounded-2xl p-4 bg-white/10 backdrop-blur-xl border border-[#C5A880]/30 shadow-2xl group hover:border-[#C5A880]/60 transition-all duration-500"
+              className="relative w-80 rounded-2xl p-4 bg-white/10 backdrop-blur-xl border border-[#E8A5B7]/30 shadow-2xl group hover:border-[#D45B7B]/70 transition-all duration-500"
               style={{
                 transform: `perspective(1000px) rotateY(${mousePos.x * 20}deg) rotateX(${
                   mousePos.y * -20
@@ -226,7 +226,7 @@ export function HeroBanner() {
                   alt={slide.floatingBadge.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute top-3 left-3 bg-[#0F0D0E]/80 backdrop-blur-md px-3 py-1 rounded-full text-[9px] uppercase tracking-widest text-[#E8D4B5] border border-[#C5A880]/30">
+                <div className="absolute top-3 left-3 bg-[#1A0A10]/80 backdrop-blur-md px-3 py-1 rounded-full text-[9px] uppercase tracking-widest text-[#FDE8EF] border border-[#E8A5B7]/30">
                   {slide.floatingBadge.tag}
                 </div>
               </div>
@@ -234,13 +234,13 @@ export function HeroBanner() {
               <div className="p-4 flex items-center justify-between text-xs">
                 <div>
                   <h4 className="font-serif text-sm text-white">{slide.floatingBadge.title}</h4>
-                  <span className="text-[#C5A880] font-semibold text-sm mt-0.5 block">
+                  <span className="text-[#E8A5B7] font-semibold text-sm mt-0.5 block">
                     {slide.floatingBadge.price}
                   </span>
                 </div>
                 <Link
                   href="/shop"
-                  className="p-2.5 rounded-full bg-[#C5A880] text-[#0F0D0E] hover:bg-white transition-colors"
+                  className="p-2.5 rounded-full bg-gradient-to-r from-[#8E1E3B] to-[#D45B7B] text-white hover:brightness-110 transition-all shadow"
                   title="View Creation"
                 >
                   <ArrowRight className="w-4 h-4" />
@@ -258,7 +258,7 @@ export function HeroBanner() {
                 key={idx}
                 onClick={() => setCurrent(idx)}
                 className={`h-1.5 transition-all duration-500 rounded-full ${
-                  idx === current ? "w-10 bg-[#C5A880]" : "w-3 bg-white/20 hover:bg-white/40"
+                  idx === current ? "w-10 bg-gradient-to-r from-[#8E1E3B] to-[#D45B7B]" : "w-3 bg-white/20 hover:bg-white/40"
                 }`}
                 aria-label={`Go to slide ${idx + 1}`}
               />

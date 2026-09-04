@@ -4,13 +4,14 @@
 
 @layer base {
   :root {
-    --background: #FAF8F5;
-    --foreground: #1E191B;
-    --silk-pearl: #FAF8F5;
-    --silk-champagne: #F3ECE2;
-    --silk-rose: #E8D6CF;
-    --velvet-rosewood: #632839;
-    --gold-accent: #C9A464;
+    --background: #FCF8F9;
+    --foreground: #1A1014;
+    --rose-petal: #F7EBEF;
+    --rose-pink: #E8A5B7;
+    --rose-vibrant: #D45B7B;
+    --velvet-rouge: #8E1E3B;
+    --deep-wine: #5C1024;
+    --champagne-gold: #D4AF37;
   }
 
   body {
@@ -26,8 +27,8 @@
   }
 }
 
-/* Liquid Silk Flow Animation */
-@keyframes silkWave {
+/* Luxury Pink & Red Silk Flow Animation */
+@keyframes roseSilkWave {
   0% {
     background-position: 0% 50%;
   }
@@ -40,18 +41,18 @@
 }
 
 .liquid-silk-gradient {
-  background: linear-gradient(135deg, #1C1215 0%, #381B24 35%, #562737 60%, #2A141D 85%, #180F12 100%);
-  background-size: 300% 300%;
-  animation: silkWave 14s ease infinite;
+  background: linear-gradient(135deg, #2E0B14 0%, #5C1024 30%, #8E1E3B 55%, #B32E50 80%, #3D0C19 100%);
+  background-size: 250% 250%;
+  animation: roseSilkWave 12s ease infinite;
 }
 
 .liquid-silk-light {
-  background: linear-gradient(120deg, #FAF8F5 0%, #F5ECE5 30%, #EFE2DA 50%, #F8F1EB 70%, #FAF8F5 100%);
-  background-size: 250% 250%;
-  animation: silkWave 10s ease infinite;
+  background: linear-gradient(120deg, #FCF8F9 0%, #F8EBF0 30%, #F2DCE5 50%, #FAF0F4 70%, #FCF8F9 100%);
+  background-size: 200% 200%;
+  animation: roseSilkWave 9s ease infinite;
 }
 
-/* Subtle Pearlescent Silk Shimmer */
+/* Pearlescent Rose Sheen */
 .silk-sheen {
   position: relative;
   overflow: hidden;
@@ -66,18 +67,18 @@
   height: 200%;
   background: linear-gradient(
     60deg,
-    rgba(255, 255, 255, 0) 20%,
-    rgba(255, 240, 230, 0.15) 40%,
-    rgba(201, 164, 100, 0.2) 50%,
-    rgba(255, 240, 230, 0.15) 60%,
-    rgba(255, 255, 255, 0) 80%
+    rgba(255, 255, 255, 0) 25%,
+    rgba(255, 215, 225, 0.25) 45%,
+    rgba(212, 91, 123, 0.3) 50%,
+    rgba(255, 215, 225, 0.25) 55%,
+    rgba(255, 255, 255, 0) 75%
   );
   transform: rotate(25deg);
-  animation: silkSheenMotion 8s infinite ease-in-out;
+  animation: roseSilkSheenMotion 7s infinite ease-in-out;
   pointer-events: none;
 }
 
-@keyframes silkSheenMotion {
+@keyframes roseSilkSheenMotion {
   0% {
     transform: translateX(-100%) translateY(-50%) rotate(25deg);
   }
@@ -86,36 +87,21 @@
   }
 }
 
-/* Glassmorphism & Cards */
-.glass-silk {
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(201, 164, 100, 0.22);
-}
-
-.glass-silk-dark {
-  background: rgba(28, 18, 21, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Custom Luxury Scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #FAF8F5;
+  background: #FCF8F9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #C9A464;
+  background: #C44569;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #632839;
+  background: #8E1E3B;
 }
