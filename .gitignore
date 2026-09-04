@@ -18,3 +18,5 @@ public/uploads/
 *.log
 npm-debug.log*
 Thumbs.db
+
+.vercel
