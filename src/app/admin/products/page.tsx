@@ -142,13 +142,21 @@ export default function AdminProductsListPage() {
                       </button>
                     </td>
                     <td className="p-4 text-right">
-                      <button
-                        onClick={() => handleDelete(prod.id)}
-                        className="p-1.5 text-zinc-400 hover:text-rose-400 transition-colors"
-                        title="Delete Product"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
+                      <div className="flex items-center justify-end gap-2">
+                        <Link
+                          href={`/admin/products/${prod.id}`}
+                          className="px-2.5 py-1 bg-white/10 hover:bg-[#C5A880] hover:text-[#121012] text-white text-[11px] font-semibold rounded transition-colors"
+                        >
+                          Edit
+                        </Link>
+                        <button
+                          onClick={() => handleDelete(prod.id)}
+                          className="p-1.5 text-zinc-400 hover:text-rose-400 transition-colors"
+                          title="Delete Product"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

@@ -31,8 +31,8 @@ export function Navbar() {
   return (
     <>
       {/* Top Silk Luxury Announcement Bar */}
-      <div className="bg-[#2D1620] text-[#F9F5F0] text-[11px] tracking-[0.22em] py-2 px-4 text-center uppercase font-medium flex items-center justify-between border-b border-[#C9A464]/20">
-        <div className="hidden md:flex items-center gap-2 w-48 text-left text-[10px] text-[#C9A464]">
+      <div className="bg-[#121012] text-[#FAF9F6] text-[11px] tracking-[0.22em] py-2 px-4 text-center uppercase font-medium flex items-center justify-between border-b border-[#C5A880]/25">
+        <div className="hidden md:flex items-center gap-2 w-48 text-left text-[10px] text-[#C5A880]">
           <Sparkles className="w-3 h-3" />
           <span>Atelier Concierge</span>
         </div>
@@ -44,7 +44,7 @@ export function Navbar() {
             href={whatsAppUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-[#F9F5F0] hover:text-[#C9A464] transition-colors"
+            className="flex items-center gap-1.5 text-[#FAF9F6] hover:text-[#C5A880] transition-colors"
           >
             <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
             <span>+92 321 9954325</span>
@@ -56,38 +56,38 @@ export function Navbar() {
       <header
         className={`sticky top-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? "bg-[#FAF8F5]/95 backdrop-blur-md shadow-sm py-3.5 border-b border-[#E8DFC8]/60"
-            : "bg-[#FAF8F5] py-5 border-b border-[#EFE8DC]"
+            ? "bg-[#FAF9F6]/95 backdrop-blur-md shadow-sm py-3.5 border-b border-[#E8E1D5]"
+            : "bg-[#FAF9F6] py-5 border-b border-[#E8E1D5]"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-[#1E191B] hover:text-[#632839]"
+            className="lg:hidden p-2 text-[#121012] hover:text-[#C5A880]"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-7 text-xs tracking-[0.16em] uppercase font-medium text-[#2B2326]">
-            <Link href="/" className="hover:text-[#632839] transition-colors">
+          <nav className="hidden lg:flex items-center space-x-7 text-xs tracking-[0.16em] uppercase font-medium text-[#121012]">
+            <Link href="/" className="hover:text-[#C5A880] transition-colors">
               Home
             </Link>
-            <Link href="/shop?category=luxe-makeup" className="hover:text-[#632839] transition-colors">
+            <Link href="/shop?category=luxe-makeup" className="hover:text-[#C5A880] transition-colors">
               Makeup & Lips
             </Link>
-            <Link href="/shop?category=fine-jewelry" className="hover:text-[#632839] transition-colors">
+            <Link href="/shop?category=fine-jewelry" className="hover:text-[#C5A880] transition-colors">
               Fine Jewelry
             </Link>
-            <Link href="/shop?category=silk-skincare" className="hover:text-[#632839] transition-colors">
+            <Link href="/shop?category=silk-skincare" className="hover:text-[#C5A880] transition-colors">
               Silk Skincare
             </Link>
-            <Link href="/shop?category=hair-fragrance" className="hover:text-[#632839] transition-colors">
+            <Link href="/shop?category=hair-fragrance" className="hover:text-[#C5A880] transition-colors">
               Hair & Mist
             </Link>
-            <Link href="/order-tracking" className="hover:text-[#632839] transition-colors text-zinc-500">
+            <Link href="/order-tracking" className="hover:text-[#C5A880] transition-colors text-zinc-500">
               Track Order
             </Link>
           </nav>
@@ -95,10 +95,10 @@ export function Navbar() {
           {/* Brand Wordmark */}
           <div className="text-center">
             <Link href="/" className="inline-block group">
-              <span className="font-serif text-2xl sm:text-3xl tracking-[0.28em] font-light text-[#1E191B] group-hover:text-[#632839] transition-colors">
+              <span className="font-serif text-2xl sm:text-3xl tracking-[0.28em] font-light text-[#121012] group-hover:text-[#C5A880] transition-colors">
                 VELOURA
               </span>
-              <span className="block text-[8px] tracking-[0.45em] text-[#C9A464] uppercase -mt-1 font-sans">
+              <span className="block text-[8px] tracking-[0.45em] text-[#C5A880] uppercase -mt-1 font-sans">
                 Beauty & Fine Jewels
               </span>
             </Link>
