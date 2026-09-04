@@ -1,0 +1,238 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum PaymentMethod {
+  COD
+  EASYPAISA
+  JAZZCASH
+}
+
+enum PaymentStatus {
+  PENDING
+  PENDING_VERIFICATION
+  VERIFIED
+  REJECTED
+  COD
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  PACKED
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+model User {
+  id           String           @id @default(cuid())
+  email        String           @unique
+  passwordHash String
+  name         String?
+  phone        String?
+  role         Role             @default(CUSTOMER)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  profile      CustomerProfile?
+  addresses    Address[]
+  orders       Order[]
+  cart         Cart?
+  wishlist     Wishlist?
+}
+
+model CustomerProfile {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  avatar    String?
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Address {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fullName    String
+  phone       String
+  addressLine String
+  city        String
+  province    String   @default("Punjab")
+  postalCode  String?
+  isDefault   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String?
+  image       String?
+  sortOrder   Int       @default(0)
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[]
+}
+
+model Product {
+  id                String         @id @default(cuid())
+  name              String
+  slug              String         @unique
+  description       String
+  shortDescription  String?
+  price             Float
+  salePrice         Float?
+  sku               String?        @unique
+  categoryId        String?
+  category          Category?      @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  brand             String         @default("VELOURA")
+  tags              String[]       @default([])
+  stock             Int            @default(0)
+  lowStockThreshold Int            @default(3)
+  isPublished       Boolean        @default(true)
+  isFeatured        Boolean        @default(false)
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+  images            ProductImage[]
+  cartItems         CartItem[]
+  wishlistItems     WishlistItem[]
+  orderItems        OrderItem[]
+}
+
+model ProductImage {
+  id        String   @id @default(cuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url       String
+  alt       String?
+  isPrimary Boolean  @default(false)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Cart {
+  id        String     @id @default(cuid())
+  userId    String?    @unique
+  user      User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  items     CartItem[]
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+  cartId    String
+  cart      Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Wishlist {
+  id        String         @id @default(cuid())
+  userId    String         @unique
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime       @default(now())
+  items     WishlistItem[]
+}
+
+model WishlistItem {
+  id         String   @id @default(cuid())
+  wishlistId String
+  wishlist   Wishlist @relation(fields: [wishlistId], references: [id], onDelete: Cascade)
+  productId  String
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+
+  @@unique([wishlistId, productId])
+}
+
+model Order {
+  id                   String        @id @default(cuid())
+  orderNumber          String        @unique
+  userId               String?
+  user                 User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  customerName         String
+  customerEmail        String
+  customerPhone        String
+  shippingAddress      String
+  city                 String
+  province             String        @default("Punjab")
+  postalCode           String?
+  notes                String?
+  subtotal             Float
+  shippingFee          Float         @default(0)
+  discount             Float         @default(0)
+  total                Float
+  paymentMethod        PaymentMethod @default(COD)
+  paymentStatus        PaymentStatus @default(PENDING)
+  transactionReference String?
+  paymentScreenshot    String?
+  verifiedAt           DateTime?
+  verifiedBy           String?
+  orderStatus          OrderStatus   @default(PENDING)
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+  items                OrderItem[]
+}
+
+model OrderItem {
+  id           String   @id @default(cuid())
+  orderId      String
+  order        Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId    String?
+  product      Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  productName  String
+  productImage String?
+  price        Float
+  quantity     Int      @default(1)
+  total        Float
+  createdAt    DateTime @default(now())
+}
+
+model HeroBanner {
+  id        String   @id @default(cuid())
+  title     String
+  subtitle  String?
+  ctaText   String   @default("DISCOVER COLLECTION")
+  ctaLink   String   @default("/shop")
+  image     String
+  sortOrder Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SiteSettings {
+  id                    String   @id @default("default")
+  brandName             String   @default("VELOURA")
+  tagline               String   @default("Luxury Fashion & Beauty")
+  whatsappNumber        String   @default("+92 321 9954325")
+  supportPhone          String   @default("+92 321 9954325")
+  easypaisaNumber       String   @default("+92 321 9954325")
+  jazzcashNumber        String   @default("+92 321 9954325")
+  currency              String   @default("PKR")
+  currencySymbol        String   @default("Rs.")
+  shippingFee           Float    @default(200)
+  freeShippingThreshold Float    @default(3000)
+  announcement          String   @default("Complimentary Silk Packaging & Free Delivery on orders over Rs. 3,000")
+  updatedAt             DateTime @updatedAt
+}
