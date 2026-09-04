@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const customerToken = cookieStore.get("veloura_customer_token")?.value;
   const adminToken = cookieStore.get("veloura_admin_token")?.value;
 

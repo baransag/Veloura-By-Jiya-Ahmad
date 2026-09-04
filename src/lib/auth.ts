@@ -32,8 +32,8 @@ export function verifyToken(token: string): TokenPayload | null {
   }
 }
 
-export function getCustomerSession(): TokenPayload | null {
-  const cookieStore = cookies();
+export async function getCustomerSession(): Promise<TokenPayload | null> {
+  const cookieStore = await cookies();
   const token = cookieStore.get("veloura_customer_token")?.value;
   if (!token) return null;
   const payload = verifyToken(token);
@@ -43,8 +43,8 @@ export function getCustomerSession(): TokenPayload | null {
   return null;
 }
 
-export function getAdminSession(): TokenPayload | null {
-  const cookieStore = cookies();
+export async function getAdminSession(): Promise<TokenPayload | null> {
+  const cookieStore = await cookies();
   const token = cookieStore.get("veloura_admin_token")?.value;
   if (!token) return null;
   const payload = verifyToken(token);

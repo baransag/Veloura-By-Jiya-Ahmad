@@ -4,7 +4,7 @@ import { getAdminSession } from "@/lib/auth";
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const admin = getAdminSession();
+    const admin = await getAdminSession();
     if (!admin) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const order = await prisma.order.findUnique({
@@ -21,7 +21,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const admin = getAdminSession();
+    const admin = await getAdminSession();
     if (!admin) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const body = await req.json();

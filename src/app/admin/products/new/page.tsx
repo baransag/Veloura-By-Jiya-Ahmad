@@ -114,9 +114,19 @@ export default function NewProductPage() {
       </div>
 
       {error && (
-        <div className="p-4 rounded-lg bg-rose-900/40 border border-rose-500/40 text-rose-300 text-xs flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 flex-shrink-0" />
-          <span>{error}</span>
+        <div className="p-4 rounded-lg bg-rose-900/40 border border-rose-500/40 text-rose-300 text-xs flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 flex-shrink-0" />
+            <span>{error}</span>
+          </div>
+          {error.toLowerCase().includes("unauthorized") && (
+            <Link
+              href="/admin/login"
+              className="px-3 py-1 bg-white/10 hover:bg-white/20 text-white rounded text-[11px] font-semibold tracking-wider uppercase underline underline-offset-4"
+            >
+              Sign In To Admin
+            </Link>
+          )}
         </div>
       )}
 

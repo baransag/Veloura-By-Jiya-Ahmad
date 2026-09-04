@@ -6,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const customerToken = cookieStore.get("veloura_customer_token")?.value;
   const adminToken = cookieStore.get("veloura_admin_token")?.value;
 

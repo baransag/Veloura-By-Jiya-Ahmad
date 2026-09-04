@@ -8,6 +8,33 @@ import { LayoutDashboard, ShoppingBag, Package, LogOut, ExternalLink, ShieldChec
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
+  const [checkingAuth, setCheckingAuth] = useState(true);
+
+  useEffect(() => {
+    if (pathname === "/admin/login") {
+      setCheckingAuth(false);
+      return;
+    }
+
+    let isMounted = true;
+    fetch("/api/auth/me")
+      .then((res) => res.json())
+      .then((data) => {
+        if (!isMounted) return;
+        if (!data.user || data.user.role !== "ADMIN") {
+          router.replace("/admin/login");
+        } else {
+          setCheckingAuth(false);
+        }
+      })
+      .catch(() => {
+        if (isMounted) router.replace("/admin/login");
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [pathname, router]);
 
   // If on admin login page, don't show admin chrome
   if (pathname === "/admin/login") {
@@ -28,6 +55,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { name: "Orders & Payments", href: "/admin/orders", icon: Package },
     { name: "Products & Atelier", href: "/admin/products", icon: ShoppingBag },
   ];
+
+  if (checkingAuth) {
+    return (
+      <div className="min-h-screen bg-[#141211] text-[#FDFBF7] flex items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 rounded-full border-2 border-[#DA9413] border-t-transparent animate-spin" />
+          <span className="text-xs uppercase tracking-[0.25em] text-[#DA9413]">Authenticating Atelier Admin...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#141211] text-[#FDFBF7] flex">

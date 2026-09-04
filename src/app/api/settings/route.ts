@@ -10,7 +10,7 @@ export async function GET() {
 
 export async function PUT(req: NextRequest) {
   try {
-    const admin = getAdminSession();
+    const admin = await getAdminSession();
     if (!admin) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const body = await req.json();

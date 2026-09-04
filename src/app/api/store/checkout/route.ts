@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Check customer session if logged in
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const customerToken = cookieStore.get("veloura_customer_token")?.value;
     let userId: string | null = null;
     if (customerToken) {
