@@ -57,14 +57,14 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-8">
       {/* Header */}
       <div className="text-center space-y-2 max-w-2xl mx-auto">
-        <span className="text-xs uppercase tracking-[0.3em] text-[#750A0A] font-semibold">
-          The Complete Boutique
+        <span className="text-xs uppercase tracking-[0.3em] text-[#8C3A4D] font-semibold">
+          The Atelier Collection
         </span>
-        <h1 className="font-serif text-3xl sm:text-4xl text-[#141211] tracking-wider">
-          VELOURA Collection
+        <h1 className="font-serif text-3xl sm:text-4xl text-[#1E191B] tracking-wide">
+          Veloura Beauty & Jewels
         </h1>
         <p className="text-xs sm:text-sm text-zinc-500">
-          Showing {products.length} {products.length === 1 ? "design" : "designs"} meticulously crafted in pure silk and botanical formulations.
+          Showing {products.length} {products.length === 1 ? "creation" : "creations"} meticulously crafted in pure silk amino elixirs and 18K tarnish-free fine jewelry.
         </p>
       </div>
 
@@ -74,10 +74,10 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
           <Link
             href="/shop"
             className={`px-4 py-2 rounded-full text-xs uppercase tracking-wider font-medium whitespace-nowrap transition-colors ${
-              !category ? "bg-[#750A0A] text-white" : "bg-[#F6F1E8] text-[#141211] hover:bg-[#EAE2D5]"
+              !category ? "bg-[#632839] text-white" : "bg-[#F3ECE2] text-[#1E191B] hover:bg-[#EAE2D5]"
             }`}
           >
-            All Items
+            All Creations
           </Link>
           {categories.map((cat) => (
             <Link
@@ -85,8 +85,8 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
               href={`/shop?category=${cat.slug}${sort ? `&sort=${sort}` : ""}`}
               className={`px-4 py-2 rounded-full text-xs uppercase tracking-wider font-medium whitespace-nowrap transition-colors ${
                 category === cat.slug
-                  ? "bg-[#750A0A] text-white"
-                  : "bg-[#F6F1E8] text-[#141211] hover:bg-[#EAE2D5]"
+                  ? "bg-[#632839] text-white"
+                  : "bg-[#F3ECE2] text-[#1E191B] hover:bg-[#EAE2D5]"
               }`}
             >
               {cat.name}
@@ -101,7 +101,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
             <Link
               href={`/shop?sort=newest${category ? `&category=${category}` : ""}`}
               className={`px-2.5 py-1 rounded ${
-                sort === "newest" ? "font-bold text-[#750A0A] underline" : "text-zinc-600"
+                sort === "newest" ? "font-bold text-[#632839] underline" : "text-zinc-600"
               }`}
             >
               Newest

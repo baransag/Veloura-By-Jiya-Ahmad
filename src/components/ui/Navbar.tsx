@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { ShoppingBag, Search, User, Menu, X, MessageCircle } from "lucide-react";
+import { ShoppingBag, Search, User, Menu, X, MessageCircle, Sparkles } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { getBaseWhatsAppUrl, OFFICIAL_WHATSAPP_NUMBER } from "@/lib/whatsapp";
 
@@ -18,7 +18,6 @@ export function Navbar() {
     };
     window.addEventListener("scroll", handleScroll);
 
-    // Fetch user status
     fetch("/api/auth/me")
       .then((res) => res.json())
       .then((data) => setUser(data.user))
@@ -31,82 +30,86 @@ export function Navbar() {
 
   return (
     <>
-      {/* Top Luxury Announcement Bar */}
-      <div className="bg-[#470B24] text-[#F6F1E8] text-[11px] tracking-[0.2em] py-2 px-4 text-center uppercase font-medium flex items-center justify-between border-b border-[#DA9413]/20">
-        <div className="hidden md:block w-32 text-left text-[10px] text-[#DA9413]">
-          Official Store
+      {/* Top Silk Luxury Announcement Bar */}
+      <div className="bg-[#2D1620] text-[#F9F5F0] text-[11px] tracking-[0.22em] py-2 px-4 text-center uppercase font-medium flex items-center justify-between border-b border-[#C9A464]/20">
+        <div className="hidden md:flex items-center gap-2 w-48 text-left text-[10px] text-[#C9A464]">
+          <Sparkles className="w-3 h-3" />
+          <span>Atelier Concierge</span>
         </div>
         <div className="flex-1 text-center truncate">
-          Complimentary Silk Packaging & Free Delivery Over Rs. 3,000
+          Complimentary Velvet Packaging & Free Express Shipping Over Rs. 3,000
         </div>
-        <div className="w-32 text-right hidden md:flex items-center justify-end gap-2 text-[10px]">
+        <div className="w-48 text-right hidden md:flex items-center justify-end gap-2 text-[10px]">
           <a
             href={whatsAppUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-[#F6F1E8] hover:text-[#DA9413] transition-colors"
+            className="flex items-center gap-1.5 text-[#F9F5F0] hover:text-[#C9A464] transition-colors"
           >
-            <MessageCircle className="w-3 h-3 text-[#DA9413]" />
-            +92 321 9954325
+            <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
+            <span>+92 321 9954325</span>
           </a>
         </div>
       </div>
 
-      {/* Main Navbar */}
+      {/* Main Luxury Header */}
       <header
         className={`sticky top-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? "bg-[#FDFBF7]/95 backdrop-blur-md shadow-sm py-3 border-b border-[#EAE2D5]"
-            : "bg-[#FDFBF7] py-5"
+            ? "bg-[#FAF8F5]/95 backdrop-blur-md shadow-sm py-3.5 border-b border-[#E8DFC8]/60"
+            : "bg-[#FAF8F5] py-5 border-b border-[#EFE8DC]"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-[#141211] hover:text-[#750A0A]"
+            className="lg:hidden p-2 text-[#1E191B] hover:text-[#632839]"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-8 text-xs tracking-[0.18em] uppercase font-medium text-[#141211]">
-            <Link href="/" className="hover:text-[#750A0A] transition-colors">
+          <nav className="hidden lg:flex items-center space-x-7 text-xs tracking-[0.16em] uppercase font-medium text-[#2B2326]">
+            <Link href="/" className="hover:text-[#632839] transition-colors">
               Home
             </Link>
-            <Link href="/shop" className="hover:text-[#750A0A] transition-colors">
-              Collection
+            <Link href="/shop?category=luxe-makeup" className="hover:text-[#632839] transition-colors">
+              Makeup & Lips
             </Link>
-            <Link href="/shop?category=beauty-personal-care" className="hover:text-[#750A0A] transition-colors">
-              Beauty & Care
+            <Link href="/shop?category=fine-jewelry" className="hover:text-[#632839] transition-colors">
+              Fine Jewelry
             </Link>
-            <Link href="/shop?sort=newest" className="hover:text-[#750A0A] transition-colors text-[#750A0A]">
-              New Arrivals
+            <Link href="/shop?category=silk-skincare" className="hover:text-[#632839] transition-colors">
+              Silk Skincare
             </Link>
-            <Link href="/order-tracking" className="hover:text-[#750A0A] transition-colors text-zinc-500">
+            <Link href="/shop?category=hair-fragrance" className="hover:text-[#632839] transition-colors">
+              Hair & Mist
+            </Link>
+            <Link href="/order-tracking" className="hover:text-[#632839] transition-colors text-zinc-500">
               Track Order
             </Link>
           </nav>
 
-          {/* Luxury Brand Logo */}
+          {/* Brand Wordmark */}
           <div className="text-center">
             <Link href="/" className="inline-block group">
-              <span className="font-serif text-2xl sm:text-3xl tracking-[0.25em] font-light text-[#141211] group-hover:text-[#750A0A] transition-colors">
+              <span className="font-serif text-2xl sm:text-3xl tracking-[0.28em] font-light text-[#1E191B] group-hover:text-[#632839] transition-colors">
                 VELOURA
               </span>
-              <span className="block text-[8px] tracking-[0.4em] text-[#5D2806] uppercase -mt-1 font-sans">
-                Haute Luxury
+              <span className="block text-[8px] tracking-[0.45em] text-[#C9A464] uppercase -mt-1 font-sans">
+                Beauty & Fine Jewels
               </span>
             </Link>
           </div>
 
-          {/* Utility Icons */}
-          <div className="flex items-center space-x-5 text-[#141211]">
+          {/* Right Action Icons */}
+          <div className="flex items-center space-x-5 text-[#1E191B]">
             <Link
               href="/shop"
-              className="p-1 hover:text-[#750A0A] transition-colors hidden sm:block"
-              title="Search collection"
+              className="p-1 hover:text-[#632839] transition-colors hidden sm:block"
+              title="Search Atelier"
             >
               <Search className="w-5 h-5" />
             </Link>
@@ -115,47 +118,48 @@ export function Navbar() {
               href={whatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1 hover:text-[#0D3A2F] transition-colors"
-              title="WhatsApp Concierge"
+              className="p-1 hover:text-[#25D366] transition-colors"
+              title="WhatsApp VIP Concierge"
             >
-              <MessageCircle className="w-5 h-5 text-[#0D3A2F]" />
+              <MessageCircle className="w-5 h-5 text-[#25D366]" />
             </a>
 
             {user?.role === "ADMIN" ? (
               <Link
                 href="/admin"
-                className="text-[11px] tracking-wider uppercase font-semibold text-[#470B24] border border-[#470B24] px-2 py-1 rounded hover:bg-[#470B24] hover:text-white transition-colors"
+                className="text-[11px] tracking-wider uppercase font-semibold text-[#632839] border border-[#632839]/50 px-2.5 py-1 rounded hover:bg-[#632839] hover:text-white transition-colors"
               >
                 Admin
               </Link>
             ) : user ? (
               <Link
                 href="/account"
-                className="p-1 hover:text-[#750A0A] transition-colors flex items-center gap-1"
+                className="p-1 hover:text-[#632839] transition-colors flex items-center gap-1.5"
                 title="My Account"
               >
                 <User className="w-5 h-5" />
-                <span className="text-[10px] hidden sm:inline uppercase">{user.name?.split(" ")[0] || "Account"}</span>
+                <span className="text-[10px] hidden sm:inline uppercase font-medium">{user.name?.split(" ")[0]}</span>
               </Link>
             ) : (
               <Link
                 href="/account/login"
-                className="p-1 hover:text-[#750A0A] transition-colors"
+                className="p-1 hover:text-[#632839] transition-colors flex items-center gap-1"
                 title="Customer Sign In"
               >
                 <User className="w-5 h-5" />
+                <span className="text-[10px] hidden sm:inline uppercase tracking-wider text-zinc-600">Sign In</span>
               </Link>
             )}
 
-            {/* Cart Trigger */}
+            {/* Shopping Bag */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className="relative p-1 hover:text-[#750A0A] transition-colors group flex items-center"
+              className="relative p-1 hover:text-[#632839] transition-colors group flex items-center"
               aria-label="Open Cart"
             >
-              <ShoppingBag className="w-5 h-5 text-[#141211] group-hover:text-[#750A0A]" />
+              <ShoppingBag className="w-5 h-5 text-[#1E191B] group-hover:text-[#632839]" />
               {totalItems > 0 && (
-                <span className="absolute -top-1 -right-2 bg-[#750A0A] text-[#FDFBF7] text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-2 bg-[#632839] text-[#FAF8F5] text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
                   {totalItems}
                 </span>
               )}
@@ -165,52 +169,57 @@ export function Navbar() {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-[#EAE2D5] bg-[#FDFBF7] px-6 py-6 space-y-4 text-xs tracking-[0.2em] uppercase font-medium">
+          <div className="lg:hidden border-t border-[#EAE2D5] bg-[#FAF8F5] px-6 py-6 space-y-4 text-xs uppercase tracking-widest font-medium">
             <Link
               href="/"
               onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-[#141211] hover:text-[#750A0A]"
+              className="block py-2 text-[#1E191B] border-b border-zinc-100"
             >
               Home
             </Link>
             <Link
-              href="/shop"
+              href="/shop?category=luxe-makeup"
               onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-[#141211] hover:text-[#750A0A]"
+              className="block py-2 text-[#1E191B] border-b border-zinc-100"
             >
-              All Collections
+              Makeup & Lips
             </Link>
             <Link
-              href="/shop?category=beauty-personal-care"
+              href="/shop?category=fine-jewelry"
               onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-[#141211] hover:text-[#750A0A]"
+              className="block py-2 text-[#1E191B] border-b border-zinc-100"
             >
-              Beauty & Personal Care
+              Fine Jewelry & Pearls
             </Link>
             <Link
-              href="/shop?sort=newest"
+              href="/shop?category=silk-skincare"
               onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-[#750A0A]"
+              className="block py-2 text-[#1E191B] border-b border-zinc-100"
             >
-              New Arrivals
+              Silk Skincare & Glow
+            </Link>
+            <Link
+              href="/shop?category=hair-fragrance"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-2 text-[#1E191B] border-b border-zinc-100"
+            >
+              Hair Elixirs & Fragrance
             </Link>
             <Link
               href="/order-tracking"
               onClick={() => setMobileMenuOpen(false)}
               className="block py-2 text-zinc-500"
             >
-              Track My Order
+              Track Your Order
             </Link>
-            <div className="pt-4 border-t border-[#EAE2D5] flex justify-between items-center text-xs">
-              <a
-                href={whatsAppUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-[#0D3A2F] font-semibold"
+            <div className="pt-2">
+              <Link
+                href="/account/login"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full py-2.5 bg-[#632839] text-white text-center rounded block text-xs tracking-widest font-semibold"
               >
-                <MessageCircle className="w-4 h-4" />
-                WhatsApp: +92 321 9954325
-              </a>
+                Sign In / Join Veloura
+              </Link>
             </div>
           </div>
         )}
