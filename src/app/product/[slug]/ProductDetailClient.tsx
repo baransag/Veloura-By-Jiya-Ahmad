@@ -180,11 +180,11 @@ export function ProductDetailClient({ product }: { product: any }) {
               <button
                 onClick={handleAddToCart}
                 disabled={isOutOfStock}
-                className="w-full py-4 px-6 bg-[#750A0A] hover:bg-[#8E1137] text-white text-xs uppercase tracking-[0.2em] font-semibold rounded shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full py-4 px-6 bg-gradient-to-r from-[#8E1E3B] to-[#D45B7B] hover:brightness-110 text-white text-xs uppercase tracking-[0.2em] font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50"
               >
                 {added ? (
                   <>
-                    <Check className="w-4 h-4 text-[#DA9413]" />
+                    <Check className="w-4 h-4 text-white" />
                     Added to Bag
                   </>
                 ) : (
@@ -199,9 +199,9 @@ export function ProductDetailClient({ product }: { product: any }) {
               <button
                 onClick={handleWhatsAppInquiry}
                 type="button"
-                className="w-full py-4 px-6 bg-[#0D3A2F] hover:bg-[#084A3B] text-[#FDFBF7] text-xs uppercase tracking-[0.2em] font-medium rounded transition-all flex items-center justify-center gap-2 border border-[#DA9413]/40 shadow-sm"
+                className="w-full py-4 px-6 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs uppercase tracking-[0.2em] font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm"
               >
-                <MessageCircle className="w-4 h-4 text-[#DA9413]" />
+                <MessageCircle className="w-4 h-4" />
                 WhatsApp Inquiry
               </button>
             </div>

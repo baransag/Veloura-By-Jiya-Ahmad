@@ -70,12 +70,12 @@ export function CartDrawer() {
           <div className="flex-1 overflow-y-auto p-6 space-y-4">
             {items.length === 0 ? (
               <div className="text-center py-16">
-                <ShoppingBag className="w-12 h-12 text-[#DA9413] mx-auto mb-3 opacity-40" />
-                <p className="font-serif text-lg text-[#141211]">Your bag is empty</p>
+                <ShoppingBag className="w-12 h-12 text-[#D45B7B] mx-auto mb-3 opacity-40" />
+                <p className="font-serif text-lg text-[#1A1014]">Your bag is empty</p>
                 <p className="text-xs text-zinc-500 mt-1">Discover our new silk and beauty arrivals</p>
                 <button
                   onClick={() => setIsCartOpen(false)}
-                  className="mt-6 inline-block text-xs uppercase tracking-[0.2em] font-semibold text-[#750A0A] border-b border-[#750A0A] pb-1 hover:text-[#470B24]"
+                  className="mt-6 inline-block text-xs uppercase tracking-[0.2em] font-semibold text-[#8E1E3B] border-b border-[#8E1E3B] pb-1 hover:text-[#D45B7B]"
                 >
                   Start Exploring
                 </button>
@@ -84,8 +84,8 @@ export function CartDrawer() {
               items.map((item) => {
                 const activePrice = item.salePrice && item.salePrice > 0 ? item.salePrice : item.price;
                 return (
-                  <div key={item.id} className="flex gap-4 pb-4 border-b border-[#EAE2D5] last:border-0">
-                    <div className="relative w-20 h-24 bg-[#F6F1E8] rounded-md overflow-hidden flex-shrink-0 border border-[#EAE2D5]">
+                  <div key={item.id} className="flex gap-4 pb-4 border-b border-[#F0D5DE] last:border-0">
+                    <div className="relative w-20 h-24 bg-[#FAF2F4] rounded-lg overflow-hidden flex-shrink-0 border border-[#F0D5DE]">
                       {item.image ? (
                         <img
                           src={item.image}
@@ -100,9 +100,9 @@ export function CartDrawer() {
                     </div>
                     <div className="flex-1 flex flex-col justify-between">
                       <div>
-                        <h4 className="text-sm font-medium text-[#141211] line-clamp-1">{item.name}</h4>
+                        <h4 className="text-sm font-medium text-[#1A1014] line-clamp-1">{item.name}</h4>
                         <div className="flex items-center gap-2 mt-1">
-                          <span className="text-xs font-semibold text-[#750A0A]">
+                          <span className="text-xs font-semibold text-[#8E1E3B]">
                             Rs. {activePrice.toLocaleString()}
                           </span>
                           {item.salePrice && item.salePrice > 0 && (
@@ -114,17 +114,17 @@ export function CartDrawer() {
                       </div>
 
                       <div className="flex items-center justify-between mt-2">
-                        <div className="flex items-center border border-[#EAE2D5] rounded bg-white">
+                        <div className="flex items-center border border-[#F0D5DE] rounded bg-white">
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            className="p-1 text-zinc-600 hover:text-[#750A0A]"
+                            className="p-1 text-zinc-600 hover:text-[#8E1E3B]"
                           >
                             <Minus className="w-3 h-3" />
                           </button>
                           <span className="px-2.5 text-xs font-semibold">{item.quantity}</span>
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className="p-1 text-zinc-600 hover:text-[#750A0A]"
+                            className="p-1 text-zinc-600 hover:text-[#8E1E3B]"
                           >
                             <Plus className="w-3 h-3" />
                           </button>
@@ -132,7 +132,7 @@ export function CartDrawer() {
 
                         <button
                           onClick={() => removeItem(item.id)}
-                          className="text-zinc-400 hover:text-[#750A0A] p-1"
+                          className="text-zinc-400 hover:text-[#8E1E3B] p-1"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -146,7 +146,7 @@ export function CartDrawer() {
 
           {/* Footer Actions */}
           {items.length > 0 && (
-            <div className="p-6 border-t border-[#EAE2D5] bg-[#FDFBF7] space-y-3">
+            <div className="p-6 border-t border-[#F0D5DE] bg-[#FCF8F9] space-y-3">
               <div className="space-y-1.5 text-xs">
                 <div className="flex justify-between text-zinc-600">
                   <span>Subtotal</span>
@@ -156,18 +156,18 @@ export function CartDrawer() {
                   <span>Shipping</span>
                   <span>{shippingFee === 0 ? "Complimentary" : `Rs. ${shippingFee}`}</span>
                 </div>
-                <div className="flex justify-between text-sm font-semibold text-[#141211] pt-2 border-t border-[#EAE2D5]">
+                <div className="flex justify-between text-sm font-semibold text-[#1A1014] pt-2 border-t border-[#F0D5DE]">
                   <span>Total</span>
-                  <span className="text-[#750A0A]">Rs. {total.toLocaleString()}</span>
+                  <span className="text-[#8E1E3B]">Rs. {total.toLocaleString()}</span>
                 </div>
               </div>
 
               {/* Order Via WhatsApp Button */}
               <button
                 onClick={() => openCartWhatsApp()}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-[#0D3A2F] text-[#FDFBF7] hover:bg-[#084A3B] rounded text-xs tracking-wider uppercase font-medium transition-colors border border-[#DA9413]/30"
+                className="w-full flex items-center justify-center gap-2 py-3.5 px-4 bg-[#25D366] text-white hover:bg-[#1EBE5D] rounded-xl text-xs tracking-wider uppercase font-semibold transition-colors shadow-sm"
               >
-                <MessageCircle className="w-4 h-4 text-[#DA9413]" />
+                <MessageCircle className="w-4 h-4" />
                 Order via WhatsApp
               </button>
 
@@ -175,7 +175,7 @@ export function CartDrawer() {
               <Link
                 href="/checkout"
                 onClick={() => setIsCartOpen(false)}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-[#750A0A] text-[#FDFBF7] hover:bg-[#470B24] rounded text-xs tracking-wider uppercase font-medium transition-colors shadow-md"
+                className="w-full flex items-center justify-center gap-2 py-3.5 px-4 bg-gradient-to-r from-[#8E1E3B] to-[#D45B7B] text-white hover:brightness-110 rounded-xl text-xs tracking-wider uppercase font-bold transition-all shadow-lg"
               >
                 Proceed to Checkout
                 <ArrowRight className="w-4 h-4" />

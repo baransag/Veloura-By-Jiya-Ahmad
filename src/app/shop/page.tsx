@@ -69,12 +69,12 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
       </div>
 
       {/* Category Pills & Sorting Bar */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4 pb-6 border-b border-[#EAE2D5]">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4 pb-6 border-b border-[#F0D5DE]">
         <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
           <Link
             href="/shop"
-            className={`px-4 py-2 rounded-full text-xs uppercase tracking-wider font-medium whitespace-nowrap transition-colors ${
-              !category ? "bg-[#632839] text-white" : "bg-[#F3ECE2] text-[#1E191B] hover:bg-[#EAE2D5]"
+            className={`px-4 py-2 rounded-full text-xs uppercase tracking-wider font-semibold whitespace-nowrap transition-all shadow-xs ${
+              !category ? "bg-gradient-to-r from-[#8E1E3B] to-[#D45B7B] text-white" : "bg-[#FAF2F4] text-[#1A1014] hover:bg-[#F0D5DE]"
             }`}
           >
             All Creations
@@ -83,10 +83,10 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
             <Link
               key={cat.id}
               href={`/shop?category=${cat.slug}${sort ? `&sort=${sort}` : ""}`}
-              className={`px-4 py-2 rounded-full text-xs uppercase tracking-wider font-medium whitespace-nowrap transition-colors ${
+              className={`px-4 py-2 rounded-full text-xs uppercase tracking-wider font-semibold whitespace-nowrap transition-all shadow-xs ${
                 category === cat.slug
-                  ? "bg-[#632839] text-white"
-                  : "bg-[#F3ECE2] text-[#1E191B] hover:bg-[#EAE2D5]"
+                  ? "bg-gradient-to-r from-[#8E1E3B] to-[#D45B7B] text-white"
+                  : "bg-[#FAF2F4] text-[#1A1014] hover:bg-[#F0D5DE]"
               }`}
             >
               {cat.name}
@@ -101,7 +101,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
             <Link
               href={`/shop?sort=newest${category ? `&category=${category}` : ""}`}
               className={`px-2.5 py-1 rounded ${
-                sort === "newest" ? "font-bold text-[#632839] underline" : "text-zinc-600"
+                sort === "newest" ? "font-bold text-[#8E1E3B] underline" : "text-zinc-600"
               }`}
             >
               Newest
@@ -109,7 +109,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
             <Link
               href={`/shop?sort=price-asc${category ? `&category=${category}` : ""}`}
               className={`px-2.5 py-1 rounded ${
-                sort === "price-asc" ? "font-bold text-[#750A0A] underline" : "text-zinc-600"
+                sort === "price-asc" ? "font-bold text-[#8E1E3B] underline" : "text-zinc-600"
               }`}
             >
               Price: Low to High
@@ -117,7 +117,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
             <Link
               href={`/shop?sort=price-desc${category ? `&category=${category}` : ""}`}
               className={`px-2.5 py-1 rounded ${
-                sort === "price-desc" ? "font-bold text-[#750A0A] underline" : "text-zinc-600"
+                sort === "price-desc" ? "font-bold text-[#8E1E3B] underline" : "text-zinc-600"
               }`}
             >
               Price: High to Low
@@ -128,13 +128,13 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
 
       {/* Grid of Products */}
       {products.length === 0 ? (
-        <div className="text-center py-20 bg-[#F6F1E8]/50 rounded-xl border border-[#EAE2D5] space-y-3">
-          <Sparkles className="w-8 h-8 text-[#DA9413] mx-auto opacity-70" />
-          <h3 className="font-serif text-xl text-[#141211]">No designs found</h3>
+        <div className="text-center py-20 bg-[#FAF2F4] rounded-2xl border border-[#F0D5DE] space-y-3">
+          <Sparkles className="w-8 h-8 text-[#D45B7B] mx-auto opacity-70" />
+          <h3 className="font-serif text-xl text-[#1A1014]">No creations found</h3>
           <p className="text-xs text-zinc-500">Try selecting another collection or clearing filters.</p>
           <Link
             href="/shop"
-            className="inline-block text-xs uppercase tracking-widest font-semibold text-[#750A0A] underline pt-2"
+            className="inline-block text-xs uppercase tracking-widest font-semibold text-[#8E1E3B] underline pt-2"
           >
             Clear Filters
           </Link>
