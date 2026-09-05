@@ -30,12 +30,12 @@ async function main() {
   });
 
   // Admin user
-  const adminPassword = await bcrypt.hash("admin123", 10);
+  const adminPassword = await bcrypt.hash("Veloura@Admin2026", 10);
   await prisma.user.upsert({
-    where: { email: "admin@veloura.com" },
-    update: { passwordHash: adminPassword },
+    where: { email: "admin@veloura.pk" },
+    update: { passwordHash: adminPassword, role: "ADMIN" },
     create: {
-      email: "admin@veloura.com",
+      email: "admin@veloura.pk",
       passwordHash: adminPassword,
       name: "Veloura Atelier Admin",
       role: "ADMIN",

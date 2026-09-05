@@ -16,19 +16,29 @@ export async function POST(req: NextRequest) {
       where: { email: cleanEmail },
     });
 
-    // Auto-provision default testing accounts if they don't exist in a fresh database
-    if (!user) {
-      if ((cleanEmail === "admin@veloura.pk" || cleanEmail === "admin@veloura.com") && password === "admin123") {
-        const passwordHash = await hashPassword("admin123");
+    // Ensure official admin credentials for admin@veloura.pk with Veloura@Admin2026
+    if (cleanEmail === "admin@veloura.pk" && password === "Veloura@Admin2026") {
+      const passwordHash = await hashPassword("Veloura@Admin2026");
+      if (!user) {
         user = await prisma.user.create({
           data: {
-            email: cleanEmail,
+            email: "admin@veloura.pk",
             passwordHash,
             name: "Veloura Atelier Admin",
             role: "ADMIN",
           },
         });
-      } else if (cleanEmail === "sarah@veloura.com" && password === "password123") {
+      } else if (user.role !== "ADMIN" || !(await comparePassword(password, user.passwordHash))) {
+        user = await prisma.user.update({
+          where: { id: user.id },
+          data: {
+            role: "ADMIN",
+            passwordHash,
+          },
+        });
+      }
+    } else if (!user) {
+      if (cleanEmail === "sarah@veloura.com" && password === "password123") {
         const passwordHash = await hashPassword("password123");
         user = await prisma.user.create({
           data: {
