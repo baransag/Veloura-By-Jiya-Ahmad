@@ -17,7 +17,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     }
 
     let isMounted = true;
-    fetch("/api/auth/me")
+    fetch("/api/admin/me")
       .then((res) => res.json())
       .then((data) => {
         if (!isMounted) return;

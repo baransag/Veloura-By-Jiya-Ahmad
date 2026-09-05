@@ -20,5 +20,13 @@ export async function GET(req: NextRequest) {
     }
   }
 
+  const adminToken = cookieStore.get("veloura_admin_token")?.value;
+  if (adminToken) {
+    const admin = verifyToken(adminToken);
+    if (admin && admin.role === "ADMIN") {
+      return NextResponse.json({ user: admin });
+    }
+  }
+
   return NextResponse.json({ user: null });
 }

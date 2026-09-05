@@ -28,7 +28,8 @@ export default function AdminLoginPage() {
         throw new Error(data.error || "Login failed");
       }
 
-      router.push("/admin");
+      // Hard navigate to ensure cookies are fresh and attached
+      window.location.href = "/admin";
     } catch (err: any) {
       setError(err.message || "Invalid administrative credentials");
     } finally {
