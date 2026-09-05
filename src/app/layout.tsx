@@ -5,10 +5,11 @@ import { Navbar } from "@/components/ui/Navbar";
 import { Footer } from "@/components/ui/Footer";
 import { CartDrawer } from "@/components/ui/CartDrawer";
 import { WhatsAppFloating } from "@/components/ui/WhatsAppFloating";
+import { MobileBottomBar } from "@/components/ui/MobileBottomBar";
 
 export const metadata: Metadata = {
-  title: "VELOURA — Haute Luxury Fashion & Beauty",
-  description: "Bespoke silk pret, rich velvet ensembles, and haute botanical beauty elixirs.",
+  title: "VELOURA By Jiya Ahmad — Luxury Beauty & Fine Jewelry Atelier",
+  description: "Discover organic silk lip elixirs, peptide skincare serums, and 18K hypoallergenic baroque pearl jewelry.",
 };
 
 export default function RootLayout({
@@ -26,13 +27,14 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-[#FDFBF7] text-[#141211] min-h-screen flex flex-col antialiased selection:bg-[#750A0A] selection:text-white">
+      <body className="bg-[#FFF8FA] text-[#25050D] min-h-screen flex flex-col antialiased selection:bg-[#C2185B] selection:text-white pb-14 md:pb-0">
         <CartProvider>
           <Navbar />
           <CartDrawer />
           <WhatsAppFloating />
           <main className="flex-1">{children}</main>
           <Footer />
+          <MobileBottomBar />
         </CartProvider>
       </body>
     </html>

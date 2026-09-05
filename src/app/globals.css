@@ -4,14 +4,17 @@
 
 @layer base {
   :root {
-    --background: #FCF8F9;
-    --foreground: #1A1014;
-    --rose-petal: #F7EBEF;
-    --rose-pink: #E8A5B7;
-    --rose-vibrant: #D45B7B;
-    --velvet-rouge: #8E1E3B;
-    --deep-wine: #5C1024;
-    --champagne-gold: #D4AF37;
+    --background: #FFF8FA;
+    --foreground: #25050D;
+    --pastel-rose: #FFF0F3;
+    --pastel-pink: #FCE7EC;
+    --blush-pink: #F8D5DE;
+    --petal-pink: #F4B8C6;
+    --rose-accent: #E14D75;
+    --crimson: #C2185B;
+    --velvet-wine: #8E1B3B;
+    --deep-wine: #500A1C;
+    --noir-wine: #25050D;
   }
 
   body {
@@ -27,8 +30,8 @@
   }
 }
 
-/* Luxury Pink & Red Silk Flow Animation */
-@keyframes roseSilkWave {
+/* Soft Pastel Silk Shimmer Animation */
+@keyframes pastelSilkFlow {
   0% {
     background-position: 0% 50%;
   }
@@ -41,18 +44,18 @@
 }
 
 .liquid-silk-gradient {
-  background: linear-gradient(135deg, #2E0B14 0%, #5C1024 30%, #8E1E3B 55%, #B32E50 80%, #3D0C19 100%);
+  background: linear-gradient(135deg, #25050D 0%, #500A1C 35%, #8E1B3B 65%, #C2185B 85%, #500A1C 100%);
   background-size: 250% 250%;
-  animation: roseSilkWave 12s ease infinite;
+  animation: pastelSilkFlow 12s ease infinite;
 }
 
 .liquid-silk-light {
-  background: linear-gradient(120deg, #FCF8F9 0%, #F8EBF0 30%, #F2DCE5 50%, #FAF0F4 70%, #FCF8F9 100%);
+  background: linear-gradient(120deg, #FFF8FA 0%, #FCE7EC 35%, #F8D5DE 65%, #FFF0F3 100%);
   background-size: 200% 200%;
-  animation: roseSilkWave 9s ease infinite;
+  animation: pastelSilkFlow 10s ease infinite;
 }
 
-/* Pearlescent Rose Sheen */
+/* Pearlescent Soft Rose Sheen */
 .silk-sheen {
   position: relative;
   overflow: hidden;
@@ -68,9 +71,9 @@
   background: linear-gradient(
     60deg,
     rgba(255, 255, 255, 0) 25%,
-    rgba(255, 215, 225, 0.25) 45%,
-    rgba(212, 91, 123, 0.3) 50%,
-    rgba(255, 215, 225, 0.25) 55%,
+    rgba(252, 231, 236, 0.4) 45%,
+    rgba(225, 77, 117, 0.25) 50%,
+    rgba(252, 231, 236, 0.4) 55%,
     rgba(255, 255, 255, 0) 75%
   );
   transform: rotate(25deg);
@@ -94,14 +97,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #FCF8F9;
+  background: #FFF0F3;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #C44569;
-  border-radius: 4px;
+  background: #F4B8C6;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #8E1E3B;
+  background: #E14D75;
 }

@@ -51,7 +51,7 @@ export default function AdminProductsListPage() {
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span className="text-[10px] uppercase tracking-[0.3em] text-[#DA9413] font-semibold">
+          <span className="text-[10px] uppercase tracking-[0.3em] text-[#C2185B] font-bold">
             Catalog Management
           </span>
           <h1 className="font-serif text-3xl text-white mt-1">Atelier Products</h1>
@@ -59,7 +59,7 @@ export default function AdminProductsListPage() {
 
         <Link
           href="/admin/products/new"
-          className="px-4 py-2.5 bg-[#750A0A] hover:bg-[#8E1137] text-white text-xs uppercase tracking-wider font-semibold rounded-lg flex items-center gap-2 transition-colors border border-[#DA9413]/30"
+          className="px-4 py-2.5 bg-gradient-to-r from-[#8E1B3B] to-[#C2185B] hover:brightness-110 text-white text-xs uppercase tracking-wider font-bold rounded-xl flex items-center gap-2 transition-all shadow-md"
         >
           <Plus className="w-4 h-4" />
           Add New Product
@@ -69,13 +69,13 @@ export default function AdminProductsListPage() {
       {loading ? (
         <div className="p-12 text-center text-xs text-zinc-500">Loading catalog from database...</div>
       ) : products.length === 0 ? (
-        <div className="p-12 text-center bg-[#1A1615] rounded-xl border border-white/10 space-y-3">
-          <Sparkles className="w-8 h-8 text-[#DA9413] mx-auto opacity-60" />
+        <div className="p-12 text-center bg-[#1A1615] rounded-3xl border border-white/10 space-y-3">
+          <Sparkles className="w-8 h-8 text-[#C2185B] mx-auto opacity-70 animate-pulse" />
           <p className="font-serif text-lg text-white">No Products in Atelier</p>
           <p className="text-xs text-zinc-400">Add a product to instantly display it on your live storefront.</p>
           <Link
             href="/admin/products/new"
-            className="inline-block mt-3 px-5 py-2.5 bg-[#750A0A] text-white rounded-lg text-xs font-semibold uppercase tracking-wider"
+            className="inline-block mt-3 px-5 py-2.5 bg-gradient-to-r from-[#8E1B3B] to-[#C2185B] text-white rounded-xl text-xs font-bold uppercase tracking-wider shadow-md"
           >
             Create First Product
           </Link>

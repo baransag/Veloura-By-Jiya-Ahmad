@@ -60,8 +60,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     return (
       <div className="min-h-screen bg-[#141211] text-[#FDFBF7] flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 rounded-full border-2 border-[#DA9413] border-t-transparent animate-spin" />
-          <span className="text-xs uppercase tracking-[0.25em] text-[#DA9413]">Authenticating Atelier Admin...</span>
+          <div className="w-8 h-8 rounded-full border-2 border-[#C2185B] border-t-transparent animate-spin" />
+          <span className="text-xs uppercase tracking-[0.25em] text-[#C2185B]">Authenticating Atelier Admin...</span>
         </div>
       </div>
     );
@@ -76,7 +76,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <span className="font-serif text-2xl tracking-[0.25em] text-[#FDFBF7] block">
               VELOURA
             </span>
-            <span className="text-[9px] uppercase tracking-[0.3em] text-[#DA9413] font-semibold">
+            <span className="text-[9px] uppercase tracking-[0.3em] text-[#C2185B] font-bold">
               Admin CMS Portal
             </span>
           </div>
@@ -89,9 +89,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-medium uppercase tracking-wider transition-colors ${
+                  className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors ${
                     isActive
-                      ? "bg-[#750A0A] text-white font-semibold"
+                      ? "bg-gradient-to-r from-[#8E1B3B] to-[#C2185B] text-white font-bold"
                       : "text-zinc-400 hover:text-white hover:bg-white/5"
                   }`}
                 >
@@ -107,7 +107,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <Link
             href="/"
             target="_blank"
-            className="flex items-center gap-2 text-zinc-400 hover:text-[#DA9413] transition-colors"
+            className="flex items-center gap-2 text-zinc-400 hover:text-[#E14D75] transition-colors font-semibold"
           >
             <ExternalLink className="w-3.5 h-3.5" />
             View Live Storefront

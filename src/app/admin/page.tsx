@@ -26,7 +26,7 @@ export default function AdminDashboardPage() {
       {/* Top bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span className="text-[10px] uppercase tracking-[0.3em] text-[#DA9413] font-semibold">
+          <span className="text-[10px] uppercase tracking-[0.3em] text-[#C2185B] font-bold">
             Operational Overview
           </span>
           <h1 className="font-serif text-3xl text-[#FDFBF7] mt-1">Atelier Dashboard</h1>
@@ -35,14 +35,14 @@ export default function AdminDashboardPage() {
         <div className="flex items-center gap-3">
           <Link
             href="/admin/products/new"
-            className="px-4 py-2.5 bg-[#750A0A] hover:bg-[#8E1137] text-white text-xs uppercase tracking-wider font-semibold rounded-lg flex items-center gap-2 transition-colors border border-[#DA9413]/30"
+            className="px-4 py-2.5 bg-gradient-to-r from-[#8E1B3B] to-[#C2185B] hover:brightness-110 text-white text-xs uppercase tracking-wider font-bold rounded-xl flex items-center gap-2 transition-all shadow-md"
           >
             <Plus className="w-4 h-4" />
             Add New Product
           </Link>
           <Link
             href="/admin/orders"
-            className="px-4 py-2.5 bg-white/10 hover:bg-white/15 text-white text-xs uppercase tracking-wider font-semibold rounded-lg flex items-center gap-2 transition-colors"
+            className="px-4 py-2.5 bg-white/10 hover:bg-white/15 text-white text-xs uppercase tracking-wider font-semibold rounded-xl flex items-center gap-2 transition-colors"
           >
             Manage Orders
           </Link>
@@ -52,10 +52,10 @@ export default function AdminDashboardPage() {
       {/* Real Metric Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Metric 1: Total Revenue */}
-        <div className="p-6 rounded-xl bg-[#1A1615] border border-white/10 space-y-2">
+        <div className="p-6 rounded-2xl bg-[#1A1615] border border-white/10 space-y-2">
           <div className="flex items-center justify-between text-zinc-400">
             <span className="text-xs uppercase tracking-wider">Total Revenue</span>
-            <DollarSign className="w-4 h-4 text-[#DA9413]" />
+            <DollarSign className="w-4 h-4 text-[#E14D75]" />
           </div>
           <p className="font-serif text-2xl font-bold text-[#FDFBF7]">
             {loading ? "..." : `Rs. ${(stats?.revenue || 0).toLocaleString()}`}
@@ -106,7 +106,7 @@ export default function AdminDashboardPage() {
           <h2 className="font-serif text-lg text-[#FDFBF7]">Recent Atelier Orders</h2>
           <Link
             href="/admin/orders"
-            className="text-xs uppercase tracking-wider text-[#DA9413] hover:underline flex items-center gap-1"
+            className="text-xs uppercase tracking-wider text-[#C2185B] hover:text-[#E14D75] flex items-center gap-1 font-bold"
           >
             View All <ArrowRight className="w-3.5 h-3.5" />
           </Link>
@@ -134,7 +134,7 @@ export default function AdminDashboardPage() {
               <tbody className="divide-y divide-white/5">
                 {stats.recentOrders.map((order: any) => (
                   <tr key={order.id} className="hover:bg-white/5 transition-colors">
-                    <td className="py-3 font-mono text-[#DA9413] font-semibold">{order.orderNumber}</td>
+                    <td className="py-3 font-mono text-[#E14D75] font-bold">{order.orderNumber}</td>
                     <td className="py-3 text-white">{order.customerName}</td>
                     <td className="py-3 uppercase text-zinc-300">{order.paymentMethod}</td>
                     <td className="py-3">

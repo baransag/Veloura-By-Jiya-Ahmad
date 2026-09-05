@@ -113,6 +113,7 @@ model Product {
   cartItems         CartItem[]
   wishlistItems     WishlistItem[]
   orderItems        OrderItem[]
+  reviews           Review[]
 }
 
 model ProductImage {
@@ -235,4 +236,16 @@ model SiteSettings {
   freeShippingThreshold Float    @default(3000)
   announcement          String   @default("Complimentary Silk Packaging & Free Delivery on orders over Rs. 3,000")
   updatedAt             DateTime @updatedAt
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  author    String
+  city      String?  @default("Lahore")
+  rating    Int      @default(5)
+  comment   String
+  verified  Boolean  @default(true)
+  createdAt DateTime @default(now())
 }

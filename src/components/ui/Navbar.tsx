@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { ShoppingBag, Search, User, Menu, X, MessageCircle, Sparkles } from "lucide-react";
+import { ShoppingBag, User, Menu, X, MessageCircle, Sparkles, PackageCheck, Flame } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { getBaseWhatsAppUrl, OFFICIAL_WHATSAPP_NUMBER } from "@/lib/whatsapp";
+import { LiveSearchDropdown } from "./LiveSearchDropdown";
 
 export function Navbar() {
   const { totalItems, setIsCartOpen } = useCart();
@@ -30,196 +31,249 @@ export function Navbar() {
 
   return (
     <>
-      {/* Top Silk Luxury Announcement Bar */}
-      <div className="bg-[#420D1A] text-[#FDE8EF] text-[11px] tracking-[0.22em] py-2 px-4 text-center uppercase font-medium flex items-center justify-between border-b border-[#D45B7B]/30">
-        <div className="hidden md:flex items-center gap-2 w-48 text-left text-[10px] text-[#E8A5B7]">
-          <Sparkles className="w-3 h-3" />
-          <span>Atelier Concierge</span>
+      {/* ── 1. Top Soft Pastel Silk Announcement Bar ──────────────────────── */}
+      <div className="bg-gradient-to-r from-[#8E1B3B] via-[#C2185B] to-[#8E1B3B] text-white text-[11px] tracking-[0.2em] py-2 px-4 text-center uppercase font-medium flex items-center justify-between border-b border-[#F8D5DE]/30">
+        <div className="hidden md:flex items-center gap-2 w-52 text-left text-[10px] text-[#FCE7EC]">
+          <Sparkles className="w-3.5 h-3.5 text-[#FCE7EC] animate-pulse" />
+          <span>VELOURA Atelier Luxe</span>
         </div>
-        <div className="flex-1 text-center truncate">
-          Complimentary Velvet Packaging & Free Express Shipping Over Rs. 3,000
+
+        <div className="flex-1 text-center truncate px-2 font-semibold">
+          Complimentary Luxury Silk Box & Free Delivery Over Rs. 3,000 across Pakistan
         </div>
-        <div className="w-48 text-right hidden md:flex items-center justify-end gap-2 text-[10px]">
+
+        <div className="w-52 text-right hidden md:flex items-center justify-end gap-3 text-[10px]">
+          <Link
+            href="/order-tracking"
+            className="flex items-center gap-1 text-[#FCE7EC] hover:text-white transition-colors"
+          >
+            <PackageCheck className="w-3.5 h-3.5" />
+            <span>Track Parcel</span>
+          </Link>
+          <span className="text-[#F8D5DE]/40">|</span>
           <a
             href={whatsAppUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-[#FDE8EF] hover:text-[#E8A5B7] transition-colors"
+            className="flex items-center gap-1 text-[#FCE7EC] hover:text-white transition-colors font-bold"
           >
-            <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
-            <span>+92 321 9954325</span>
+            <MessageCircle className="w-3.5 h-3.5 text-white" />
+            <span>VIP Support</span>
           </a>
         </div>
       </div>
 
-      {/* Main Luxury Header */}
+      {/* ── 2. Main Luxury Header with Instant Search Bar ─────────────────── */}
       <header
         className={`sticky top-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? "bg-[#FCF8F9]/95 backdrop-blur-md shadow-sm py-3.5 border-b border-[#F0D5DE]"
-            : "bg-[#FCF8F9] py-5 border-b border-[#F0D5DE]"
+            ? "bg-white/95 backdrop-blur-md shadow-soft-pink py-3 border-b border-[#F8D5DE]"
+            : "bg-white py-4 border-b border-[#FCE7EC]"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-[#1A1014] hover:text-[#8E1E3B]"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between gap-4">
+            {/* Mobile Hamburger Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden p-2 text-[#8E1B3B] hover:text-[#C2185B] rounded-xl hover:bg-[#FFF0F3] transition-colors"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-7 text-xs tracking-[0.16em] uppercase font-medium text-[#1A1014]">
-            <Link href="/" className="hover:text-[#8E1E3B] transition-colors">
-              Home
-            </Link>
-            <Link href="/shop?category=luxe-makeup" className="hover:text-[#8E1E3B] transition-colors">
-              Makeup & Lips
-            </Link>
-            <Link href="/shop?category=fine-jewelry" className="hover:text-[#8E1E3B] transition-colors">
-              Fine Jewelry
-            </Link>
-            <Link href="/shop?category=silk-skincare" className="hover:text-[#8E1E3B] transition-colors">
-              Silk Skincare
-            </Link>
-            <Link href="/shop?category=hair-fragrance" className="hover:text-[#8E1E3B] transition-colors">
-              Hair & Mist
-            </Link>
-            <Link href="/order-tracking" className="hover:text-[#8E1E3B] transition-colors text-zinc-500">
-              Track Order
-            </Link>
-          </nav>
-
-          {/* Brand Wordmark */}
-          <div className="text-center">
-            <Link href="/" className="inline-block group">
-              <span className="font-serif text-2xl sm:text-3xl tracking-[0.28em] font-light text-[#1A1014] group-hover:text-[#8E1E3B] transition-colors">
+            {/* Brand Wordmark */}
+            <Link href="/" className="flex-shrink-0 group text-left">
+              <span className="font-serif text-2xl sm:text-3xl tracking-[0.25em] font-medium text-[#8E1B3B] group-hover:text-[#C2185B] transition-colors">
                 VELOURA
               </span>
-              <span className="block text-[8px] tracking-[0.45em] text-[#8E1E3B] uppercase -mt-1 font-sans font-semibold">
-                Beauty & Fine Jewels
+              <span className="block text-[8px] tracking-[0.45em] text-[#C2185B] uppercase -mt-1 font-sans font-bold">
+                By Jiya Ahmad
               </span>
             </Link>
-          </div>
 
-          {/* Right Action Icons */}
-          <div className="flex items-center space-x-5 text-[#1A1014]">
-            <Link
-              href="/shop"
-              className="p-1 hover:text-[#8E1E3B] transition-colors hidden sm:block"
-              title="Search Atelier"
-            >
-              <Search className="w-5 h-5" />
-            </Link>
+            {/* Live Search Bar (Desktop) */}
+            <div className="hidden lg:block flex-1 max-w-lg mx-6">
+              <LiveSearchDropdown />
+            </div>
 
-            <a
-              href={whatsAppUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-1 hover:text-[#25D366] transition-colors"
-              title="WhatsApp VIP Concierge"
-            >
-              <MessageCircle className="w-5 h-5 text-[#25D366]" />
-            </a>
-
-            {user?.role === "ADMIN" ? (
-              <Link
-                href="/admin"
-                className="text-[11px] tracking-wider uppercase font-semibold text-[#8E1E3B] border border-[#8E1E3B]/50 px-2.5 py-1 rounded-full hover:bg-[#8E1E3B] hover:text-white transition-colors"
+            {/* Right Action Icons */}
+            <div className="flex items-center space-x-4 sm:space-x-5 text-[#8E1B3B]">
+              <a
+                href={whatsAppUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-xl text-[#8E1B3B] hover:text-[#C2185B] hover:bg-[#FFF0F3] transition-colors hidden sm:flex items-center gap-1.5 text-xs font-semibold"
+                title="WhatsApp VIP Concierge"
               >
-                Admin
-              </Link>
-            ) : user ? (
-              <Link
-                href="/account"
-                className="p-1 hover:text-[#8E1E3B] transition-colors flex items-center gap-1.5"
-                title="My Account"
-              >
-                <User className="w-5 h-5" />
-                <span className="text-[10px] hidden sm:inline uppercase font-medium">{user.name?.split(" ")[0]}</span>
-              </Link>
-            ) : (
-              <Link
-                href="/account/login"
-                className="p-1 hover:text-[#8E1E3B] transition-colors flex items-center gap-1"
-                title="Customer Sign In"
-              >
-                <User className="w-5 h-5" />
-                <span className="text-[10px] hidden sm:inline uppercase tracking-wider text-zinc-600">Sign In</span>
-              </Link>
-            )}
+                <MessageCircle className="w-4 h-4 text-[#C2185B]" />
+                <span className="hidden md:inline">Order via WhatsApp</span>
+              </a>
 
-            {/* Shopping Bag */}
-            <button
-              onClick={() => setIsCartOpen(true)}
-              className="relative p-1 hover:text-[#8E1E3B] transition-colors group flex items-center"
-              aria-label="Open Cart"
-            >
-              <ShoppingBag className="w-5 h-5 text-[#1A1014] group-hover:text-[#8E1E3B]" />
-              {totalItems > 0 && (
-                <span className="absolute -top-1 -right-2 bg-[#8E1E3B] text-[#FCF8F9] text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center shadow">
-                  {totalItems}
-                </span>
+              {user?.role === "ADMIN" ? (
+                <Link
+                  href="/admin"
+                  className="text-[11px] tracking-wider uppercase font-bold text-white bg-[#8E1B3B] hover:bg-[#C2185B] px-3 py-1.5 rounded-full shadow-xs transition-colors"
+                >
+                  Admin Panel
+                </Link>
+              ) : user ? (
+                <Link
+                  href="/account"
+                  className="p-2 rounded-xl hover:bg-[#FFF0F3] transition-colors flex items-center gap-1.5"
+                  title="My Account"
+                >
+                  <User className="w-4 h-4" />
+                  <span className="text-xs hidden sm:inline font-semibold capitalize">
+                    {user.name?.split(" ")[0]}
+                  </span>
+                </Link>
+              ) : (
+                <Link
+                  href="/account/login"
+                  className="p-2 rounded-xl hover:bg-[#FFF0F3] transition-colors flex items-center gap-1 text-xs font-semibold text-[#8E1B3B] hover:text-[#C2185B]"
+                  title="Customer Sign In"
+                >
+                  <User className="w-4 h-4" />
+                  <span className="hidden sm:inline">Sign In</span>
+                </Link>
               )}
-            </button>
-          </div>
-        </div>
 
-        {/* Mobile Navigation Drawer */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-[#EAE2D5] bg-[#FAF8F5] px-6 py-6 space-y-4 text-xs uppercase tracking-widest font-medium">
-            <Link
-              href="/"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-[#1E191B] border-b border-zinc-100"
-            >
+              {/* Cart Drawer Trigger Button */}
+              <button
+                type="button"
+                onClick={() => setIsCartOpen(true)}
+                className="relative p-2.5 rounded-2xl bg-[#FFF0F3] hover:bg-[#FCE7EC] text-[#8E1B3B] hover:text-[#C2185B] border border-[#F8D5DE] transition-all flex items-center gap-2 group shadow-2xs"
+                aria-label="Open Cart Drawer"
+              >
+                <ShoppingBag className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                <span className="hidden sm:inline text-xs font-bold uppercase tracking-wider">
+                  Bag
+                </span>
+                {totalItems > 0 && (
+                  <span className="bg-gradient-to-r from-[#8E1B3B] to-[#C2185B] text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-xs">
+                    {totalItems}
+                  </span>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile Search Bar Row */}
+          <div className="mt-3 lg:hidden">
+            <LiveSearchDropdown />
+          </div>
+
+          {/* Secondary Desktop Categories Navigation Strip */}
+          <nav className="hidden lg:flex items-center justify-center space-x-8 pt-3 mt-2 border-t border-[#FCE7EC] text-[11px] tracking-[0.2em] uppercase font-semibold text-[#8E1B3B]/80">
+            <Link href="/" className="hover:text-[#C2185B] transition-colors">
               Home
             </Link>
-            <Link
-              href="/shop?category=luxe-makeup"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-[#1E191B] border-b border-zinc-100"
-            >
+            <Link href="/shop" className="hover:text-[#C2185B] transition-colors">
+              All Creations
+            </Link>
+            <Link href="/shop?category=luxe-makeup" className="hover:text-[#C2185B] transition-colors">
               Makeup & Lips
             </Link>
-            <Link
-              href="/shop?category=fine-jewelry"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-[#1E191B] border-b border-zinc-100"
-            >
+            <Link href="/shop?category=fine-jewelry" className="hover:text-[#C2185B] transition-colors">
               Fine Jewelry & Pearls
             </Link>
-            <Link
-              href="/shop?category=silk-skincare"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-[#1E191B] border-b border-zinc-100"
-            >
-              Silk Skincare & Glow
+            <Link href="/shop?category=silk-skincare" className="hover:text-[#C2185B] transition-colors">
+              Silk Skincare
+            </Link>
+            <Link href="/shop?category=hair-fragrance" className="hover:text-[#C2185B] transition-colors">
+              Hair & Mist
             </Link>
             <Link
-              href="/shop?category=hair-fragrance"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-[#1E191B] border-b border-zinc-100"
+              href="/shop?deals=true"
+              className="text-[#C2185B] font-bold hover:text-[#8E1B3B] transition-colors flex items-center gap-1"
             >
-              Hair Elixirs & Fragrance
+              <Flame className="w-3.5 h-3.5 fill-current animate-pulse" />
+              <span>Flash Deals</span>
             </Link>
             <Link
               href="/order-tracking"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-zinc-500"
+              className="text-[#8E1B3B] hover:text-[#C2185B] transition-colors flex items-center gap-1"
             >
-              Track Your Order
+              <PackageCheck className="w-3.5 h-3.5" />
+              <span>Live Tracking</span>
             </Link>
-            <div className="pt-2">
-              <Link
-                href="/account/login"
-                onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-2.5 bg-[#632839] text-white text-center rounded block text-xs tracking-widest font-semibold"
-              >
-                Sign In / Join Veloura
-              </Link>
+          </nav>
+        </div>
+
+        {/* Mobile Slide-Out Drawer */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden fixed inset-0 top-[110px] z-50 bg-[#25050D]/40 backdrop-blur-xs animate-in fade-in duration-200">
+            <div className="bg-white max-w-xs w-full h-full p-6 space-y-6 shadow-2xl border-r border-[#F8D5DE] overflow-y-auto">
+              <div className="flex items-center justify-between pb-4 border-b border-[#F8D5DE]">
+                <span className="font-serif text-lg font-bold text-[#8E1B3B]">Atelier Menu</span>
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-1 rounded-lg text-[#8E1B3B] hover:bg-[#FFF0F3]"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="space-y-4 text-xs font-semibold uppercase tracking-wider text-[#8E1B3B]">
+                <Link
+                  href="/"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 hover:text-[#C2185B] border-b border-[#FCE7EC]"
+                >
+                  Home
+                </Link>
+                <Link
+                  href="/shop"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 hover:text-[#C2185B] border-b border-[#FCE7EC]"
+                >
+                  All Products
+                </Link>
+                <Link
+                  href="/shop?category=luxe-makeup"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 hover:text-[#C2185B] border-b border-[#FCE7EC]"
+                >
+                  Luxe Makeup & Lips
+                </Link>
+                <Link
+                  href="/shop?category=fine-jewelry"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 hover:text-[#C2185B] border-b border-[#FCE7EC]"
+                >
+                  Fine Jewelry & Pearls
+                </Link>
+                <Link
+                  href="/shop?category=silk-skincare"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 hover:text-[#C2185B] border-b border-[#FCE7EC]"
+                >
+                  Silk Skincare
+                </Link>
+                <Link
+                  href="/shop?category=hair-fragrance"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 hover:text-[#C2185B] border-b border-[#FCE7EC]"
+                >
+                  Hair Mist & Argan
+                </Link>
+                <Link
+                  href="/order-tracking"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 text-[#C2185B] border-b border-[#FCE7EC]"
+                >
+                  Track My Order
+                </Link>
+                <a
+                  href={whatsAppUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block py-3 px-4 rounded-xl bg-gradient-to-r from-[#8E1B3B] to-[#C2185B] text-white text-center font-bold shadow-md"
+                >
+                  WhatsApp VIP Concierge
+                </a>
+              </div>
             </div>
           </div>
         )}

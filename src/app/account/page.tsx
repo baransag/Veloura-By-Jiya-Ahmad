@@ -64,41 +64,41 @@ export default function CustomerAccountPage() {
 
       {/* Overview Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div className="p-6 rounded-xl bg-[#FDFBF7] border border-[#EAE2D5] space-y-2">
-          <div className="flex items-center justify-between text-zinc-400">
-            <span className="text-xs uppercase tracking-wider">Account Level</span>
-            <ShieldCheck className="w-4 h-4 text-[#DA9413]" />
+        <div className="p-6 rounded-3xl bg-white border border-[#F8D5DE] space-y-2 shadow-soft-pink">
+          <div className="flex items-center justify-between text-[#8E1B3B]/60">
+            <span className="text-xs uppercase tracking-wider font-bold">Account Level</span>
+            <ShieldCheck className="w-4 h-4 text-[#C2185B]" />
           </div>
-          <p className="font-serif text-xl font-bold text-[#141211]">VELOURA Privilege</p>
-          <p className="text-[11px] text-zinc-500">Complimentary silk packaging enabled</p>
+          <p className="font-serif text-xl font-bold text-[#25050D]">VELOURA Privilege</p>
+          <p className="text-[11px] text-[#8E1B3B]/70">Complimentary silk packaging enabled</p>
         </div>
 
-        <div className="p-6 rounded-xl bg-[#FDFBF7] border border-[#EAE2D5] space-y-2">
-          <div className="flex items-center justify-between text-zinc-400">
-            <span className="text-xs uppercase tracking-wider">Track Shipments</span>
-            <Package className="w-4 h-4 text-[#0D3A2F]" />
+        <div className="p-6 rounded-3xl bg-white border border-[#F8D5DE] space-y-2 shadow-soft-pink">
+          <div className="flex items-center justify-between text-[#8E1B3B]/60">
+            <span className="text-xs uppercase tracking-wider font-bold">Track Shipments</span>
+            <Package className="w-4 h-4 text-[#C2185B]" />
           </div>
           <Link
             href="/order-tracking"
-            className="font-serif text-xl font-bold text-[#0D3A2F] hover:underline block"
+            className="font-serif text-xl font-bold text-[#8E1B3B] hover:text-[#C2185B] transition-colors block"
           >
             Live Tracking →
           </Link>
-          <p className="text-[11px] text-zinc-500">Real-time status updates</p>
+          <p className="text-[11px] text-[#8E1B3B]/70">Real-time status updates</p>
         </div>
 
-        <div className="p-6 rounded-xl bg-[#FDFBF7] border border-[#EAE2D5] space-y-2">
-          <div className="flex items-center justify-between text-zinc-400">
-            <span className="text-xs uppercase tracking-wider">Explore Boutique</span>
-            <Heart className="w-4 h-4 text-[#750A0A]" />
+        <div className="p-6 rounded-3xl bg-white border border-[#F8D5DE] space-y-2 shadow-soft-pink">
+          <div className="flex items-center justify-between text-[#8E1B3B]/60">
+            <span className="text-xs uppercase tracking-wider font-bold">Explore Atelier</span>
+            <Heart className="w-4 h-4 text-[#E14D75]" />
           </div>
           <Link
             href="/shop"
-            className="font-serif text-xl font-bold text-[#750A0A] hover:underline block"
+            className="font-serif text-xl font-bold text-[#8E1B3B] hover:text-[#C2185B] transition-colors block"
           >
-            Shop Silk Pret →
+            Shop Creations →
           </Link>
-          <p className="text-[11px] text-zinc-500">Fresh arrivals daily</p>
+          <p className="text-[11px] text-[#8E1B3B]/70">Organic silk & 18K jewels</p>
         </div>
       </div>
     </div>

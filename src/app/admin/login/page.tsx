@@ -43,7 +43,7 @@ export default function AdminLoginPage() {
           <span className="font-serif text-3xl tracking-[0.25em] text-[#FDFBF7] block">
             VELOURA
           </span>
-          <p className="text-xs uppercase tracking-[0.3em] text-[#DA9413] font-semibold">
+          <p className="text-xs uppercase tracking-[0.3em] text-[#C2185B] font-bold">
             Atelier Administrative Gate
           </p>
         </div>
@@ -64,7 +64,7 @@ export default function AdminLoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-[#DA9413]"
+                className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white focus:outline-none focus:border-[#C2185B]"
               />
               <Mail className="w-4 h-4 text-zinc-500 absolute right-3 top-3.5" />
             </div>
@@ -78,7 +78,7 @@ export default function AdminLoginPage() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-[#DA9413]"
+                className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white focus:outline-none focus:border-[#C2185B]"
               />
               <Lock className="w-4 h-4 text-zinc-500 absolute right-3 top-3.5" />
             </div>
@@ -87,7 +87,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3.5 px-4 bg-[#750A0A] hover:bg-[#8E1137] text-white font-semibold uppercase tracking-[0.2em] rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50 mt-4 border border-[#DA9413]/30"
+            className="w-full py-3.5 px-4 bg-gradient-to-r from-[#8E1B3B] to-[#C2185B] hover:brightness-110 text-white font-bold uppercase tracking-[0.2em] rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 mt-4 shadow-lg"
           >
             {loading ? "Verifying Credentials..." : "Authenticate Admin"}
           </button>

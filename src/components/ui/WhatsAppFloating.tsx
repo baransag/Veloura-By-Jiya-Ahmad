@@ -16,7 +16,7 @@ export function WhatsAppFloating() {
         href={whatsAppUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-gradient-to-r from-[#8E1E3B] to-[#D45B7B] text-white hover:brightness-110 px-4 py-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-105 border border-[#F4A6B8]/40 group"
+        className="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-40 flex items-center gap-2 bg-gradient-to-r from-[#8E1B3B] to-[#C2185B] text-white hover:brightness-110 px-4 py-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-105 border border-[#F8D5DE]/40 group"
         title="Chat with Atelier Concierge"
       >
         <MessageCircle className="w-5 h-5 text-white group-hover:rotate-12 transition-transform" />

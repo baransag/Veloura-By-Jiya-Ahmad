@@ -105,7 +105,7 @@ export default function NewProductPage() {
             <ArrowLeft className="w-4 h-4" />
           </Link>
           <div>
-            <span className="text-[10px] uppercase tracking-[0.3em] text-[#DA9413] font-semibold">
+            <span className="text-[10px] uppercase tracking-[0.3em] text-[#C2185B] font-bold">
               Product Atelier CMS
             </span>
             <h1 className="font-serif text-2xl text-white">Create & Publish Product</h1>
@@ -131,34 +131,38 @@ export default function NewProductPage() {
       )}
 
       {successMsg && (
-        <div className="p-4 rounded-lg bg-emerald-900/40 border border-emerald-500/40 text-emerald-300 text-xs flex items-center gap-2 font-semibold">
+        <div className="p-4 rounded-lg bg-emerald-900/40 border border-emerald-500/40 text-emerald-300 text-xs flex items-center gap-2">
           <Check className="w-4 h-4 flex-shrink-0" />
           <span>{successMsg}</span>
         </div>
       )}
 
       <form onSubmit={handlePublish} className="space-y-6">
-        {/* Images Card */}
-        <div className="p-6 rounded-xl bg-[#1A1615] border border-white/10 space-y-4">
-          <label className="text-xs uppercase tracking-wider text-zinc-400 font-semibold block">
-            Product Photography (Persistent Disk Upload)
-          </label>
+        {/* Gallery Upload Card */}
+        <div className="bg-[#1A1615] p-6 rounded-xl border border-white/10 space-y-4">
+          <div className="flex items-center justify-between">
+            <label className="text-xs uppercase tracking-wider text-white font-semibold flex items-center gap-2">
+              <span>Product Photography</span>
+              <span className="text-[10px] text-zinc-500 font-normal">(PNG, JPG, WebP)</span>
+            </label>
+            {uploading && <span className="text-[11px] text-[#C2185B] animate-pulse">Uploading to Atelier...</span>}
+          </div>
 
-          <div className="flex flex-wrap gap-4 items-center">
+          <div className="flex flex-wrap gap-3">
             {images.map((img, idx) => (
-              <div key={idx} className="relative w-24 h-32 rounded-lg overflow-hidden border border-white/20 bg-black">
-                <img src={img} alt="" className="w-full h-full object-cover" />
+              <div key={idx} className="relative w-24 h-32 rounded-lg overflow-hidden border border-white/20 group">
+                <img src={img} alt="Product" className="w-full h-full object-cover" />
                 <button
                   type="button"
                   onClick={() => setImages((prev) => prev.filter((_, i) => i !== idx))}
-                  className="absolute top-1 right-1 p-1 rounded-full bg-black/70 text-rose-400 hover:text-rose-200"
+                  className="absolute top-1 right-1 p-1 rounded-full bg-black/70 text-white hover:bg-rose-600 transition-colors opacity-0 group-hover:opacity-100"
                 >
                   <X className="w-3 h-3" />
                 </button>
               </div>
             ))}
 
-            <label className="w-24 h-32 rounded-lg border-2 border-dashed border-white/20 hover:border-[#DA9413] flex flex-col items-center justify-center cursor-pointer transition-colors p-2 text-center bg-black/20">
+            <label className="w-24 h-32 rounded-lg border-2 border-dashed border-white/20 hover:border-[#C2185B] flex flex-col items-center justify-center cursor-pointer transition-colors p-2 text-center bg-black/20">
               <Upload className="w-5 h-5 text-zinc-400 mb-1" />
               <span className="text-[10px] text-zinc-400">
                 {uploading ? "Uploading..." : "Add Image"}
@@ -184,7 +188,7 @@ export default function NewProductPage() {
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-[#DA9413]"
+              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-[#C2185B]"
             />
           </div>
 
@@ -196,7 +200,7 @@ export default function NewProductPage() {
                 required
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-[#DA9413]"
+                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-[#C2185B]"
               />
             </div>
 
@@ -206,7 +210,7 @@ export default function NewProductPage() {
                 type="number"
                 value={salePrice}
                 onChange={(e) => setSalePrice(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-[#DA9413]"
+                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-[#C2185B]"
               />
             </div>
           </div>
@@ -219,7 +223,7 @@ export default function NewProductPage() {
                 required
                 value={categoryName}
                 onChange={(e) => setCategoryName(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-[#DA9413]"
+                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-[#C2185B]"
               />
             </div>
 
@@ -230,7 +234,7 @@ export default function NewProductPage() {
                 required
                 value={stock}
                 onChange={(e) => setStock(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-[#DA9413]"
+                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-[#C2185B]"
               />
             </div>
 
@@ -240,7 +244,7 @@ export default function NewProductPage() {
                 type="text"
                 value={sku}
                 onChange={(e) => setSku(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-[#DA9413]"
+                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-[#C2185B]"
               />
             </div>
           </div>
@@ -251,7 +255,7 @@ export default function NewProductPage() {
               rows={4}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-[#DA9413]"
+              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-[#C2185B]"
             />
           </div>
 
@@ -261,7 +265,7 @@ export default function NewProductPage() {
               type="text"
               value={tags}
               onChange={(e) => setTags(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-[#DA9413]"
+              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-[#C2185B]"
             />
           </div>
         </div>
@@ -271,13 +275,13 @@ export default function NewProductPage() {
           <button
             type="submit"
             disabled={publishing}
-            className="w-full py-4 px-6 bg-[#750A0A] hover:bg-[#8E1137] text-white font-semibold uppercase tracking-[0.25em] text-xs rounded-xl transition-all shadow-xl flex items-center justify-center gap-2 disabled:opacity-50 border border-[#DA9413]/40"
+            className="w-full py-4 px-6 bg-gradient-to-r from-[#8E1B3B] to-[#C2185B] hover:brightness-110 text-white font-bold uppercase tracking-[0.25em] text-xs rounded-xl transition-all shadow-xl flex items-center justify-center gap-2 disabled:opacity-50"
           >
             {publishing ? (
               "Writing to PostgreSQL & Publishing..."
             ) : (
               <>
-                <Sparkles className="w-4 h-4 text-[#DA9413]" />
+                <Sparkles className="w-4 h-4 text-[#F4B8C6]" />
                 Publish Product (One Click)
               </>
             )}
