@@ -8,18 +8,10 @@ export const dynamic = "force-dynamic";
 export async function GET(req: NextRequest) {
   const cookieStore = await cookies();
   const customerToken = cookieStore.get("veloura_customer_token")?.value;
-  const adminToken = cookieStore.get("veloura_admin_token")?.value;
-
-  if (adminToken) {
-    const admin = verifyToken(adminToken);
-    if (admin && admin.role === "ADMIN") {
-      return NextResponse.json({ user: admin });
-    }
-  }
 
   if (customerToken) {
     const customer = verifyToken(customerToken);
-    if (customer) {
+    if (customer && customer.role === "CUSTOMER") {
       const dbUser = await prisma.user.findUnique({
         where: { id: customer.userId },
         select: { id: true, email: true, name: true, phone: true, role: true },

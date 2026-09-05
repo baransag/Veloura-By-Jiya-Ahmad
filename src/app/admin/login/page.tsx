@@ -6,8 +6,8 @@ import { ShieldCheck, Lock, Mail, AlertCircle } from "lucide-react";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("admin@veloura.com");
-  const [password, setPassword] = useState("admin123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -92,10 +92,6 @@ export default function AdminLoginPage() {
             {loading ? "Verifying Credentials..." : "Authenticate Admin"}
           </button>
         </form>
-
-        <div className="pt-2 text-center text-[10px] text-zinc-500">
-          Default seed credentials pre-filled for administrative testing.
-        </div>
       </div>
     </div>
   );

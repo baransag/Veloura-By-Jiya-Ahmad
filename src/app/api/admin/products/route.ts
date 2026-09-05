@@ -76,37 +76,88 @@ export async function POST(req: NextRequest) {
       finalCategoryId = cat.id;
     }
 
-    const product = await prisma.product.create({
-      data: {
-        name,
-        slug,
-        description: description || name,
-        shortDescription: shortDescription || null,
-        price: parseFloat(price),
-        salePrice: salePrice ? parseFloat(salePrice) : null,
-        stock: parseInt(stock) || 0,
-        sku: sku || `SKU-${Date.now()}`,
-        brand: brand || "VELOURA",
-        tags: Array.isArray(tags) ? tags : [],
-        categoryId: finalCategoryId || null,
-        isPublished: Boolean(isPublished),
-        isFeatured: Boolean(isFeatured),
-        images: {
-          create: Array.isArray(images)
-            ? images.map((img: any, idx: number) => ({
-                url: typeof img === "string" ? img : img.url,
-                alt: name,
-                isPrimary: idx === 0,
-                sortOrder: idx,
-              }))
-            : [],
+    // Auto-generate or sanitize unique SKU
+    let baseSku = (sku && typeof sku === "string" && sku.trim()) || `VEL-${Date.now().toString().slice(-6)}`;
+    let finalSku = baseSku;
+    let skuCounter = 1;
+    while (await prisma.product.findUnique({ where: { sku: finalSku } })) {
+      finalSku = `${baseSku}-${skuCounter}`;
+      skuCounter++;
+    }
+
+    let product;
+    try {
+      product = await prisma.product.create({
+        data: {
+          name,
+          slug,
+          description: description || name,
+          shortDescription: shortDescription || null,
+          price: parseFloat(price),
+          salePrice: salePrice ? parseFloat(salePrice) : null,
+          stock: parseInt(stock) || 0,
+          sku: finalSku,
+          brand: brand || "VELOURA",
+          tags: Array.isArray(tags) ? tags : [],
+          categoryId: finalCategoryId || null,
+          isPublished: Boolean(isPublished),
+          isFeatured: Boolean(isFeatured),
+          images: {
+            create: Array.isArray(images)
+              ? images.map((img: any, idx: number) => ({
+                  url: typeof img === "string" ? img : img.url,
+                  alt: name,
+                  isPrimary: idx === 0,
+                  sortOrder: idx,
+                }))
+              : [],
+          },
         },
-      },
-      include: {
-        images: true,
-        category: true,
-      },
-    });
+        include: {
+          images: true,
+          category: true,
+        },
+      });
+    } catch (createErr: any) {
+      // If still unique constraint race condition, retry with timestamp
+      if (createErr.code === "P2002") {
+        finalSku = `${baseSku}-${Date.now().toString().slice(-4)}`;
+        slug = `${slug}-${Date.now().toString().slice(-4)}`;
+        product = await prisma.product.create({
+          data: {
+            name,
+            slug,
+            description: description || name,
+            shortDescription: shortDescription || null,
+            price: parseFloat(price),
+            salePrice: salePrice ? parseFloat(salePrice) : null,
+            stock: parseInt(stock) || 0,
+            sku: finalSku,
+            brand: brand || "VELOURA",
+            tags: Array.isArray(tags) ? tags : [],
+            categoryId: finalCategoryId || null,
+            isPublished: Boolean(isPublished),
+            isFeatured: Boolean(isFeatured),
+            images: {
+              create: Array.isArray(images)
+                ? images.map((img: any, idx: number) => ({
+                    url: typeof img === "string" ? img : img.url,
+                    alt: name,
+                    isPrimary: idx === 0,
+                    sortOrder: idx,
+                  }))
+                : [],
+            },
+          },
+          include: {
+            images: true,
+            category: true,
+          },
+        });
+      } else {
+        throw createErr;
+      }
+    }
 
     return NextResponse.json({
       success: true,

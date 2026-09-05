@@ -8,17 +8,15 @@ import Link from "next/link";
 export default function NewProductPage() {
   const router = useRouter();
 
-  const [name, setName] = useState("Complete Hair & Skin Care Bundle");
-  const [price, setPrice] = useState("2500");
-  const [salePrice, setSalePrice] = useState("1999");
-  const [categoryName, setCategoryName] = useState("Beauty & Personal Care");
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [salePrice, setSalePrice] = useState("");
+  const [categoryName, setCategoryName] = useState("Luxe Makeup & Lips");
   const [stock, setStock] = useState("10");
-  const [sku, setSku] = useState("VEL-BUNDLE-01");
+  const [sku, setSku] = useState(`VEL-${Math.floor(1000 + Math.random() * 9000)}`);
   const [brand, setBrand] = useState("VELOURA");
-  const [description, setDescription] = useState(
-    "A pure botanical silk elixir and revitalizing hair & skin care bundle, infused with Moroccan argan, golden jojoba, and hydrolyzed silk peptides for an ethereal, velvet radiance."
-  );
-  const [tags, setTags] = useState("Bundle, Beauty, Hair Care, Skin Care, Organic");
+  const [description, setDescription] = useState("");
+  const [tags, setTags] = useState("");
 
   const [images, setImages] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);

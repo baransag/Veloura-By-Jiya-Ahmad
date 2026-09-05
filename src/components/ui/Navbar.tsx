@@ -110,14 +110,7 @@ export function Navbar() {
                 <span className="hidden md:inline">Order via WhatsApp</span>
               </a>
 
-              {user?.role === "ADMIN" ? (
-                <Link
-                  href="/admin"
-                  className="text-[11px] tracking-wider uppercase font-bold text-white bg-[#8E1B3B] hover:bg-[#C2185B] px-3 py-1.5 rounded-full shadow-xs transition-colors"
-                >
-                  Admin Panel
-                </Link>
-              ) : user ? (
+              {user ? (
                 <Link
                   href="/account"
                   className="p-2 rounded-xl hover:bg-[#FFF0F3] transition-colors flex items-center gap-1.5"

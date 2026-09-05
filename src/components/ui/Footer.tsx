@@ -90,7 +90,7 @@ export function Footer() {
             <li><Link href="/order-tracking" className="hover:text-white transition-colors">Track Your Parcel</Link></li>
             <li><Link href="/account" className="hover:text-white transition-colors">Customer Account</Link></li>
             <li><Link href="/checkout" className="hover:text-white transition-colors">Express Checkout</Link></li>
-            <li><Link href="/admin/login" className="hover:text-[#E8A5B7] transition-colors">Atelier CMS Gate</Link></li>
+            <li><Link href="/shop" className="hover:text-white transition-colors">Exclusive Bundles</Link></li>
           </ul>
         </div>
 

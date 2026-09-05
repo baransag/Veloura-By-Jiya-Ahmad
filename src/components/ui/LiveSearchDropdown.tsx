@@ -68,7 +68,7 @@ export function LiveSearchDropdown() {
             setIsOpen(true);
           }}
           onFocus={() => setIsOpen(true)}
-          placeholder="Search luxury beauty, fine jewelry, bundles..."
+          placeholder="Search beauty, jewelry, bundles..."
           className="w-full pl-10 pr-10 py-2 sm:py-2.5 rounded-full text-xs bg-[#FFF0F3]/80 hover:bg-[#FFF0F3] focus:bg-white text-[#25050D] placeholder-[#8E1B3B]/50 border border-[#F8D5DE] focus:border-[#E14D75] focus:ring-2 focus:ring-[#E14D75]/20 outline-none transition-all shadow-xs"
         />
         <Search className="w-4 h-4 text-[#C2185B] absolute left-3.5 pointer-events-none" />
