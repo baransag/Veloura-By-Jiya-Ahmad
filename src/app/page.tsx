@@ -324,7 +324,7 @@ export default async function HomePage() {
                 href="/shop"
                 className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-widest transition-all border border-white/20"
               >
-                <span>Browse All 199 Creations</span>
+                <span>Browse All Creations</span>
               </Link>
             </div>
           </div>

@@ -199,7 +199,7 @@ export function Navbar() {
             </Link>
 
             <Link href="/shop" className="hover:text-[#C2185B] transition-colors">
-              All 199 Creations
+              All Creations
             </Link>
 
             <Link
@@ -271,7 +271,7 @@ export function Navbar() {
                   onClick={() => setMobileMenuOpen(false)}
                   className="block py-2 hover:text-[#C2185B] border-b border-[#FCE7EC]"
                 >
-                  All 199 Creations
+                  All Creations
                 </Link>
                 <Link
                   href="/seller"

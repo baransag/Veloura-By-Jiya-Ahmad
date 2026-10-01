@@ -187,7 +187,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
             <Sparkles className="w-10 h-10 text-[#C2185B] mx-auto opacity-70 animate-pulse" />
             <h3 className="font-serif text-2xl text-[#25050D]">No creations found in this selection</h3>
             <p className="text-xs text-[#8E1B3B]/70 max-w-md mx-auto">
-              Please adjust your filters or switch universe to explore all 199 fine jewels and silk beauty creations.
+              Please adjust your filters or switch universe to explore all fine jewels and silk beauty creations.
             </p>
             <Link
               href="/shop"

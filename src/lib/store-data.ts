@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import bcrypt from "bcryptjs";
-import { generateAll199Products, CatalogItem } from "./catalog-data";
+import { getVelouraProducts, CatalogItem } from "./catalog-data";
 
 export interface StoreUser {
   id: string;
@@ -123,20 +123,28 @@ function loadDb(): DBState {
     if (fs.existsSync(DB_FILE)) {
       const raw = fs.readFileSync(DB_FILE, "utf-8");
       const parsed = JSON.parse(raw);
-      // Ensure we have the full 199 catalog
-      if (parsed.products && parsed.products.length >= 190) {
-        memoryState = parsed;
-        return memoryState!;
+      if (parsed.products && parsed.products.length > 0) {
+        // Filter out any non-Veloura or deleted item references
+        const validProducts = parsed.products.filter((p: any) => {
+          const imgUrl = p.images?.[0]?.url || "";
+          const match = imgUrl.match(/item-(\d+)\.jpeg/);
+          if (match && parseInt(match[1]) > 86) return false;
+          return true;
+        });
+        if (validProducts.length > 0) {
+          memoryState = { ...parsed, products: validProducts };
+          return memoryState!;
+        }
       }
     }
   } catch (err) {
     console.error("Error reading store db file, re-initializing:", err);
   }
 
-  // Initialize fresh with full 199 products
+  // Initialize fresh with pure authentic Veloura creations
   memoryState = {
     users: defaultUsers,
-    products: generateAll199Products(),
+    products: getVelouraProducts(),
   };
 
   saveDb(memoryState);
