@@ -30,7 +30,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
   const primaryImage =
     product.images?.[0]?.url ||
-    "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=800&auto=format&fit=crop";
+    "/uploads/products/item-01.jpeg";
   const activePrice = product.salePrice && product.salePrice > 0 ? product.salePrice : product.price;
   const hasDiscount = product.salePrice && product.salePrice > 0 && product.salePrice < product.price;
   const discountPercent = hasDiscount

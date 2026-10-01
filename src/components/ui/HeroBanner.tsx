@@ -15,7 +15,7 @@ const SLIDES = [
       "Handcrafted 18-karat tarnish-free fine jewelry paired with pure bio-fermented silk botanical skincare. Curated for the modern muse.",
     primaryCta: { text: "Shop Fine Jewelry", href: "/shop?category=fine-jewelry" },
     secondaryCta: { text: "Explore Silk Elixirs", href: "/shop?category=silk-skincare" },
-    image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=1600&auto=format&fit=crop",
+    image: "/uploads/products/item-05.jpeg",
     floatingBadge: {
       title: "18K Baroque Pearl Choker",
       price: "Rs. 3,850",
@@ -31,7 +31,7 @@ const SLIDES = [
       "Feather-soft matte liquid lip elixirs and 24K gold flecked plumping nectars. Enriched with organic rosehip and silk amino acids for 12-hour weightless wear.",
     primaryCta: { text: "Explore Lip Elixirs", href: "/shop?category=luxe-makeup" },
     secondaryCta: { text: "All Beauty Creations", href: "/shop" },
-    image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=1600&auto=format&fit=crop",
+    image: "/uploads/products/item-01.jpeg",
     floatingBadge: {
       title: "Velvet Liquid Lip Elixir",
       price: "Rs. 1,950",
@@ -47,7 +47,7 @@ const SLIDES = [
       "Triple 18K gold-plated bracelets and pavé ear climbers that capture every beam of light. Hypoallergenic, waterproof, and presented in our signature velvet keepsake box.",
     primaryCta: { text: "Shop Tennis Bracelets", href: "/shop?category=fine-jewelry" },
     secondaryCta: { text: "WhatsApp Concierge", href: "#whatsapp" },
-    image: "https://images.unsplash.com/photo-1611591475152-473549646b9a?q=80&w=1600&auto=format&fit=crop",
+    image: "/uploads/products/item-37.jpeg",
     floatingBadge: {
       title: "Celestial Tennis Bracelet",
       price: "Rs. 3,200",

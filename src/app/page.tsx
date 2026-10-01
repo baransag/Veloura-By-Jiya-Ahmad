@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import { getStoreProducts } from "@/lib/store-data";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { HeroBanner } from "@/components/ui/HeroBanner";
 import { FlashSaleSection } from "@/components/ui/FlashSaleSection";
@@ -36,6 +37,10 @@ export default async function HomePage() {
     });
   } catch (error) {
     console.error("Failed to fetch products:", error);
+  }
+
+  if (!products || products.length === 0) {
+    products = await getStoreProducts({ limit: 8 });
   }
 
   const whatsAppUrl = getBaseWhatsAppUrl(OFFICIAL_WHATSAPP_NUMBER);
@@ -121,28 +126,28 @@ export default async function HomePage() {
               slug: "luxe-makeup",
               desc: "Velvet matte liquid silks & 24K gold lip plumping nectars",
               tag: "Best Seller",
-              image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=800&auto=format&fit=crop",
+              image: "/uploads/products/item-01.jpeg",
             },
             {
               title: "Fine Jewelry & Pearls",
               slug: "fine-jewelry",
               desc: "18K baroque freshwater pearls & zircon tennis bracelets",
               tag: "18K Real Gold",
-              image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=800&auto=format&fit=crop",
+              image: "/uploads/products/item-05.jpeg",
             },
             {
               title: "Silk Skincare & Glow",
               slug: "silk-skincare",
               desc: "Bio-fermented silk peptides & rose damascena toners",
               tag: "Ethereal Dew",
-              image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop",
+              image: "/uploads/products/item-17.jpeg",
             },
             {
               title: "Hair Nectar & Mist",
               slug: "hair-fragrance",
               desc: "Cold-pressed Moroccan argan silk & vanilla amber mists",
               tag: "Mirror Gloss",
-              image: "https://images.unsplash.com/photo-1608248597289-5405629c4266?q=80&w=800&auto=format&fit=crop",
+              image: "/uploads/products/item-29.jpeg",
             },
           ].map((cat) => (
             <Link
@@ -320,7 +325,7 @@ export default async function HomePage() {
             <div className="lg:col-span-5 flex justify-center">
               <div className="relative w-72 aspect-[3/4] rounded-3xl overflow-hidden border border-[#F8D5DE]/40 shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=800&auto=format&fit=crop"
+                  src="/uploads/products/item-08.jpeg"
                   alt="Veloura Craftsmanship"
                   className="w-full h-full object-cover"
                 />

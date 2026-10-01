@@ -93,7 +93,7 @@ export function FlashSaleSection({ products }: FlashSaleProps) {
         {/* Product Cards Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-6 relative z-10">
           {displayItems.map((prod, idx) => {
-            const imgUrl = prod.images?.[0]?.url || "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=800&auto=format&fit=crop";
+            const imgUrl = prod.images?.[0]?.url || "/uploads/products/item-01.jpeg";
             const discountPct = prod.salePrice
               ? Math.round(((prod.price - prod.salePrice) / prod.price) * 100)
               : 25;

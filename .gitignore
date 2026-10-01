@@ -10,9 +10,6 @@ out/
 .env.local
 .env.production
 
-# Uploads (local dev only — use cloud storage in production)
-public/uploads/
-
 # Misc
 .DS_Store
 *.log

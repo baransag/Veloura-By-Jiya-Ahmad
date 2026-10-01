@@ -1,6 +1,7 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import { getStoreProductBySlugOrId } from "@/lib/store-data";
 import { ProductDetailClient } from "./ProductDetailClient";
 
 export const dynamic = "force-dynamic";
@@ -12,13 +13,23 @@ interface ProductPageProps {
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const product = await prisma.product.findUnique({
-    where: { slug: params.slug },
-    include: {
-      category: true,
-      images: { orderBy: { sortOrder: "asc" } },
-    },
-  });
+  let product: any = null;
+
+  try {
+    product = await prisma.product.findUnique({
+      where: { slug: params.slug },
+      include: {
+        category: true,
+        images: { orderBy: { sortOrder: "asc" } },
+      },
+    });
+  } catch (err) {
+    // Prisma error, check store-data fallback
+  }
+
+  if (!product) {
+    product = await getStoreProductBySlugOrId(params.slug);
+  }
 
   if (!product || !product.isPublished) {
     notFound();

@@ -131,7 +131,7 @@ export default function EditProductPage() {
 
   if (loading) {
     return (
-      <div className="min-h-[50vh] flex items-center justify-center text-xs uppercase tracking-widest text-[#C5A880]">
+      <div className="min-h-[50vh] flex items-center justify-center text-xs uppercase tracking-widest text-[#C2185B]">
         Loading Atelier Product Details...
       </div>
     );
@@ -149,7 +149,7 @@ export default function EditProductPage() {
             <ArrowLeft className="w-4 h-4" />
           </Link>
           <div>
-            <span className="text-[10px] uppercase tracking-[0.3em] text-[#C5A880] font-semibold">
+            <span className="text-[10px] uppercase tracking-[0.3em] text-[#C2185B] font-semibold">
               Product Atelier CMS
             </span>
             <h1 className="font-serif text-2xl text-white">Edit Atelier Creation</h1>
@@ -174,7 +174,7 @@ export default function EditProductPage() {
       <form onSubmit={handleSave} className="space-y-6">
         {/* Images section */}
         <div className="bg-[#1A1615] p-6 rounded-xl border border-white/10 space-y-4">
-          <label className="text-xs uppercase tracking-wider text-[#C5A880] font-semibold block">
+          <label className="text-xs uppercase tracking-wider text-[#C2185B] font-semibold block">
             Product Photography (Instant URLs or Disk Upload)
           </label>
 
@@ -193,7 +193,7 @@ export default function EditProductPage() {
               </div>
             ))}
 
-            <label className="aspect-square rounded-lg border-2 border-dashed border-white/20 hover:border-[#C5A880] flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white">
+            <label className="aspect-square rounded-lg border-2 border-dashed border-white/20 hover:border-[#C2185B] flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white">
               <Upload className="w-5 h-5" />
               <span className="text-[10px] uppercase tracking-wider">
                 {uploading ? "Uploading..." : "Upload File"}
@@ -215,8 +215,8 @@ export default function EditProductPage() {
               type="url"
               value={newImageUrl}
               onChange={(e) => setNewImageUrl(e.target.value)}
-              placeholder="Or paste direct image URL (https://images.unsplash.com/...)"
-              className="flex-1 px-3.5 py-2 rounded-lg bg-black/40 border border-white/10 text-white text-xs focus:outline-none focus:border-[#C5A880]"
+              placeholder="Or paste direct image URL (/uploads/products/item-01.jpeg)"
+              className="flex-1 px-3.5 py-2 rounded-lg bg-black/40 border border-white/10 text-white text-xs focus:outline-none focus:border-[#C2185B]"
             />
             <button
               type="button"
@@ -237,7 +237,7 @@ export default function EditProductPage() {
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-[#C5A880]"
+              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-[#C2185B]"
             />
           </div>
 
@@ -249,7 +249,7 @@ export default function EditProductPage() {
                 required
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-[#C5A880]"
+                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-[#C2185B]"
               />
             </div>
             <div className="space-y-1">
@@ -259,7 +259,7 @@ export default function EditProductPage() {
                 value={salePrice}
                 onChange={(e) => setSalePrice(e.target.value)}
                 placeholder="Optional discount"
-                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-[#C5A880]"
+                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-[#C2185B]"
               />
             </div>
             <div className="space-y-1">
@@ -269,7 +269,7 @@ export default function EditProductPage() {
                 required
                 value={stock}
                 onChange={(e) => setStock(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-[#C5A880]"
+                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-[#C2185B]"
               />
             </div>
           </div>
@@ -281,7 +281,7 @@ export default function EditProductPage() {
                 type="text"
                 value={sku}
                 onChange={(e) => setSku(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-[#C5A880]"
+                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-[#C2185B]"
               />
             </div>
             <div className="space-y-1">
@@ -290,7 +290,7 @@ export default function EditProductPage() {
                 type="text"
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-[#C5A880]"
+                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-[#C2185B]"
               />
             </div>
           </div>
@@ -302,7 +302,7 @@ export default function EditProductPage() {
               required
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white text-xs leading-relaxed focus:outline-none focus:border-[#C5A880]"
+              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white text-xs leading-relaxed focus:outline-none focus:border-[#C2185B]"
             />
           </div>
 
@@ -313,7 +313,7 @@ export default function EditProductPage() {
               value={tags}
               onChange={(e) => setTags(e.target.value)}
               placeholder="e.g. Jewelry, 18k Gold, Makeup, Bestseller"
-              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white text-xs focus:outline-none focus:border-[#C5A880]"
+              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white text-xs focus:outline-none focus:border-[#C2185B]"
             />
           </div>
         </div>
@@ -322,7 +322,7 @@ export default function EditProductPage() {
         <button
           type="submit"
           disabled={saving}
-          className="w-full py-4 bg-[#C5A880] hover:bg-[#D4B991] text-[#121012] font-bold uppercase tracking-[0.2em] rounded-xl transition-all shadow-xl flex items-center justify-center gap-2 text-xs disabled:opacity-50"
+          className="w-full py-4 bg-[#C2185B] hover:bg-[#E14D75] text-[#121012] font-bold uppercase tracking-[0.2em] rounded-xl transition-all shadow-xl flex items-center justify-center gap-2 text-xs disabled:opacity-50"
         >
           {saving ? "Saving Changes to Atelier..." : "Save & Update Product"}
         </button>

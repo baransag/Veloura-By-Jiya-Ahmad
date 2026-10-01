@@ -18,28 +18,28 @@ const mockPurchases: SaleNotification[] = [
     city: "Lahore, PK",
     product: "Velvet Matte Liquid Silk Lip Rouge",
     time: "2 minutes ago",
-    image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=300&auto=format&fit=crop",
+    image: "/uploads/products/item-01.jpeg",
   },
   {
     customer: "Ayesha K.",
     city: "Karachi, PK",
     product: "18K Baroque Pearl Choker Necklace",
     time: "4 minutes ago",
-    image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=300&auto=format&fit=crop",
+    image: "/uploads/products/item-05.jpeg",
   },
   {
     customer: "Zainab M.",
     city: "Islamabad, PK",
     product: "Complete Hair & Skin Care Silk Bundle",
     time: "6 minutes ago",
-    image: "https://images.unsplash.com/photo-1608248597289-5405629c4266?q=80&w=300&auto=format&fit=crop",
+    image: "/uploads/products/item-37.jpeg",
   },
   {
     customer: "Hira T.",
     city: "Faisalabad, PK",
     product: "Bio-Fermented Silk Peptide Dew Serum",
     time: "8 minutes ago",
-    image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=300&auto=format&fit=crop",
+    image: "/uploads/products/item-17.jpeg",
   },
 ];
 

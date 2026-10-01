@@ -25,7 +25,7 @@ import Image from "next/image";
 export function ProductDetailClient({ product }: { product: any }) {
   const { addItem } = useCart();
   const [selectedImage, setSelectedImage] = useState(
-    product.images?.[0]?.url || "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=800&auto=format&fit=crop"
+    product.images?.[0]?.url || "/uploads/products/item-01.jpeg"
   );
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);

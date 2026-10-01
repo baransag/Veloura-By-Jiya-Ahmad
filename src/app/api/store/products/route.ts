@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { getStoreProducts } from "@/lib/store-data";
 
 export const dynamic = "force-dynamic";
 
@@ -12,47 +13,49 @@ export async function GET(req: NextRequest) {
     const sort = searchParams.get("sort") || "newest";
     const limit = searchParams.get("limit") ? parseInt(searchParams.get("limit")!) : undefined;
 
-    const where: any = {
-      isPublished: true,
-    };
+    // Try PostgreSQL prisma first if available, otherwise seamlessly use store-data
+    try {
+      const where: any = { isPublished: true };
+      if (category) where.category = { slug: category };
+      if (featured === "true") where.isFeatured = true;
+      if (search) {
+        where.OR = [
+          { name: { contains: search, mode: "insensitive" } },
+          { description: { contains: search, mode: "insensitive" } },
+          { sku: { contains: search, mode: "insensitive" } },
+          { brand: { contains: search, mode: "insensitive" } },
+          { tags: { has: search } },
+        ];
+      }
 
-    if (category) {
-      where.category = { slug: category };
-    }
+      let orderBy: any = { createdAt: "desc" };
+      if (sort === "price-asc") orderBy = { price: "asc" };
+      else if (sort === "price-desc") orderBy = { price: "desc" };
 
-    if (featured === "true") {
-      where.isFeatured = true;
-    }
-
-    if (search) {
-      where.OR = [
-        { name: { contains: search, mode: "insensitive" } },
-        { description: { contains: search, mode: "insensitive" } },
-        { sku: { contains: search, mode: "insensitive" } },
-        { brand: { contains: search, mode: "insensitive" } },
-        { tags: { has: search } },
-      ];
-    }
-
-    let orderBy: any = { createdAt: "desc" };
-    if (sort === "price-asc") {
-      orderBy = { price: "asc" };
-    } else if (sort === "price-desc") {
-      orderBy = { price: "desc" };
-    } else if (sort === "newest") {
-      orderBy = { createdAt: "desc" };
-    }
-
-    const products = await prisma.product.findMany({
-      where,
-      orderBy,
-      take: limit,
-      include: {
-        category: true,
-        images: {
-          orderBy: { sortOrder: "asc" },
+      const dbProducts = await prisma.product.findMany({
+        where,
+        orderBy,
+        take: limit,
+        include: {
+          category: true,
+          images: { orderBy: { sortOrder: "asc" } },
         },
-      },
+      });
+
+      if (dbProducts && dbProducts.length > 0) {
+        return NextResponse.json({ products: dbProducts });
+      }
+    } catch (dbErr) {
+      // Prisma error, fallback smoothly
+    }
+
+    // High performance store-data with WhatsApp catalog
+    const products = await getStoreProducts({
+      categorySlug: category,
+      featured: featured === "true",
+      search,
+      sort,
+      limit,
     });
 
     return NextResponse.json({ products });

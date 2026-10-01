@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, ShoppingBag, Package, LogOut, ExternalLink, ShieldCheck } from "lucide-react";
+import { LayoutDashboard, ShoppingBag, Package, LogOut, ExternalLink, ShieldCheck, Users } from "lucide-react";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -54,6 +54,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { name: "Overview", href: "/admin", icon: LayoutDashboard },
     { name: "Orders & Payments", href: "/admin/orders", icon: Package },
     { name: "Products & Atelier", href: "/admin/products", icon: ShoppingBag },
+    { name: "Users & Sellers", href: "/admin/users", icon: Users },
   ];
 
   if (checkingAuth) {

@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import { getStoreProducts } from "@/lib/store-data";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { MobileBottomBar } from "@/components/ui/MobileBottomBar";
 import { Sparkles, SlidersHorizontal, Flame, Search } from "lucide-react";
@@ -61,6 +62,23 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
     ]);
   } catch (err) {
     console.error("Shop fetch error:", err);
+  }
+
+  if (!products || products.length === 0) {
+    products = await getStoreProducts({
+      categorySlug: category,
+      search: searchQuery,
+      sort,
+    });
+  }
+
+  if (!categories || categories.length === 0) {
+    categories = [
+      { id: "cat-1", name: "Luxe Makeup & Lips", slug: "luxe-makeup" },
+      { id: "cat-2", name: "Fine Jewelry & Pearls", slug: "fine-jewelry" },
+      { id: "cat-3", name: "Silk Skincare & Glow", slug: "silk-skincare" },
+      { id: "cat-4", name: "Hair Elixirs & Fragrance", slug: "hair-fragrance" },
+    ];
   }
 
   return (
