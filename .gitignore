@@ -10,10 +10,12 @@ out/
 .env.local
 .env.production
 
+# Build artifacts & cache
+tsconfig.tsbuildinfo
+.vercel
+
 # Misc
 .DS_Store
 *.log
 npm-debug.log*
 Thumbs.db
-
-.vercel

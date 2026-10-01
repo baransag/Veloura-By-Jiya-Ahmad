@@ -1,15 +1,17 @@
 import React from "react";
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
 import { getStoreProducts } from "@/lib/store-data";
+import { UNIVERSES, JEWELRY_SUB_CATEGORIES, BEAUTY_SUB_CATEGORIES } from "@/lib/catalog-data";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { MobileBottomBar } from "@/components/ui/MobileBottomBar";
-import { Sparkles, SlidersHorizontal, Flame, Search } from "lucide-react";
+import { Sparkles, Flame, Search, Gem, Flower2, Layers } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
 interface ShopPageProps {
   searchParams: {
+    universe?: string;
+    subCategory?: string;
     category?: string;
     search?: string;
     q?: string;
@@ -19,197 +21,190 @@ interface ShopPageProps {
 }
 
 export default async function ShopPage({ searchParams }: ShopPageProps) {
-  const { category, search, q, sort = "newest", deals } = searchParams;
+  const { universe = "ALL", subCategory, category, search, q, sort = "newest", deals } = searchParams;
   const searchQuery = (q || search || "").trim();
 
-  const where: any = { isPublished: true };
+  // Fetch from comprehensive 199-catalog store data
+  const products = await getStoreProducts({
+    universe: universe === "ALL" ? undefined : universe,
+    subCategory: subCategory && !subCategory.startsWith("All") ? subCategory : undefined,
+    categorySlug: category,
+    search: searchQuery,
+    sort,
+  });
 
-  if (category) {
-    where.category = { slug: category };
-  }
+  const activeUniverse = universe || "ALL";
 
-  if (deals === "true") {
-    where.salePrice = { not: null };
-  }
-
-  if (searchQuery) {
-    where.OR = [
-      { name: { contains: searchQuery, mode: "insensitive" } },
-      { description: { contains: searchQuery, mode: "insensitive" } },
-      { sku: { contains: searchQuery, mode: "insensitive" } },
-      { brand: { contains: searchQuery, mode: "insensitive" } },
-      { tags: { hasSome: [searchQuery] } },
-    ];
-  }
-
-  let orderBy: any = { createdAt: "desc" };
-  if (sort === "price-asc") orderBy = { price: "asc" };
-  else if (sort === "price-desc") orderBy = { price: "desc" };
-
-  let products: any[] = [];
-  let categories: any[] = [];
-  try {
-    [products, categories] = await Promise.all([
-      prisma.product.findMany({
-        where,
-        orderBy,
-        include: {
-          category: true,
-          images: { orderBy: { sortOrder: "asc" } },
-        },
-      }),
-      prisma.category.findMany({ where: { isActive: true }, orderBy: { sortOrder: "asc" } }),
-    ]);
-  } catch (err) {
-    console.error("Shop fetch error:", err);
-  }
-
-  if (!products || products.length === 0) {
-    products = await getStoreProducts({
-      categorySlug: category,
-      search: searchQuery,
-      sort,
-    });
-  }
-
-  if (!categories || categories.length === 0) {
-    categories = [
-      { id: "cat-1", name: "Luxe Makeup & Lips", slug: "luxe-makeup" },
-      { id: "cat-2", name: "Fine Jewelry & Pearls", slug: "fine-jewelry" },
-      { id: "cat-3", name: "Silk Skincare & Glow", slug: "silk-skincare" },
-      { id: "cat-4", name: "Hair Elixirs & Fragrance", slug: "hair-fragrance" },
-    ];
-  }
+  // Sub-categories list according to active universe
+  const subCategoriesToDisplay =
+    activeUniverse === "JEWELRY"
+      ? JEWELRY_SUB_CATEGORIES
+      : activeUniverse === "BEAUTY_SKIN_HAIR"
+      ? BEAUTY_SUB_CATEGORIES
+      : [];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-8 bg-[#FFF8FA] min-h-screen">
-      {/* Header */}
-      <div className="text-center space-y-2 max-w-2xl mx-auto">
-        <span className="text-xs uppercase tracking-[0.3em] text-[#C2185B] font-bold">
-          {deals === "true" ? "Limited Time Flash Drops" : "The Atelier Collection"}
-        </span>
-        <h1 className="font-serif text-3xl sm:text-5xl text-[#25050D] font-light tracking-wide">
-          {deals === "true" ? "Flash Deals & Offers" : "Veloura Beauty & Fine Jewels"}
-        </h1>
-        <p className="text-xs sm:text-sm text-[#8E1B3B]/70">
-          Showing {products.length} {products.length === 1 ? "creation" : "creations"} formulated in pure organic silk botanicals and cast in 18K hypoallergenic gold.
-        </p>
+    <div className="min-h-screen bg-gradient-to-b from-[#FFF5F8] via-[#FFF8FA] to-[#FFF0F4] py-8 sm:py-14 text-[#25050D]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        
+        {/* ── 1. Page Header & Pinkish Brand Aura ───────────────────────────── */}
+        <div className="text-center space-y-3 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/80 backdrop-blur-md border border-[#F8D5DE] text-[11px] uppercase tracking-[0.25em] text-[#C2185B] font-bold shadow-xs">
+            <Sparkles className="w-3.5 h-3.5 text-[#E14D75]" />
+            <span>Veloura Haute Atelier</span>
+          </div>
 
-        {searchQuery && (
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#FFF0F3] border border-[#F8D5DE] rounded-full text-xs text-[#8E1B3B]">
-            <Search className="w-3.5 h-3.5 text-[#C2185B]" />
-            <span>Search results for: <strong>&quot;{searchQuery}&quot;</strong></span>
-            <Link href="/shop" className="text-xs text-[#C2185B] font-bold hover:underline ml-2">
-              Clear
+          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#25050D] font-light tracking-wide">
+            {activeUniverse === "JEWELRY"
+              ? "Fine Jewellery & Pearls"
+              : activeUniverse === "BEAUTY_SKIN_HAIR"
+              ? "Silk Skincare, Facewash & Hair"
+              : "Veloura Beauty & Fine Jewels"}
+          </h1>
+
+          <p className="text-xs sm:text-sm text-[#8E1B3B]/80 max-w-xl mx-auto leading-relaxed">
+            {activeUniverse === "JEWELRY"
+              ? "18K & 22K gold-plated bridal chokers, zircon solitaires, and organic freshwater pearls."
+              : activeUniverse === "BEAUTY_SKIN_HAIR"
+              ? "Gentle rose facewashes, bio-silk peptide glow serums, and Moroccan cashmere argan hair elixirs."
+              : "Explore our dual ateliers: Handcrafted heirloom jewelry on one wing, and organic botanical skincare on the other."}
+          </p>
+
+          {searchQuery && (
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white border border-[#F8D5DE] rounded-full text-xs text-[#8E1B3B] shadow-xs">
+              <Search className="w-3.5 h-3.5 text-[#C2185B]" />
+              <span>
+                Search results for: <strong>&quot;{searchQuery}&quot;</strong>
+              </span>
+              <Link href="/shop" className="text-xs text-[#C2185B] font-bold hover:underline ml-2">
+                Clear
+              </Link>
+            </div>
+          )}
+        </div>
+
+        {/* ── 2. Master Dual-Universe Switcher (Jewellery vs Skincare/Hair) ── */}
+        <div className="flex flex-col items-center gap-3">
+          <div className="inline-flex p-1.5 rounded-3xl bg-white/90 backdrop-blur-md border border-[#F8D5DE] shadow-soft-pink max-w-full overflow-x-auto gap-1">
+            {UNIVERSES.map((u) => {
+              const isActive = activeUniverse === u.id;
+              const linkHref = `/shop?universe=${u.id}${sort ? `&sort=${sort}` : ""}`;
+              return (
+                <Link
+                  key={u.id}
+                  href={linkHref}
+                  className={`px-4 sm:px-6 py-2.5 rounded-2xl text-xs sm:text-sm font-bold tracking-wide transition-all duration-300 flex items-center gap-2 whitespace-nowrap ${
+                    isActive
+                      ? "bg-gradient-to-r from-[#8E1B3B] via-[#C2185B] to-[#E14D75] text-white shadow-md scale-102"
+                      : "text-[#8E1B3B] hover:bg-[#FFF0F4] hover:text-[#C2185B]"
+                  }`}
+                >
+                  <span className="text-base">{u.icon}</span>
+                  <span>{u.name}</span>
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Sub-Category Pills for Active Universe */}
+          {subCategoriesToDisplay.length > 0 && (
+            <div className="flex items-center gap-2 overflow-x-auto max-w-full py-1 px-2">
+              {subCategoriesToDisplay.map((sub) => {
+                const isSubActive = subCategory === sub || (!subCategory && sub.startsWith("All"));
+                const querySub = sub.startsWith("All") ? "" : `&subCategory=${encodeURIComponent(sub)}`;
+                const subHref = `/shop?universe=${activeUniverse}${querySub}${sort ? `&sort=${sort}` : ""}`;
+                return (
+                  <Link
+                    key={sub}
+                    href={subHref}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border ${
+                      isSubActive
+                        ? "bg-[#FFF0F4] border-[#E14D75] text-[#C2185B] shadow-2xs font-bold"
+                        : "bg-white/70 border-[#F8D5DE] text-[#8E1B3B]/80 hover:bg-white hover:text-[#C2185B]"
+                    }`}
+                  >
+                    {sub}
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* ── 3. Filter Bar & Quick Stats ─────────────────────────────────── */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-4 border-b border-[#F8D5DE]/80 text-xs text-[#8E1B3B]">
+          <div className="flex items-center gap-2">
+            <span className="font-bold text-[#25050D] text-sm">
+              {products.length} {products.length === 1 ? "Creation" : "Creations"}
+            </span>
+            <span className="text-[#8E1B3B]/40">•</span>
+            <span className="text-[#8E1B3B]/70">
+              {activeUniverse === "JEWELRY"
+                ? "Fine Jewels Atelier"
+                : activeUniverse === "BEAUTY_SKIN_HAIR"
+                ? "Silk Skincare & Hair Laboratory"
+                : "Full Atelier Catalog"}
+            </span>
+          </div>
+
+          {/* Sorting */}
+          <div className="flex items-center gap-2 self-end sm:self-auto">
+            <span className="text-[11px] uppercase tracking-wider font-bold text-[#8E1B3B]/60">
+              Sort:
+            </span>
+            <div className="inline-flex rounded-xl bg-white border border-[#F8D5DE] p-0.5 shadow-2xs">
+              <Link
+                href={`/shop?universe=${activeUniverse}${subCategory ? `&subCategory=${encodeURIComponent(subCategory)}` : ""}sort=newest`}
+                className={`px-2.5 py-1 rounded-lg font-medium transition-colors ${
+                  sort === "newest" ? "bg-[#FFF0F4] text-[#C2185B] font-bold" : "text-[#8E1B3B]/70 hover:text-[#8E1B3B]"
+                }`}
+              >
+                Newest
+              </Link>
+              <Link
+                href={`/shop?universe=${activeUniverse}${subCategory ? `&subCategory=${encodeURIComponent(subCategory)}` : ""}sort=price-asc`}
+                className={`px-2.5 py-1 rounded-lg font-medium transition-colors ${
+                  sort === "price-asc" ? "bg-[#FFF0F4] text-[#C2185B] font-bold" : "text-[#8E1B3B]/70 hover:text-[#8E1B3B]"
+                }`}
+              >
+                Price: Low to High
+              </Link>
+              <Link
+                href={`/shop?universe=${activeUniverse}${subCategory ? `&subCategory=${encodeURIComponent(subCategory)}` : ""}sort=price-desc`}
+                className={`px-2.5 py-1 rounded-lg font-medium transition-colors ${
+                  sort === "price-desc" ? "bg-[#FFF0F4] text-[#C2185B] font-bold" : "text-[#8E1B3B]/70 hover:text-[#8E1B3B]"
+                }`}
+              >
+                Price: High to Low
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* ── 4. Full Products Grid ───────────────────────────────────────── */}
+        {products.length === 0 ? (
+          <div className="text-center py-20 bg-white/80 backdrop-blur-md rounded-3xl border border-[#F8D5DE] p-8 space-y-4 shadow-soft-pink">
+            <Sparkles className="w-10 h-10 text-[#C2185B] mx-auto opacity-70 animate-pulse" />
+            <h3 className="font-serif text-2xl text-[#25050D]">No creations found in this selection</h3>
+            <p className="text-xs text-[#8E1B3B]/70 max-w-md mx-auto">
+              Please adjust your filters or switch universe to explore all 199 fine jewels and silk beauty creations.
+            </p>
+            <Link
+              href="/shop"
+              className="inline-block px-6 py-2.5 bg-gradient-to-r from-[#8E1B3B] to-[#C2185B] text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-md"
+            >
+              Reset to All Creations
             </Link>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-6">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
           </div>
         )}
+
       </div>
-
-      {/* Category Pills & Sorting Bar */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4 pb-6 border-b border-[#F8D5DE]">
-        <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
-          <Link
-            href="/shop"
-            className={`px-4 py-2 rounded-full text-xs uppercase tracking-wider font-bold whitespace-nowrap transition-all shadow-2xs ${
-              !category && deals !== "true"
-                ? "bg-gradient-to-r from-[#8E1B3B] to-[#C2185B] text-white"
-                : "bg-white text-[#8E1B3B] hover:bg-[#FFF0F3] border border-[#F8D5DE]"
-            }`}
-          >
-            All Creations
-          </Link>
-
-          <Link
-            href="/shop?deals=true"
-            className={`px-4 py-2 rounded-full text-xs uppercase tracking-wider font-bold whitespace-nowrap transition-all shadow-2xs flex items-center gap-1.5 ${
-              deals === "true"
-                ? "bg-gradient-to-r from-[#8E1B3B] to-[#C2185B] text-white"
-                : "bg-white text-[#C2185B] hover:bg-[#FFF0F3] border border-[#F8D5DE]"
-            }`}
-          >
-            <Flame className="w-3.5 h-3.5 fill-current" />
-            <span>Flash Deals</span>
-          </Link>
-
-          {categories.map((cat) => (
-            <Link
-              key={cat.id}
-              href={`/shop?category=${cat.slug}${sort ? `&sort=${sort}` : ""}`}
-              className={`px-4 py-2 rounded-full text-xs uppercase tracking-wider font-bold whitespace-nowrap transition-all shadow-2xs ${
-                category === cat.slug
-                  ? "bg-gradient-to-r from-[#8E1B3B] to-[#C2185B] text-white"
-                  : "bg-white text-[#8E1B3B] hover:bg-[#FFF0F3] border border-[#F8D5DE]"
-              }`}
-            >
-              {cat.name}
-            </Link>
-          ))}
-        </div>
-
-        {/* Sort selector */}
-        <div className="flex items-center gap-3 w-full md:w-auto justify-end text-xs">
-          <span className="text-[#8E1B3B]/60 uppercase tracking-wider font-bold text-[11px]">
-            Sort By:
-          </span>
-          <div className="flex items-center gap-2">
-            <Link
-              href={`/shop?${category ? `category=${category}&` : ""}${deals ? `deals=true&` : ""}sort=newest`}
-              className={`px-3 py-1.5 rounded-xl border text-xs font-semibold transition-colors ${
-                sort === "newest"
-                  ? "bg-[#FFF0F3] border-[#C2185B] text-[#C2185B]"
-                  : "bg-white border-[#F8D5DE] text-[#8E1B3B] hover:bg-[#FFF0F3]"
-              }`}
-            >
-              Newest
-            </Link>
-            <Link
-              href={`/shop?${category ? `category=${category}&` : ""}${deals ? `deals=true&` : ""}sort=price-asc`}
-              className={`px-3 py-1.5 rounded-xl border text-xs font-semibold transition-colors ${
-                sort === "price-asc"
-                  ? "bg-[#FFF0F3] border-[#C2185B] text-[#C2185B]"
-                  : "bg-white border-[#F8D5DE] text-[#8E1B3B] hover:bg-[#FFF0F3]"
-              }`}
-            >
-              Price: Low to High
-            </Link>
-            <Link
-              href={`/shop?${category ? `category=${category}&` : ""}${deals ? `deals=true&` : ""}sort=price-desc`}
-              className={`px-3 py-1.5 rounded-xl border text-xs font-semibold transition-colors ${
-                sort === "price-desc"
-                  ? "bg-[#FFF0F3] border-[#C2185B] text-[#C2185B]"
-                  : "bg-white border-[#F8D5DE] text-[#8E1B3B] hover:bg-[#FFF0F3]"
-              }`}
-            >
-              Price: High to Low
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Products Grid */}
-      {products.length === 0 ? (
-        <div className="text-center py-20 bg-white rounded-3xl border border-[#F8D5DE] p-8 space-y-4 shadow-soft-pink">
-          <Sparkles className="w-10 h-10 text-[#C2185B] mx-auto opacity-70 animate-pulse" />
-          <h3 className="font-serif text-2xl text-[#25050D]">No creations matched your criteria</h3>
-          <p className="text-xs text-[#8E1B3B]/70 max-w-md mx-auto">
-            Try adjusting your search terms or view our complete catalog of French luxury beauty and fine jewels.
-          </p>
-          <Link
-            href="/shop"
-            className="inline-block px-6 py-2.5 bg-gradient-to-r from-[#8E1B3B] to-[#C2185B] text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-md"
-          >
-            Clear Filters
-          </Link>
-        </div>
-      ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      )}
-
       <MobileBottomBar />
     </div>
   );

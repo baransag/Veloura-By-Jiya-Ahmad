@@ -2,7 +2,19 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { ShoppingBag, User, Menu, X, MessageCircle, Sparkles, PackageCheck, Flame } from "lucide-react";
+import {
+  ShoppingBag,
+  User,
+  Menu,
+  X,
+  MessageCircle,
+  Sparkles,
+  PackageCheck,
+  Flame,
+  Gem,
+  Flower2,
+  Store,
+} from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { getBaseWhatsAppUrl, OFFICIAL_WHATSAPP_NUMBER } from "@/lib/whatsapp";
 import { LiveSearchDropdown } from "./LiveSearchDropdown";
@@ -33,16 +45,24 @@ export function Navbar() {
     <>
       {/* ── 1. Top Soft Pastel Silk Announcement Bar ──────────────────────── */}
       <div className="bg-gradient-to-r from-[#8E1B3B] via-[#C2185B] to-[#8E1B3B] text-white text-[11px] tracking-[0.2em] py-2 px-4 text-center uppercase font-medium flex items-center justify-between border-b border-[#F8D5DE]/30">
-        <div className="hidden md:flex items-center gap-2 w-52 text-left text-[10px] text-[#FCE7EC]">
+        <div className="hidden md:flex items-center gap-2 w-56 text-left text-[10px] text-[#FCE7EC]">
           <Sparkles className="w-3.5 h-3.5 text-[#FCE7EC] animate-pulse" />
           <span>VELOURA Atelier Luxe</span>
         </div>
 
         <div className="flex-1 text-center truncate px-2 font-semibold">
-          Complimentary Luxury Silk Box & Free Delivery Over Rs. 3,000 across Pakistan
+          Complimentary Keepsake Velvet Casket & Free Delivery Across Pakistan on Orders Over Rs. 3,000
         </div>
 
-        <div className="w-52 text-right hidden md:flex items-center justify-end gap-3 text-[10px]">
+        <div className="w-56 text-right hidden md:flex items-center justify-end gap-3 text-[10px]">
+          <Link
+            href="/seller"
+            className="flex items-center gap-1 text-[#FCE7EC] hover:text-white transition-colors"
+          >
+            <Store className="w-3.5 h-3.5" />
+            <span>Seller Portal</span>
+          </Link>
+          <span className="text-[#F8D5DE]/40">|</span>
           <Link
             href="/order-tracking"
             className="flex items-center gap-1 text-[#FCE7EC] hover:text-white transition-colors"
@@ -58,7 +78,7 @@ export function Navbar() {
             className="flex items-center gap-1 text-[#FCE7EC] hover:text-white transition-colors font-bold"
           >
             <MessageCircle className="w-3.5 h-3.5 text-white" />
-            <span>VIP Support</span>
+            <span>VIP Concierge</span>
           </a>
         </div>
       </div>
@@ -98,34 +118,32 @@ export function Navbar() {
             </div>
 
             {/* Right Action Icons */}
-            <div className="flex items-center space-x-4 sm:space-x-5 text-[#8E1B3B]">
+            <div className="flex items-center gap-2 sm:gap-3">
+              {/* WhatsApp VIP Concierge Button */}
               <a
                 href={whatsAppUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-xl text-[#8E1B3B] hover:text-[#C2185B] hover:bg-[#FFF0F3] transition-colors hidden sm:flex items-center gap-1.5 text-xs font-semibold"
-                title="WhatsApp VIP Concierge"
+                title="Chat with Personal Stylist on WhatsApp"
+                className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-[#E8F8EE] hover:bg-[#D4F3DE] text-[#1EBE5D] border border-[#BDE8CD] text-xs font-bold transition-all shadow-2xs"
               >
-                <MessageCircle className="w-4 h-4 text-[#C2185B]" />
-                <span className="hidden md:inline">Order via WhatsApp</span>
+                <MessageCircle className="w-3.5 h-3.5 fill-[#1EBE5D]" />
+                <span>WhatsApp VIP</span>
               </a>
 
+              {/* Account Dropdown */}
               {user ? (
                 <Link
                   href="/account"
-                  className="p-2 rounded-xl hover:bg-[#FFF0F3] transition-colors flex items-center gap-1.5"
-                  title="My Account"
+                  className="flex items-center gap-1.5 p-2 sm:px-3 sm:py-2 rounded-2xl text-xs font-bold text-[#8E1B3B] hover:text-[#C2185B] hover:bg-[#FFF0F3] transition-colors"
                 >
                   <User className="w-4 h-4" />
-                  <span className="text-xs hidden sm:inline font-semibold capitalize">
-                    {user.name?.split(" ")[0]}
-                  </span>
+                  <span className="hidden sm:inline truncate max-w-[100px]">{user.name}</span>
                 </Link>
               ) : (
                 <Link
-                  href="/account/login"
-                  className="p-2 rounded-xl hover:bg-[#FFF0F3] transition-colors flex items-center gap-1 text-xs font-semibold text-[#8E1B3B] hover:text-[#C2185B]"
-                  title="Customer Sign In"
+                  href="/account"
+                  className="flex items-center gap-1.5 p-2 sm:px-3 sm:py-2 rounded-2xl text-xs font-bold text-[#8E1B3B] hover:text-[#C2185B] hover:bg-[#FFF0F3] transition-colors"
                 >
                   <User className="w-4 h-4" />
                   <span className="hidden sm:inline">Sign In</span>
@@ -158,38 +176,54 @@ export function Navbar() {
           </div>
 
           {/* Secondary Desktop Categories Navigation Strip */}
-          <nav className="hidden lg:flex items-center justify-center space-x-8 pt-3 mt-2 border-t border-[#FCE7EC] text-[11px] tracking-[0.2em] uppercase font-semibold text-[#8E1B3B]/80">
+          <nav className="hidden lg:flex items-center justify-center space-x-7 pt-3 mt-2 border-t border-[#FCE7EC] text-[11px] tracking-[0.2em] uppercase font-semibold text-[#8E1B3B]/80">
             <Link href="/" className="hover:text-[#C2185B] transition-colors">
               Home
             </Link>
+            
+            {/* The 2 Primary Universes */}
+            <Link
+              href="/shop?universe=JEWELRY"
+              className="text-[#8E1B3B] hover:text-[#C2185B] transition-colors flex items-center gap-1 font-bold"
+            >
+              <Gem className="w-3.5 h-3.5 text-[#C2185B]" />
+              <span>Fine Jewellery Wing</span>
+            </Link>
+
+            <Link
+              href="/shop?universe=BEAUTY_SKIN_HAIR"
+              className="text-[#8E1B3B] hover:text-[#C2185B] transition-colors flex items-center gap-1 font-bold"
+            >
+              <Flower2 className="w-3.5 h-3.5 text-[#E14D75]" />
+              <span>Skincare, Facewash & Hair</span>
+            </Link>
+
             <Link href="/shop" className="hover:text-[#C2185B] transition-colors">
-              All Creations
+              All 199 Creations
             </Link>
-            <Link href="/shop?category=luxe-makeup" className="hover:text-[#C2185B] transition-colors">
-              Makeup & Lips
-            </Link>
-            <Link href="/shop?category=fine-jewelry" className="hover:text-[#C2185B] transition-colors">
-              Fine Jewelry & Pearls
-            </Link>
-            <Link href="/shop?category=silk-skincare" className="hover:text-[#C2185B] transition-colors">
-              Silk Skincare
-            </Link>
-            <Link href="/shop?category=hair-fragrance" className="hover:text-[#C2185B] transition-colors">
-              Hair & Mist
-            </Link>
+
             <Link
               href="/shop?deals=true"
               className="text-[#C2185B] font-bold hover:text-[#8E1B3B] transition-colors flex items-center gap-1"
             >
               <Flame className="w-3.5 h-3.5 fill-current animate-pulse" />
-              <span>Flash Deals</span>
+              <span>Flash Drops</span>
             </Link>
+
+            <Link
+              href="/seller"
+              className="text-[#8E1B3B]/80 hover:text-[#C2185B] transition-colors flex items-center gap-1"
+            >
+              <Store className="w-3.5 h-3.5" />
+              <span>Vendor Portal</span>
+            </Link>
+
             <Link
               href="/order-tracking"
-              className="text-[#8E1B3B] hover:text-[#C2185B] transition-colors flex items-center gap-1"
+              className="text-[#8E1B3B]/80 hover:text-[#C2185B] transition-colors flex items-center gap-1"
             >
               <PackageCheck className="w-3.5 h-3.5" />
-              <span>Live Tracking</span>
+              <span>Track Parcel</span>
             </Link>
           </nav>
         </div>
@@ -217,44 +251,40 @@ export function Navbar() {
                   Home
                 </Link>
                 <Link
+                  href="/shop?universe=JEWELRY"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-2 py-2 text-[#C2185B] font-bold border-b border-[#FCE7EC]"
+                >
+                  <Gem className="w-4 h-4 text-[#C2185B]" />
+                  <span>💎 Fine Jewellery Wing</span>
+                </Link>
+                <Link
+                  href="/shop?universe=BEAUTY_SKIN_HAIR"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-2 py-2 text-[#C2185B] font-bold border-b border-[#FCE7EC]"
+                >
+                  <Flower2 className="w-4 h-4 text-[#E14D75]" />
+                  <span>🌸 Skincare, Facewash & Hair</span>
+                </Link>
+                <Link
                   href="/shop"
                   onClick={() => setMobileMenuOpen(false)}
                   className="block py-2 hover:text-[#C2185B] border-b border-[#FCE7EC]"
                 >
-                  All Products
+                  All 199 Creations
                 </Link>
                 <Link
-                  href="/shop?category=luxe-makeup"
+                  href="/seller"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 hover:text-[#C2185B] border-b border-[#FCE7EC]"
+                  className="flex items-center gap-2 py-2 hover:text-[#C2185B] border-b border-[#FCE7EC]"
                 >
-                  Luxe Makeup & Lips
-                </Link>
-                <Link
-                  href="/shop?category=fine-jewelry"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 hover:text-[#C2185B] border-b border-[#FCE7EC]"
-                >
-                  Fine Jewelry & Pearls
-                </Link>
-                <Link
-                  href="/shop?category=silk-skincare"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 hover:text-[#C2185B] border-b border-[#FCE7EC]"
-                >
-                  Silk Skincare
-                </Link>
-                <Link
-                  href="/shop?category=hair-fragrance"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 hover:text-[#C2185B] border-b border-[#FCE7EC]"
-                >
-                  Hair Mist & Argan
+                  <Store className="w-4 h-4 text-[#8E1B3B]" />
+                  <span>Vendor / Seller Dashboard</span>
                 </Link>
                 <Link
                   href="/order-tracking"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 text-[#C2185B] border-b border-[#FCE7EC]"
+                  className="block py-2 text-[#8E1B3B] border-b border-[#FCE7EC]"
                 >
                   Track My Order
                 </Link>

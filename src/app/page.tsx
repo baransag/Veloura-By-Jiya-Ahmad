@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
 import { getStoreProducts } from "@/lib/store-data";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { HeroBanner } from "@/components/ui/HeroBanner";
@@ -11,37 +10,25 @@ import {
   ArrowRight,
   Sparkles,
   Gem,
-  ShieldCheck,
   Award,
-  MessageCircle,
   Star,
   CheckCircle2,
   Heart,
   Truck,
+  Flower2,
+  Droplets,
+  ShieldCheck,
 } from "lucide-react";
 import { getBaseWhatsAppUrl, OFFICIAL_WHATSAPP_NUMBER } from "@/lib/whatsapp";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  let products: any[] = [];
-  try {
-    products = await prisma.product.findMany({
-      where: { isPublished: true },
-      orderBy: { createdAt: "desc" },
-      take: 8,
-      include: {
-        category: true,
-        images: { orderBy: { sortOrder: "asc" } },
-      },
-    });
-  } catch (error) {
-    console.error("Failed to fetch products:", error);
-  }
-
-  if (!products || products.length === 0) {
-    products = await getStoreProducts({ limit: 8 });
-  }
+  const [jewelryProducts, beautyProducts, flashProducts] = await Promise.all([
+    getStoreProducts({ universe: "JEWELRY", limit: 8 }),
+    getStoreProducts({ universe: "BEAUTY_SKIN_HAIR", limit: 8 }),
+    getStoreProducts({ featured: true, limit: 8 }),
+  ]);
 
   const whatsAppUrl = getBaseWhatsAppUrl(OFFICIAL_WHATSAPP_NUMBER);
 
@@ -52,8 +39,8 @@ export default async function HomePage() {
       rating: 5,
       date: "Yesterday",
       comment:
-        "The Velvet Matte Lip Rouge is so lightweight and hydrating! Lasts through chai without fading. The packaging in the silk pink box felt like receiving high-end Parisian couture.",
-      item: "Velvet Matte Liquid Silk Lip Rouge",
+        "The Damask Rose & Silk Peptide Facewash is divine! Foams like silk cloud and doesn't strip my sensitive skin at all. The velvet pink packaging feels like receiving Parisian couture.",
+      item: "Damask Rose & Silk Peptide Gentle Foaming Facewash",
     },
     {
       name: "Zoya Tariq",
@@ -61,8 +48,8 @@ export default async function HomePage() {
       rating: 5,
       date: "3 days ago",
       comment:
-        "Ordered the 18K Freshwater Pearl Choker. It's truly tarnish-free and feels so luxurious. COD delivery reached Karachi within 48 hours. 10/10 recommended!",
-      item: "18K Baroque Pearl Choker Necklace",
+        "Ordered the 18K Freshwater Pearl & Emerald Choker. It's truly tarnish-free and so heavy in gold weight. COD delivery reached Karachi in 48 hours. 10/10 recommended!",
+      item: "Imperial Baroque Freshwater Pearl & Emerald Drop Necklace",
     },
     {
       name: "Mahnoor Khan",
@@ -70,30 +57,30 @@ export default async function HomePage() {
       rating: 5,
       date: "1 week ago",
       comment:
-        "The Bio-Silk peptide serum gave my skin such an angelic glass glow. No greasy feel. Customer service on WhatsApp confirmed my order immediately with parcel tracking.",
-      item: "Bio-Fermented Silk Peptide Dew Serum",
+        "The Moroccan Cashmere Silk Hair Oil gave my hair mirror shine and heat protection without any stickiness. WhatsApp concierge answered my queries within 5 minutes.",
+      item: "Moroccan Cashmere Silk Nourishing Hair Oil Elixir",
     },
   ];
 
   return (
-    <div className="space-y-16 sm:space-y-24 bg-[#FFF8FA] text-[#25050D]">
-      {/* ── 1. 3D Animated Hero Banner with Picture Slides ─────────────────── */}
+    <div className="space-y-16 sm:space-y-24 bg-gradient-to-b from-[#FFF5F8] via-[#FFF8FA] to-[#FFF0F4] text-[#25050D]">
+      {/* ── 1. 3D Animated Hero Banner ────────────────────────────────────── */}
       <HeroBanner />
 
       {/* ── 2. Soft Pastel Luxury Marquee Strip ────────────────────────────── */}
-      <div className="border-y border-[#F8D5DE] bg-white py-4 overflow-hidden shadow-2xs">
+      <div className="border-y border-[#F8D5DE] bg-white/90 backdrop-blur-md py-4 overflow-hidden shadow-2xs">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-around text-[11px] uppercase tracking-[0.25em] text-[#8E1B3B] font-semibold whitespace-nowrap overflow-x-auto gap-8">
           <div className="flex items-center gap-2">
             <Gem className="w-4 h-4 text-[#C2185B]" />
-            <span>18K Real Gold Plated</span>
+            <span>18K Real Gold Plated Ornaments</span>
           </div>
-          <div className="hidden sm:flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-[#C2185B]" />
-            <span>Bio-Fermented Silk Peptides</span>
+          <div className="flex items-center gap-2">
+            <Droplets className="w-4 h-4 text-[#C2185B]" />
+            <span>Bio-Fermented Silk Facewashes & Serums</span>
           </div>
           <div className="flex items-center gap-2">
             <Award className="w-4 h-4 text-[#C2185B]" />
-            <span>Signature Keepsake Velvet Box</span>
+            <span>Complimentary Keepsake Velvet Casket</span>
           </div>
           <div className="flex items-center gap-2">
             <Truck className="w-4 h-4 text-[#C2185B]" />
@@ -102,127 +89,155 @@ export default async function HomePage() {
         </div>
       </div>
 
-      {/* ── 3. Flash Velvet Deals (Temu/Daraz Engine) ──────────────────────── */}
-      <FlashSaleSection products={products} />
-
-      {/* ── 4. Curated Atelier Universes (Visual Category Portals) ─────────── */}
+      {/* ── 3. Dual-Wing Universe Split Portals (Jewellery vs Skincare/Hair) ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-2 mb-10">
           <span className="text-[11px] uppercase tracking-[0.3em] text-[#C2185B] font-bold block">
             Signature Curation
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#25050D] font-light tracking-wide">
-            The Atelier Universes
+            Two Distinct Universes of Beauty
           </h2>
-          <p className="text-xs sm:text-sm text-[#8E1B3B]/70 max-w-md mx-auto">
-            Infused with precious Moroccan botanicals or cast in 18-karat tarnish-free gold.
+          <p className="text-xs sm:text-sm text-[#8E1B3B]/80 max-w-lg mx-auto">
+            Choose your destination: Royal 18K bridal jewellery on one wing, or organic silk skincare & hair elixirs on the other.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            {
-              title: "Luxe Makeup & Lips",
-              slug: "luxe-makeup",
-              desc: "Velvet matte liquid silks & 24K gold lip plumping nectars",
-              tag: "Best Seller",
-              image: "/uploads/products/item-01.jpeg",
-            },
-            {
-              title: "Fine Jewelry & Pearls",
-              slug: "fine-jewelry",
-              desc: "18K baroque freshwater pearls & zircon tennis bracelets",
-              tag: "18K Real Gold",
-              image: "/uploads/products/item-05.jpeg",
-            },
-            {
-              title: "Silk Skincare & Glow",
-              slug: "silk-skincare",
-              desc: "Bio-fermented silk peptides & rose damascena toners",
-              tag: "Ethereal Dew",
-              image: "/uploads/products/item-17.jpeg",
-            },
-            {
-              title: "Hair Nectar & Mist",
-              slug: "hair-fragrance",
-              desc: "Cold-pressed Moroccan argan silk & vanilla amber mists",
-              tag: "Mirror Gloss",
-              image: "/uploads/products/item-29.jpeg",
-            },
-          ].map((cat) => (
-            <Link
-              key={cat.slug}
-              href={`/shop?category=${cat.slug}`}
-              className="group relative rounded-3xl overflow-hidden aspect-[4/5] bg-white shadow-soft-pink hover:shadow-hover-pink transition-all duration-500 border border-[#F8D5DE] hover:border-[#E14D75]"
-            >
-              <img
-                src={cat.image}
-                alt={cat.title}
-                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#25050D]/90 via-[#25050D]/30 to-transparent" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          {/* Wing A: Fine Jewellery */}
+          <Link
+            href="/shop?universe=JEWELRY"
+            className="group relative rounded-[32px] overflow-hidden aspect-[16/10] bg-white shadow-soft-pink hover:shadow-[0_20px_50px_rgba(225,77,117,0.22)] transition-all duration-500 border border-[#F8D5DE] hover:border-[#E14D75]"
+          >
+            <img
+              src="/uploads/products/item-05.jpeg"
+              alt="Fine Jewellery Wing"
+              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#25050D]/95 via-[#25050D]/40 to-transparent" />
 
-              <div className="absolute top-4 left-4 z-10">
-                <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[9px] uppercase tracking-widest text-[#8E1B3B] font-bold border border-[#F8D5DE]">
-                  {cat.tag}
-                </span>
-              </div>
+            <div className="absolute top-5 left-5 z-10 flex items-center gap-2">
+              <span className="px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-md text-[10px] uppercase tracking-widest text-[#8E1B3B] font-bold border border-[#F8D5DE] flex items-center gap-1.5 shadow-sm">
+                <Gem className="w-3.5 h-3.5 text-[#C2185B]" />
+                <span>Fine Jewels Wing</span>
+              </span>
+            </div>
 
-              <div className="absolute inset-x-0 bottom-0 p-6 z-10 space-y-1.5 text-white">
-                <h3 className="font-serif text-xl sm:text-2xl text-white group-hover:text-[#FCE7EC] transition-colors">
-                  {cat.title}
-                </h3>
-                <p className="text-xs text-[#F8D5DE]/80 font-light line-clamp-2 leading-relaxed">
-                  {cat.desc}
-                </p>
-                <div className="pt-2 flex items-center gap-2 text-[11px] uppercase tracking-widest text-[#FCE7EC] font-bold">
-                  <span>Explore Collection</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform text-[#E14D75]" />
-                </div>
+            <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8 z-10 space-y-2 text-white">
+              <h3 className="font-serif text-2xl sm:text-3xl text-white group-hover:text-[#FCE7EC] transition-colors">
+                Fine Jewellery & Pearls
+              </h3>
+              <p className="text-xs sm:text-sm text-[#F8D5DE]/85 font-light leading-relaxed max-w-md">
+                18K & 22K gold-plated bridal chokers, zircon solitaires, Kundan sets & baroque pearl strings.
+              </p>
+              <div className="pt-2 flex items-center gap-2 text-xs uppercase tracking-widest text-[#FCE7EC] font-bold">
+                <span>Enter Jewellery Wing</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform text-[#E14D75]" />
               </div>
-            </Link>
-          ))}
+            </div>
+          </Link>
+
+          {/* Wing B: Skincare, Facewash & Hair */}
+          <Link
+            href="/shop?universe=BEAUTY_SKIN_HAIR"
+            className="group relative rounded-[32px] overflow-hidden aspect-[16/10] bg-white shadow-soft-pink hover:shadow-[0_20px_50px_rgba(225,77,117,0.22)] transition-all duration-500 border border-[#F8D5DE] hover:border-[#E14D75]"
+          >
+            <img
+              src="/uploads/products/item-101.jpeg"
+              alt="Skincare & Hair Wing"
+              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#25050D]/95 via-[#25050D]/40 to-transparent" />
+
+            <div className="absolute top-5 left-5 z-10 flex items-center gap-2">
+              <span className="px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-md text-[10px] uppercase tracking-widest text-[#8E1B3B] font-bold border border-[#F8D5DE] flex items-center gap-1.5 shadow-sm">
+                <Flower2 className="w-3.5 h-3.5 text-[#E14D75]" />
+                <span>Skincare & Hair Wing</span>
+              </span>
+            </div>
+
+            <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8 z-10 space-y-2 text-white">
+              <h3 className="font-serif text-2xl sm:text-3xl text-white group-hover:text-[#FCE7EC] transition-colors">
+                Silk Skincare, Facewash & Hair
+              </h3>
+              <p className="text-xs sm:text-sm text-[#F8D5DE]/85 font-light leading-relaxed max-w-md">
+                Gentle Damask rose facewashes, bio-silk peptide glow serums, and Moroccan argan hair oils.
+              </p>
+              <div className="pt-2 flex items-center gap-2 text-xs uppercase tracking-widest text-[#FCE7EC] font-bold">
+                <span>Enter Skincare Wing</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform text-[#E14D75]" />
+              </div>
+            </div>
+          </Link>
         </div>
       </section>
 
-      {/* ── 5. New Atelier Masterpieces (Product Grid) ─────────────────────── */}
+      {/* ── 4. Flash Velvet Drops ─────────────────────────────────────────── */}
+      <FlashSaleSection products={flashProducts} />
+
+      {/* ── 5. Fine Jewellery & Pearls Showcase ────────────────────────────── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-[#F8D5DE] gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-[#F8D5DE] gap-4">
           <div>
-            <span className="text-[11px] uppercase tracking-[0.3em] text-[#C2185B] font-bold block">
-              Curated Atelier
-            </span>
+            <div className="flex items-center gap-2">
+              <Gem className="w-4 h-4 text-[#C2185B]" />
+              <span className="text-[11px] uppercase tracking-[0.3em] text-[#C2185B] font-bold block">
+                Atelier Fine Ornaments
+              </span>
+            </div>
             <h2 className="font-serif text-3xl sm:text-4xl text-[#25050D] font-light tracking-wide mt-1">
-              New Atelier Masterpieces
+              Royal Jewels & Pearls
             </h2>
           </div>
           <Link
-            href="/shop"
+            href="/shop?universe=JEWELRY"
             className="text-xs uppercase tracking-widest text-[#8E1B3B] hover:text-[#C2185B] font-bold flex items-center gap-2 group transition-colors"
           >
-            <span>View All Creations ({products.length})</span>
+            <span>Explore All Jewellery Wing</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 
-        {products.length === 0 ? (
-          <div className="text-center py-20 bg-white rounded-3xl border border-[#F8D5DE] p-8 space-y-3 shadow-soft-pink">
-            <Sparkles className="w-8 h-8 text-[#C2185B] mx-auto animate-pulse" />
-            <h3 className="font-serif text-xl text-[#25050D]">Catalog Initializing</h3>
-            <p className="text-xs text-[#8E1B3B]/70">Creations are loading from the database.</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        )}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-6">
+          {jewelryProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
       </section>
 
-      {/* ── 6. Daraz/Temu Style Verified Customer Reviews Wall ─────────────── */}
+      {/* ── 6. Silk Skincare, Facewashes & Hair Elixirs Showcase ──────────── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#F8D5DE] shadow-soft-pink space-y-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-[#F8D5DE] gap-4">
+          <div>
+            <div className="flex items-center gap-2">
+              <Flower2 className="w-4 h-4 text-[#E14D75]" />
+              <span className="text-[11px] uppercase tracking-[0.3em] text-[#C2185B] font-bold block">
+                Botanical Silk Laboratory
+              </span>
+            </div>
+            <h2 className="font-serif text-3xl sm:text-4xl text-[#25050D] font-light tracking-wide mt-1">
+              Facewash, Skincare & Hair Care
+            </h2>
+          </div>
+          <Link
+            href="/shop?universe=BEAUTY_SKIN_HAIR"
+            className="text-xs uppercase tracking-widest text-[#8E1B3B] hover:text-[#C2185B] font-bold flex items-center gap-2 group transition-colors"
+          >
+            <span>Explore All Skincare Wing</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-6">
+          {beautyProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </section>
+
+      {/* ── 7. Verified Customer Reviews Wall ──────────────────────────────── */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white rounded-[32px] p-8 sm:p-12 border border-[#F8D5DE] shadow-soft-pink space-y-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#F8D5DE] pb-6">
             <div>
               <div className="flex items-center gap-2">
@@ -239,42 +254,42 @@ export default async function HomePage() {
             </div>
             <div className="flex items-center gap-1 text-[#E14D75]">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 fill-current" />
+                <Star key={i} className="w-4 h-4 fill-current" />
               ))}
-              <span className="ml-2 text-xs font-bold text-[#8E1B3B]">98.4% Verified Satisfaction</span>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {realCustomerReviews.map((rev, idx) => (
+            {realCustomerReviews.map((review, idx) => (
               <div
                 key={idx}
-                className="bg-[#FFF8FA] rounded-2xl p-6 border border-[#F8D5DE] space-y-4 flex flex-col justify-between hover:border-[#E14D75] transition-all hover:shadow-hover-pink"
+                className="p-6 rounded-2xl bg-[#FFF8FA] border border-[#F8D5DE] flex flex-col justify-between space-y-4 shadow-2xs hover:border-[#E14D75] transition-all"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-1 text-[#E14D75]">
-                      {[...Array(rev.rating)].map((_, i) => (
-                        <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                    <div className="flex items-center gap-1">
+                      {[...Array(review.rating)].map((_, i) => (
+                        <Star key={i} className="w-3.5 h-3.5 fill-[#FFB300] text-[#FFB300]" />
                       ))}
                     </div>
-                    <span className="text-[10px] text-[#8E1B3B]/60">{rev.date}</span>
+                    <span className="text-[10px] text-[#8E1B3B]/60">{review.date}</span>
                   </div>
-                  <p className="text-xs text-[#25050D] leading-relaxed italic">
-                    &quot;{rev.comment}&quot;
+                  <p className="text-xs sm:text-sm text-[#25050D]/80 leading-relaxed italic">
+                    &quot;{review.comment}&quot;
                   </p>
                 </div>
 
                 <div className="pt-3 border-t border-[#F8D5DE]/60 space-y-1">
                   <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#C2185B]" />
-                    <span className="text-xs font-bold text-[#25050D]">{rev.name}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-[10px] text-[#8E1B3B]/80">
-                    <span>{rev.city}</span>
-                    <span className="font-semibold text-[#C2185B] truncate max-w-[140px]">
-                      {rev.item}
+                    <span className="text-xs font-bold text-[#8E1B3B]">{review.name}</span>
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#25D366]" />
+                    <span className="text-[9px] uppercase tracking-wider text-[#25D366] font-bold">
+                      Verified Buyer
                     </span>
+                  </div>
+                  <div className="text-[10px] text-[#8E1B3B]/60">{review.city}</div>
+                  <div className="text-[10px] font-semibold text-[#C2185B] truncate">
+                    Purchased: {review.item}
                   </div>
                 </div>
               </div>
@@ -283,68 +298,39 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── 7. Velvet Craftsmanship & Guarantees Showcase ──────────────────── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        <div className="rounded-3xl bg-gradient-to-r from-[#25050D] via-[#500A1C] to-[#25050D] text-white p-8 sm:p-14 border border-[#F8D5DE]/30 relative overflow-hidden shadow-2xl">
-          <div className="absolute right-0 bottom-0 w-[500px] h-[500px] bg-[#E14D75]/15 rounded-full blur-[140px] pointer-events-none" />
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-[#F8D5DE]/30 text-[#FCE7EC] text-[10px] uppercase tracking-widest font-bold">
-                <Sparkles className="w-3.5 h-3.5 text-[#F4B8C6]" />
-                <span>The Veloura Standard</span>
-              </div>
-
-              <h2 className="font-serif text-3xl sm:text-5xl font-light leading-[1.2] text-white">
-                Hypoallergenic 18K Real Gold, <br />
-                <span className="italic font-extralight text-[#FCE7EC]">
-                  Bio-Silk Peptides & Keepsake Velvet Box
-                </span>
-              </h2>
-
-              <p className="text-xs sm:text-sm text-[#F8D5DE]/90 font-light leading-relaxed max-w-xl">
-                Every lip elixir is poured with organic botanical oils, and every jewelry piece is triple-plated in genuine 18-karat gold with high-lustre freshwater pearls. Delivered in our signature velvet gift box with Cash on Delivery across Pakistan.
-              </p>
-
-              <div className="pt-2 flex flex-wrap gap-4">
-                <Link
-                  href="/shop?category=fine-jewelry"
-                  className="px-7 py-3.5 bg-gradient-to-r from-[#8E1B3B] to-[#C2185B] hover:brightness-110 text-white text-xs uppercase tracking-widest font-bold rounded-2xl transition-all shadow-lg"
-                >
-                  Explore Fine Jewels
-                </Link>
-                <Link
-                  href="/shop?category=luxe-makeup"
-                  className="px-7 py-3.5 bg-white/10 hover:bg-white/20 text-white text-xs uppercase tracking-widest font-bold rounded-2xl border border-white/20 transition-colors"
-                >
-                  Explore Lip Elixirs
-                </Link>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 flex justify-center">
-              <div className="relative w-72 aspect-[3/4] rounded-3xl overflow-hidden border border-[#F8D5DE]/40 shadow-2xl">
-                <img
-                  src="/uploads/products/item-08.jpeg"
-                  alt="Veloura Craftsmanship"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#25050D]/80 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 p-3.5 bg-white/95 backdrop-blur-md rounded-2xl border border-[#F8D5DE] text-center">
-                  <span className="text-[10px] uppercase tracking-widest text-[#C2185B] block font-bold">
-                    100% Guaranteed Satisfaction
-                  </span>
-                  <span className="text-xs text-[#25050D] font-serif font-medium">
-                    7-Day Easy Concierge Exchange
-                  </span>
-                </div>
-              </div>
+      {/* ── 8. VIP WhatsApp Concierge Banner ───────────────────────────────── */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div className="rounded-[32px] bg-gradient-to-r from-[#25050D] via-[#500A1C] to-[#8E1B3B] p-8 sm:p-14 text-white text-center space-y-6 relative overflow-hidden shadow-2xl">
+          <div className="relative z-10 space-y-3 max-w-2xl mx-auto">
+            <span className="text-[11px] uppercase tracking-[0.3em] text-[#F8D5DE] font-bold">
+              VIP Personal Concierge
+            </span>
+            <h2 className="font-serif text-3xl sm:text-5xl text-white font-light">
+              Need Bridal Consultation or Custom Sizing?
+            </h2>
+            <p className="text-xs sm:text-sm text-[#F8D5DE]/80 leading-relaxed">
+              Connect directly with Jiya Ahmad&apos;s styling team on WhatsApp for real parcel dispatch videos, ring size measurements, and immediate order placement.
+            </p>
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href={whatsAppUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-widest transition-all shadow-lg hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
+              >
+                <span>Chat on WhatsApp (+92 321 9954325)</span>
+              </a>
+              <Link
+                href="/shop"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-widest transition-all border border-white/20"
+              >
+                <span>Browse All 199 Creations</span>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── 8. Live Real Sales Toasts & Mobile App Bar ─────────────────────── */}
       <RecentSalesToast />
       <MobileBottomBar />
     </div>

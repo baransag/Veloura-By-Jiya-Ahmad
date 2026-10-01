@@ -53,3 +53,16 @@ export async function getAdminSession(): Promise<TokenPayload | null> {
   }
   return null;
 }
+
+export async function getSellerSession(): Promise<TokenPayload | null> {
+  const cookieStore = await cookies();
+  const token =
+    cookieStore.get("veloura_seller_token")?.value ||
+    cookieStore.get("veloura_admin_token")?.value;
+  if (!token) return null;
+  const payload = verifyToken(token);
+  if (payload && (payload.role === "SELLER" || payload.role === "ADMIN")) {
+    return payload;
+  }
+  return null;
+}
