@@ -1,14 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getAdminSession } from "@/lib/auth";
-import { getStoreProducts, upsertStoreProduct } from "@/lib/store-data";
+import { getStoreProducts, upsertStoreProduct, getStoreCategories, addStoreCategory } from "@/lib/store-data";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
   try {
+    const { searchParams } = new URL(req.url);
+    const universe = searchParams.get("universe") || undefined;
+    const deals = searchParams.get("deals") === "true";
+
+    // 1. Try Prisma DB
     try {
+      const where: any = {};
+      if (deals) where.salePrice = { not: null };
+
       const products = await prisma.product.findMany({
+        where,
         include: {
           category: true,
           images: {
@@ -21,10 +30,14 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ products });
       }
     } catch (dbErr) {
-      // Fallback
+      // Fallback smoothly
     }
 
-    const fallbackProducts = await getStoreProducts();
+    // 2. High-performance fallback
+    const fallbackProducts = await getStoreProducts({
+      universe,
+      deals,
+    });
     return NextResponse.json({ products: fallbackProducts });
   } catch (error: any) {
     console.error("Admin products GET error:", error);
@@ -44,15 +57,19 @@ export async function POST(req: NextRequest) {
       name,
       price,
       salePrice,
+      universe = "BEAUTY_SKIN_HAIR",
+      subCategory,
       categoryId,
       categoryName,
-      stock,
+      stock = 10,
       sku,
       brand,
       description,
       shortDescription,
-      tags,
-      images,
+      isDeal = false,
+      dealBadge,
+      tags = [],
+      images = [],
       isPublished = true,
       isFeatured = false,
     } = body;
@@ -61,7 +78,63 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Name and price are required" }, { status: 400 });
     }
 
-    // Try Prisma first
+    const finalUniverse = universe === "JEWELRY" ? "JEWELRY" : "BEAUTY_SKIN_HAIR";
+    const parsedPrice = parseFloat(price);
+    const parsedSalePrice = salePrice ? parseFloat(salePrice) : null;
+    const isDealActive = Boolean(isDeal || (parsedSalePrice && parsedSalePrice < parsedPrice));
+    const effectiveDealBadge = dealBadge || (isDealActive ? "SPECIAL DEAL" : undefined);
+
+    let catObj = {
+      id: categoryId || "cat-default",
+      name: categoryName || (finalUniverse === "JEWELRY" ? "Fine Jewelry & Pearls" : "Silk Skincare & Serums"),
+      slug: (categoryName || "general").toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+    };
+
+    // Ensure category exists in store-data
+    if (categoryName) {
+      const createdCat = await addStoreCategory({
+        name: categoryName,
+        universe: finalUniverse,
+      });
+      catObj = {
+        id: createdCat.id,
+        name: createdCat.name,
+        slug: createdCat.slug,
+      };
+    }
+
+    const formattedImages = Array.isArray(images) && images.length > 0
+      ? images.map((img: any, idx: number) => ({
+          id: `img-${Date.now()}-${idx}`,
+          url: typeof img === "string" ? img : img.url,
+          alt: name,
+          isPrimary: idx === 0,
+          sortOrder: idx,
+        }))
+      : [];
+
+    // 1. Always save into Store-Data (Immediate guarantee for storefront)
+    const storeProduct = await upsertStoreProduct({
+      name,
+      price: parsedPrice,
+      salePrice: parsedSalePrice,
+      isDeal: isDealActive,
+      dealBadge: effectiveDealBadge,
+      universe: finalUniverse,
+      subCategory: subCategory || (finalUniverse === "JEWELRY" ? "Chokers & Necklaces" : "Facewash & Cleansers"),
+      category: catObj,
+      stock: parseInt(stock) || 10,
+      sku: (sku && typeof sku === "string" && sku.trim()) || `VEL-${Date.now().toString().slice(-6)}`,
+      brand: brand || "VELOURA Haute Atelier",
+      description: description || name,
+      shortDescription: shortDescription || description?.slice(0, 110) || name,
+      tags: Array.isArray(tags) ? tags : [],
+      images: formattedImages,
+      isPublished: Boolean(isPublished),
+      isFeatured: Boolean(isFeatured),
+    });
+
+    // 2. Also try writing to Prisma PostgreSQL if available
     try {
       let baseSlug = name
         .toLowerCase()
@@ -77,98 +150,48 @@ export async function POST(req: NextRequest) {
       }
 
       let finalCategoryId = categoryId;
-      if (!finalCategoryId && categoryName) {
-        const catSlug = categoryName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+      if (!finalCategoryId && catObj.name) {
         const cat = await prisma.category.upsert({
-          where: { slug: catSlug },
+          where: { slug: catObj.slug },
           update: {},
-          create: { name: categoryName, slug: catSlug },
+          create: { name: catObj.name, slug: catObj.slug },
         });
         finalCategoryId = cat.id;
       }
 
-      let baseSku = (sku && typeof sku === "string" && sku.trim()) || `VEL-${Date.now().toString().slice(-6)}`;
-      let finalSku = baseSku;
-      let skuCounter = 1;
-      while (await prisma.product.findUnique({ where: { sku: finalSku } })) {
-        finalSku = `${baseSku}-${skuCounter}`;
-        skuCounter++;
-      }
-
-      const product = await prisma.product.create({
+      await prisma.product.create({
         data: {
           name,
           slug,
           description: description || name,
           shortDescription: shortDescription || null,
-          price: parseFloat(price),
-          salePrice: salePrice ? parseFloat(salePrice) : null,
-          stock: parseInt(stock) || 0,
-          sku: finalSku,
+          price: parsedPrice,
+          salePrice: parsedSalePrice,
+          stock: parseInt(stock) || 10,
+          sku: storeProduct.sku,
           brand: brand || "VELOURA",
           tags: Array.isArray(tags) ? tags : [],
           categoryId: finalCategoryId || null,
           isPublished: Boolean(isPublished),
           isFeatured: Boolean(isFeatured),
           images: {
-            create: Array.isArray(images)
-              ? images.map((img: any, idx: number) => ({
-                  url: typeof img === "string" ? img : img.url,
-                  alt: name,
-                  isPrimary: idx === 0,
-                  sortOrder: idx,
-                }))
-              : [],
+            create: formattedImages.map((img: any) => ({
+              url: img.url,
+              alt: name,
+              isPrimary: img.isPrimary,
+              sortOrder: img.sortOrder,
+            })),
           },
         },
-        include: {
-          images: true,
-          category: true,
-        },
-      });
-
-      return NextResponse.json({
-        success: true,
-        product,
-        message: "Product published successfully.",
       });
     } catch (prismaErr) {
-      console.warn("Prisma error in create, saving to store-data fallback:", prismaErr);
+      console.warn("Prisma error in create (store-data saved):", prismaErr);
     }
-
-    // Fallback store
-    const newProduct = await upsertStoreProduct({
-      name,
-      description: description || name,
-      shortDescription: shortDescription || "",
-      price: parseFloat(price),
-      salePrice: salePrice ? parseFloat(salePrice) : null,
-      stock: parseInt(stock) || 10,
-      sku: sku || `VEL-${Date.now().toString().slice(-6)}`,
-      brand: brand || "VELOURA Haute Atelier",
-      tags: Array.isArray(tags) ? tags : [],
-      isPublished: Boolean(isPublished),
-      isFeatured: Boolean(isFeatured),
-      category: {
-        id: "cat-1",
-        name: categoryName || "Luxe Makeup & Lips",
-        slug: (categoryName || "luxe-makeup").toLowerCase().replace(/[^a-z0-9]+/g, "-"),
-      },
-      images: Array.isArray(images)
-        ? images.map((img: any, idx: number) => ({
-            id: `img-${Date.now()}-${idx}`,
-            url: typeof img === "string" ? img : img.url,
-            alt: name,
-            isPrimary: idx === 0,
-            sortOrder: idx,
-          }))
-        : [{ id: `img-1`, url: "/uploads/products/item-01.jpeg", isPrimary: true }],
-    });
 
     return NextResponse.json({
       success: true,
-      product: newProduct,
-      message: "Product published successfully.",
+      product: storeProduct,
+      message: `Product "${name}" published successfully! Live across the store.`,
     });
   } catch (error: any) {
     console.error("Admin product POST error:", error);

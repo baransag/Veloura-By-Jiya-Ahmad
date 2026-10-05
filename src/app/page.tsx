@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { getStoreProducts } from "@/lib/store-data";
+import { LUXURY_FALLBACK_IMAGE } from "@/lib/catalog-data";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { HeroBanner } from "@/components/ui/HeroBanner";
 import { FlashSaleSection } from "@/components/ui/FlashSaleSection";
@@ -29,6 +30,10 @@ export default async function HomePage() {
     getStoreProducts({ universe: "BEAUTY_SKIN_HAIR", limit: 8 }),
     getStoreProducts({ featured: true, limit: 8 }),
   ]);
+
+  const jewelryCover = jewelryProducts[0]?.images?.[0]?.url || LUXURY_FALLBACK_IMAGE;
+  const beautyCover = beautyProducts[0]?.images?.[0]?.url || LUXURY_FALLBACK_IMAGE;
+
 
   const whatsAppUrl = getBaseWhatsAppUrl(OFFICIAL_WHATSAPP_NUMBER);
 
@@ -110,8 +115,11 @@ export default async function HomePage() {
             className="group relative rounded-[32px] overflow-hidden aspect-[16/10] bg-white shadow-soft-pink hover:shadow-[0_20px_50px_rgba(225,77,117,0.22)] transition-all duration-500 border border-[#F8D5DE] hover:border-[#E14D75]"
           >
             <img
-              src="/uploads/products/item-05.jpeg"
+              src={jewelryCover}
               alt="Fine Jewellery Wing"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = LUXURY_FALLBACK_IMAGE;
+              }}
               className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#25050D]/95 via-[#25050D]/40 to-transparent" />
@@ -143,8 +151,11 @@ export default async function HomePage() {
             className="group relative rounded-[32px] overflow-hidden aspect-[16/10] bg-white shadow-soft-pink hover:shadow-[0_20px_50px_rgba(225,77,117,0.22)] transition-all duration-500 border border-[#F8D5DE] hover:border-[#E14D75]"
           >
             <img
-              src="/uploads/products/item-101.jpeg"
+              src={beautyCover}
               alt="Skincare & Hair Wing"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = LUXURY_FALLBACK_IMAGE;
+              }}
               className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#25050D]/95 via-[#25050D]/40 to-transparent" />

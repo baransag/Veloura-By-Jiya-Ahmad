@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { getStoreProducts } from "@/lib/store-data";
-import { UNIVERSES, JEWELRY_SUB_CATEGORIES, BEAUTY_SUB_CATEGORIES } from "@/lib/catalog-data";
+import { getStoreProducts, getStoreCategories } from "@/lib/store-data";
+import { UNIVERSES } from "@/lib/catalog-data";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { MobileBottomBar } from "@/components/ui/MobileBottomBar";
 import { Sparkles, Flame, Search, Gem, Flower2, Layers } from "lucide-react";
@@ -23,25 +23,23 @@ interface ShopPageProps {
 export default async function ShopPage({ searchParams }: ShopPageProps) {
   const { universe = "ALL", subCategory, category, search, q, sort = "newest", deals } = searchParams;
   const searchQuery = (q || search || "").trim();
+  const isDealsUniverse = universe === "DEALS" || deals === "true";
+  const activeUniverse = isDealsUniverse ? "DEALS" : (universe || "ALL");
 
-  // Fetch from comprehensive 199-catalog store data
+  // Fetch dynamic categories configured by Admin
+  const dynamicCategories = await getStoreCategories(
+    activeUniverse === "ALL" || activeUniverse === "DEALS" ? undefined : activeUniverse
+  );
+
+  // Fetch products
   const products = await getStoreProducts({
-    universe: universe === "ALL" ? undefined : universe,
+    universe: (activeUniverse === "ALL" || activeUniverse === "DEALS") ? undefined : activeUniverse,
     subCategory: subCategory && !subCategory.startsWith("All") ? subCategory : undefined,
     categorySlug: category,
     search: searchQuery,
     sort,
+    deals: isDealsUniverse,
   });
-
-  const activeUniverse = universe || "ALL";
-
-  // Sub-categories list according to active universe
-  const subCategoriesToDisplay =
-    activeUniverse === "JEWELRY"
-      ? JEWELRY_SUB_CATEGORIES
-      : activeUniverse === "BEAUTY_SKIN_HAIR"
-      ? BEAUTY_SUB_CATEGORIES
-      : [];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FFF5F8] via-[#FFF8FA] to-[#FFF0F4] py-8 sm:py-14 text-[#25050D]">
@@ -59,6 +57,8 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
               ? "Fine Jewellery & Pearls"
               : activeUniverse === "BEAUTY_SKIN_HAIR"
               ? "Silk Skincare, Facewash & Hair"
+              : activeUniverse === "DEALS"
+              ? "Exclusive Deals & Bundles"
               : "Veloura Beauty & Fine Jewels"}
           </h1>
 
@@ -67,6 +67,8 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
               ? "18K & 22K gold-plated bridal chokers, zircon solitaires, and organic freshwater pearls."
               : activeUniverse === "BEAUTY_SKIN_HAIR"
               ? "Gentle rose facewashes, bio-silk peptide glow serums, and Moroccan cashmere argan hair elixirs."
+              : activeUniverse === "DEALS"
+              ? "Limited time discounted beauty hampers, bridal bundles, and exclusive flash offers."
               : "Explore our dual ateliers: Handcrafted heirloom jewelry on one wing, and organic botanical skincare on the other."}
           </p>
 
@@ -83,7 +85,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
           )}
         </div>
 
-        {/* ── 2. Master Dual-Universe Switcher (Jewellery vs Skincare/Hair) ── */}
+        {/* ── 2. Master Dual-Universe Switcher (Jewellery vs Skincare/Hair vs Deals) ── */}
         <div className="flex flex-col items-center gap-3">
           <div className="inline-flex p-1.5 rounded-3xl bg-white/90 backdrop-blur-md border border-[#F8D5DE] shadow-soft-pink max-w-full overflow-x-auto gap-1">
             {UNIVERSES.map((u) => {
@@ -106,30 +108,41 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
             })}
           </div>
 
-          {/* Sub-Category Pills for Active Universe */}
-          {subCategoriesToDisplay.length > 0 && (
+          {/* Dynamic Category Filter Pills */}
+          {dynamicCategories.length > 0 && activeUniverse !== "DEALS" && (
             <div className="flex items-center gap-2 overflow-x-auto max-w-full py-1 px-2">
-              {subCategoriesToDisplay.map((sub) => {
-                const isSubActive = subCategory === sub || (!subCategory && sub.startsWith("All"));
-                const querySub = sub.startsWith("All") ? "" : `&subCategory=${encodeURIComponent(sub)}`;
-                const subHref = `/shop?universe=${activeUniverse}${querySub}${sort ? `&sort=${sort}` : ""}`;
+              <Link
+                href={`/shop?universe=${activeUniverse}${sort ? `&sort=${sort}` : ""}`}
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border ${
+                  !category && !subCategory
+                    ? "bg-[#FFF0F4] border-[#E14D75] text-[#C2185B] shadow-2xs font-bold"
+                    : "bg-white/70 border-[#F8D5DE] text-[#8E1B3B]/80 hover:bg-white hover:text-[#C2185B]"
+                }`}
+              >
+                All {activeUniverse === "JEWELRY" ? "Jewels" : activeUniverse === "BEAUTY_SKIN_HAIR" ? "Beauty" : "Creations"}
+              </Link>
+
+              {dynamicCategories.map((cat) => {
+                const isCatActive = category === cat.slug || subCategory === cat.name;
+                const catHref = `/shop?universe=${activeUniverse}&category=${cat.slug}${sort ? `&sort=${sort}` : ""}`;
                 return (
                   <Link
-                    key={sub}
-                    href={subHref}
+                    key={cat.id}
+                    href={catHref}
                     className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border ${
-                      isSubActive
+                      isCatActive
                         ? "bg-[#FFF0F4] border-[#E14D75] text-[#C2185B] shadow-2xs font-bold"
                         : "bg-white/70 border-[#F8D5DE] text-[#8E1B3B]/80 hover:bg-white hover:text-[#C2185B]"
                     }`}
                   >
-                    {sub}
+                    {cat.name}
                   </Link>
                 );
               })}
             </div>
           )}
         </div>
+
 
         {/* ── 3. Filter Bar & Quick Stats ─────────────────────────────────── */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-4 border-b border-[#F8D5DE]/80 text-xs text-[#8E1B3B]">

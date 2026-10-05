@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Zap, Timer, ArrowRight, ShoppingBag, Flame } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
+import { LUXURY_FALLBACK_IMAGE } from "@/lib/catalog-data";
 
 interface FlashSaleProps {
   products: any[];
@@ -93,7 +94,7 @@ export function FlashSaleSection({ products }: FlashSaleProps) {
         {/* Product Cards Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-6 relative z-10">
           {displayItems.map((prod, idx) => {
-            const imgUrl = prod.images?.[0]?.url || "/uploads/products/item-01.jpeg";
+            const imgUrl = prod.images?.[0]?.url || LUXURY_FALLBACK_IMAGE;
             const discountPct = prod.salePrice
               ? Math.round(((prod.price - prod.salePrice) / prod.price) * 100)
               : 25;

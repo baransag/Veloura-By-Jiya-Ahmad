@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ShoppingBag, MessageCircle, Star, Sparkles, Gem, Check, Store } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { generateProductWhatsAppMessage, getBaseWhatsAppUrl, OFFICIAL_WHATSAPP_NUMBER } from "@/lib/whatsapp";
+import { LUXURY_FALLBACK_IMAGE } from "@/lib/catalog-data";
 
 interface ProductCardProps {
   product: {
@@ -17,6 +18,8 @@ interface ProductCardProps {
     universe?: string;
     subCategory?: string;
     sellerShopName?: string;
+    isDeal?: boolean;
+    dealBadge?: string;
     category?: { name: string } | null;
     images?: Array<{ url: string; alt?: string | null }> | null;
   };
@@ -32,7 +35,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [addedAnimation, setAddedAnimation] = useState(false);
 
-  const primaryImage = product.images?.[0]?.url || "/uploads/products/item-01.jpeg";
+  const primaryImage = product.images?.[0]?.url || LUXURY_FALLBACK_IMAGE;
   const secondaryImage = product.images?.[1]?.url || primaryImage;
   const activePrice = product.salePrice && product.salePrice > 0 ? product.salePrice : product.price;
   const hasDiscount = product.salePrice && product.salePrice > 0 && product.salePrice < product.price;
@@ -41,6 +44,7 @@ export function ProductCard({ product }: ProductCardProps) {
     : 0;
 
   const isJewelry = product.universe === "JEWELRY" || product.category?.name?.toLowerCase().includes("jewelry");
+
 
   // 3D Tilt calculation
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -125,6 +129,9 @@ export function ProductCard({ product }: ProductCardProps) {
           <img
             src={primaryImage}
             alt={product.name}
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = LUXURY_FALLBACK_IMAGE;
+            }}
             className={`h-full w-full object-cover object-center transition-all duration-700 ${
               isHovered && secondaryImage !== primaryImage ? "opacity-0 scale-105" : "opacity-100 scale-100 group-hover:scale-105"
             }`}
@@ -135,6 +142,9 @@ export function ProductCard({ product }: ProductCardProps) {
             <img
               src={secondaryImage}
               alt={`${product.name} alternate view`}
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = LUXURY_FALLBACK_IMAGE;
+              }}
               className={`absolute inset-0 h-full w-full object-cover object-center transition-all duration-700 ${
                 isHovered ? "opacity-100 scale-105" : "opacity-0 scale-100"
               }`}
@@ -153,7 +163,14 @@ export function ProductCard({ product }: ProductCardProps) {
           {/* Badges on Top */}
           <div className="absolute top-2.5 left-2.5 right-2.5 flex items-start justify-between z-10 pointer-events-none">
             <div className="flex flex-col gap-1 items-start">
-              {hasDiscount && (
+              {product.isDeal && (
+                <span className="bg-gradient-to-r from-[#D32F2F] to-[#E91E63] text-white text-[9px] sm:text-[10px] font-black px-2.5 py-0.5 rounded-full tracking-wider uppercase shadow-[0_4px_12px_rgba(211,47,47,0.4)] flex items-center gap-1 animate-pulse">
+                  <span>🔥</span>
+                  <span>{product.dealBadge || "SPECIAL DEAL"}</span>
+                </span>
+              )}
+
+              {hasDiscount && !product.isDeal && (
                 <span className="bg-gradient-to-r from-[#C2185B] via-[#E14D75] to-[#FF4D8D] text-white text-[9px] sm:text-[10px] font-black px-2.5 py-0.5 rounded-full tracking-wider uppercase shadow-[0_4px_12px_rgba(225,77,117,0.35)]">
                   -{discountPercent}% OFF
                 </span>

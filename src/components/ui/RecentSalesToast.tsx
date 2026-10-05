@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { CheckCircle2, X } from "lucide-react";
+import { LUXURY_FALLBACK_IMAGE } from "@/lib/catalog-data";
 
 interface SaleNotification {
   customer: string;
@@ -18,28 +19,28 @@ const mockPurchases: SaleNotification[] = [
     city: "Lahore, PK",
     product: "Velvet Matte Liquid Silk Lip Rouge",
     time: "2 minutes ago",
-    image: "/uploads/products/item-01.jpeg",
+    image: LUXURY_FALLBACK_IMAGE,
   },
   {
     customer: "Ayesha K.",
     city: "Karachi, PK",
     product: "18K Baroque Pearl Choker Necklace",
     time: "4 minutes ago",
-    image: "/uploads/products/item-05.jpeg",
+    image: LUXURY_FALLBACK_IMAGE,
   },
   {
     customer: "Zainab M.",
     city: "Islamabad, PK",
     product: "Complete Hair & Skin Care Silk Bundle",
     time: "6 minutes ago",
-    image: "/uploads/products/item-37.jpeg",
+    image: LUXURY_FALLBACK_IMAGE,
   },
   {
     customer: "Hira T.",
     city: "Faisalabad, PK",
     product: "Bio-Fermented Silk Peptide Dew Serum",
     time: "8 minutes ago",
-    image: "/uploads/products/item-17.jpeg",
+    image: LUXURY_FALLBACK_IMAGE,
   },
 ];
 

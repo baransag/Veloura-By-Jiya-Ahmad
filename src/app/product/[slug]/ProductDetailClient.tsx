@@ -21,11 +21,12 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { LUXURY_FALLBACK_IMAGE } from "@/lib/catalog-data";
 
 export function ProductDetailClient({ product }: { product: any }) {
   const { addItem } = useCart();
   const [selectedImage, setSelectedImage] = useState(
-    product.images?.[0]?.url || "/uploads/products/item-01.jpeg"
+    product.images?.[0]?.url || LUXURY_FALLBACK_IMAGE
   );
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
@@ -191,6 +192,9 @@ export function ProductDetailClient({ product }: { product: any }) {
             <img
               src={selectedImage}
               alt={product.name}
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = LUXURY_FALLBACK_IMAGE;
+              }}
               className="w-full h-full object-cover object-center"
             />
             {hasDiscount && (

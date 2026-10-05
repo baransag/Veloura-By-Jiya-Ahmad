@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { ArrowRight, Sparkles, MessageCircle, Gem, Award, ShieldCheck, ChevronRight, ChevronLeft } from "lucide-react";
 import { getBaseWhatsAppUrl, OFFICIAL_WHATSAPP_NUMBER } from "@/lib/whatsapp";
+import { LUXURY_FALLBACK_IMAGE } from "@/lib/catalog-data";
 
 const SLIDES = [
   {
@@ -13,9 +14,9 @@ const SLIDES = [
     headingAccent: "Silk Radiance & 18K Gold",
     description:
       "Handcrafted 18-karat tarnish-free fine jewelry paired with pure bio-fermented silk botanical skincare. Curated for the modern muse.",
-    primaryCta: { text: "Shop Fine Jewelry", href: "/shop?category=fine-jewelry" },
-    secondaryCta: { text: "Explore Silk Elixirs", href: "/shop?category=silk-skincare" },
-    image: "/uploads/products/item-05.jpeg",
+    primaryCta: { text: "Shop Fine Jewelry", href: "/shop?universe=JEWELRY" },
+    secondaryCta: { text: "Explore Silk Elixirs", href: "/shop?universe=BEAUTY_SKIN_HAIR" },
+    image: LUXURY_FALLBACK_IMAGE,
     floatingBadge: {
       title: "18K Baroque Pearl Choker",
       price: "Rs. 3,850",
@@ -29,9 +30,9 @@ const SLIDES = [
     headingAccent: "Velvet Silk Lip Mousse",
     description:
       "Feather-soft matte liquid lip elixirs and 24K gold flecked plumping nectars. Enriched with organic rosehip and silk amino acids for 12-hour weightless wear.",
-    primaryCta: { text: "Explore Lip Elixirs", href: "/shop?category=luxe-makeup" },
+    primaryCta: { text: "Explore Lip Elixirs", href: "/shop?universe=BEAUTY_SKIN_HAIR" },
     secondaryCta: { text: "All Beauty Creations", href: "/shop" },
-    image: "/uploads/products/item-01.jpeg",
+    image: LUXURY_FALLBACK_IMAGE,
     floatingBadge: {
       title: "Velvet Liquid Lip Elixir",
       price: "Rs. 1,950",
@@ -45,9 +46,9 @@ const SLIDES = [
     headingAccent: "Zirconia & Huggie Jewels",
     description:
       "Triple 18K gold-plated bracelets and pavé ear climbers that capture every beam of light. Hypoallergenic, waterproof, and presented in our signature velvet keepsake box.",
-    primaryCta: { text: "Shop Tennis Bracelets", href: "/shop?category=fine-jewelry" },
+    primaryCta: { text: "Shop Tennis Bracelets", href: "/shop?universe=JEWELRY" },
     secondaryCta: { text: "WhatsApp Concierge", href: "#whatsapp" },
-    image: "/uploads/products/item-37.jpeg",
+    image: LUXURY_FALLBACK_IMAGE,
     floatingBadge: {
       title: "Celestial Tennis Bracelet",
       price: "Rs. 3,200",
@@ -224,6 +225,9 @@ export function HeroBanner() {
                 <img
                   src={slide.image}
                   alt={slide.floatingBadge.title}
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = LUXURY_FALLBACK_IMAGE;
+                  }}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute top-3 left-3 bg-[#1A0A10]/80 backdrop-blur-md px-3 py-1 rounded-full text-[9px] uppercase tracking-widest text-[#FDE8EF] border border-[#E8A5B7]/30">
