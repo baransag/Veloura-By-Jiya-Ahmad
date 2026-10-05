@@ -1,0 +1,107 @@
+{
+  "users": [
+    {
+      "id": "usr-admin-1",
+      "name": "Veloura Atelier Admin",
+      "email": "admin@veloura.pk",
+      "phone": "+92 321 9954325",
+      "role": "ADMIN",
+      "passwordHash": "$2a$10$w09u7uR2c8i2f6TzYdGvye0bZ0b3z4q7l8m9n0p1q2r3s4t5u6v7w",
+      "status": "ACTIVE",
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "usr-admin-2",
+      "name": "Jiya Ahmad (Founder)",
+      "email": "admin@veloura.com",
+      "phone": "+92 321 9954325",
+      "role": "ADMIN",
+      "passwordHash": "$2a$10$w09u7uR2c8i2f6TzYdGvye0bZ0b3z4q7l8m9n0p1q2r3s4t5u6v7w",
+      "status": "ACTIVE",
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat-skincare",
+      "name": "Silk Skincare & Serums",
+      "slug": "silk-skincare",
+      "universe": "BEAUTY_SKIN_HAIR",
+      "description": "Bio-fermented silk peptides, rose damascena toners & night glow elixirs",
+      "isActive": true,
+      "sortOrder": 1,
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "cat-facewash",
+      "name": "Facewash & Cleansers",
+      "slug": "facewash-cleansers",
+      "universe": "BEAUTY_SKIN_HAIR",
+      "description": "Cloud foaming rose cleansers, 24K gold face polishes & tea tree clarifying washes",
+      "isActive": true,
+      "sortOrder": 2,
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "cat-hair",
+      "name": "Hair Elixirs & Fragrance",
+      "slug": "hair-fragrance",
+      "universe": "BEAUTY_SKIN_HAIR",
+      "description": "Moroccan cashmere argan hair oils, amber perfume mists & leave-in silk glazes",
+      "isActive": true,
+      "sortOrder": 3,
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "cat-lips",
+      "name": "Luxe Lip Care & Velvet Rouges",
+      "slug": "luxe-lips",
+      "universe": "BEAUTY_SKIN_HAIR",
+      "description": "Velvet matte liquid lipsticks, 24K gold lip oils & boxed lip caskets",
+      "isActive": true,
+      "sortOrder": 4,
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "cat-chokers",
+      "name": "Bridal Chokers & Necklaces",
+      "slug": "chokers-necklaces",
+      "universe": "JEWELRY",
+      "description": "18K & 22K gold-plated bridal chokers, freshwater baroque pearls & royal emerald drops",
+      "isActive": true,
+      "sortOrder": 5,
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "cat-earrings",
+      "name": "Earrings & Traditional Jhumkas",
+      "slug": "earrings-jhumkas",
+      "universe": "JEWELRY",
+      "description": "Handcrafted Mughal Meenakari jhumkas, chandbalis & solitaire studs",
+      "isActive": true,
+      "sortOrder": 6,
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "cat-rings",
+      "name": "Rings & Solitaires",
+      "slug": "rings-solitaires",
+      "universe": "JEWELRY",
+      "description": "2-carat crown solitaire rings, cocktail emeralds & eternity chevron bands",
+      "isActive": true,
+      "sortOrder": 7,
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "cat-bangles",
+      "name": "Royal Kundan & Bangles",
+      "slug": "kundan-bangles",
+      "universe": "JEWELRY",
+      "description": "Polki diamond kara pairs, zircon tennis bracelets & pearl cuffs",
+      "isActive": true,
+      "sortOrder": 8,
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    }
+  ],
+  "products": []
+}

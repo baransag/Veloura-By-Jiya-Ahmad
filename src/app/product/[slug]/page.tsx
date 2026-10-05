@@ -13,22 +13,20 @@ interface ProductPageProps {
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  let product: any = null;
-
-  try {
-    product = await prisma.product.findUnique({
-      where: { slug: params.slug },
-      include: {
-        category: true,
-        images: { orderBy: { sortOrder: "asc" } },
-      },
-    });
-  } catch (err) {
-    // Prisma error, check store-data fallback
-  }
+  let product: any = await getStoreProductBySlugOrId(params.slug);
 
   if (!product) {
-    product = await getStoreProductBySlugOrId(params.slug);
+    try {
+      product = await prisma.product.findUnique({
+        where: { slug: params.slug },
+        include: {
+          category: true,
+          images: { orderBy: { sortOrder: "asc" } },
+        },
+      });
+    } catch (err) {
+      // Prisma error ignored
+    }
   }
 
   if (!product || !product.isPublished) {

@@ -37,8 +37,6 @@ export interface StoreUser {
 
 export type StoreProduct = CatalogItem;
 
-const DB_FILE = path.join(process.cwd(), "data", "store-db.json");
-
 // Default initial categories that Admin can manage and expand
 const defaultCategories: StoreCategory[] = [
   {
@@ -184,31 +182,43 @@ interface DBState {
 
 let memoryState: DBState | null = null;
 
+function getDbFile(): string {
+  if (process.env.VERCEL) {
+    return path.join("/tmp", "store-db.json");
+  }
+  return path.join(process.cwd(), "data", "store-db.json");
+}
+
 function loadDb(): DBState {
   if (memoryState) return memoryState;
 
-  try {
-    if (fs.existsSync(DB_FILE)) {
-      const raw = fs.readFileSync(DB_FILE, "utf-8");
-      const parsed = JSON.parse(raw);
-      if (parsed) {
-        // Clean out any legacy dummy products referencing deleted item-*.jpeg files
-        const cleanedProducts = (parsed.products || []).filter((p: any) => {
-          const imgUrl = p.images?.[0]?.url || "";
-          return !imgUrl.includes("/uploads/products/item-");
-        });
+  const candidateFiles = [
+    getDbFile(),
+    path.join(process.cwd(), "data", "store-db.json"),
+  ];
 
-        memoryState = {
-          users: parsed.users && parsed.users.length > 0 ? parsed.users : defaultUsers,
-          categories: parsed.categories && parsed.categories.length > 0 ? parsed.categories : defaultCategories,
-          products: cleanedProducts,
-        };
-        saveDb(memoryState);
-        return memoryState;
+  for (const fpath of candidateFiles) {
+    try {
+      if (fs.existsSync(fpath)) {
+        const raw = fs.readFileSync(fpath, "utf-8");
+        const parsed = JSON.parse(raw);
+        if (parsed) {
+          const cleanedProducts = (parsed.products || []).filter((p: any) => {
+            const imgUrl = p.images?.[0]?.url || "";
+            return !imgUrl.includes("/uploads/products/item-");
+          });
+
+          memoryState = {
+            users: parsed.users && parsed.users.length > 0 ? parsed.users : defaultUsers,
+            categories: parsed.categories && parsed.categories.length > 0 ? parsed.categories : defaultCategories,
+            products: cleanedProducts,
+          };
+          return memoryState;
+        }
       }
+    } catch (err) {
+      // Continue to next candidate
     }
-  } catch (err) {
-    console.error("Error reading store db file, initializing fresh:", err);
   }
 
   // Initialize fresh without dummy products so Admin can add her own
@@ -224,13 +234,14 @@ function loadDb(): DBState {
 
 function saveDb(state: DBState) {
   try {
-    const dir = path.dirname(DB_FILE);
+    const targetFile = getDbFile();
+    const dir = path.dirname(targetFile);
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }
-    fs.writeFileSync(DB_FILE, JSON.stringify(state, null, 2), "utf-8");
+    fs.writeFileSync(targetFile, JSON.stringify(state, null, 2), "utf-8");
   } catch (err) {
-    console.error("Error saving store db file:", err);
+    console.warn("Notice: Persistent DB write skipped in serverless environment:", err);
   }
 }
 
