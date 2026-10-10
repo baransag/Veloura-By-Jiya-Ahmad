@@ -81,7 +81,7 @@ export function RecentSalesToast() {
   return (
     <div className="fixed bottom-16 md:bottom-6 left-4 z-40 max-w-xs sm:max-w-sm bg-white/95 backdrop-blur-md rounded-2xl p-3 border border-[#F8D5DE] shadow-hover-pink flex items-center gap-3 animate-in fade-in slide-in-from-bottom-3 duration-300">
       <div className="w-11 h-11 rounded-xl overflow-hidden bg-[#FFF0F3] border border-[#F8D5DE] flex-shrink-0 relative">
-        <Image src={current.image} alt={current.product} fill className="object-cover" />
+        <img src={current.image} alt={current.product} className="w-full h-full object-cover" />
       </div>
 
       <div className="flex-1 min-w-0">

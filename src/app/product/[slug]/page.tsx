@@ -13,7 +13,7 @@ interface ProductPageProps {
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  let product: any = await getStoreProductBySlugOrId(params.slug);
+  let product: any = await getStoreProductBySlugOrId(params.slug).catch(() => null);
 
   if (!product) {
     try {

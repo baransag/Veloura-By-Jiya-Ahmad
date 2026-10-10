@@ -12,11 +12,15 @@ export async function GET(req: NextRequest) {
   if (customerToken) {
     const customer = verifyToken(customerToken);
     if (customer && customer.role === "CUSTOMER") {
-      const dbUser = await prisma.user.findUnique({
-        where: { id: customer.userId },
-        select: { id: true, email: true, name: true, phone: true, role: true },
-      });
-      return NextResponse.json({ user: dbUser });
+      try {
+        const dbUser = await prisma.user.findUnique({
+          where: { id: customer.userId },
+          select: { id: true, email: true, name: true, phone: true, role: true },
+        });
+        return NextResponse.json({ user: dbUser });
+      } catch (e) {
+        return NextResponse.json({ user: null });
+      }
     }
   }
 

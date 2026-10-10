@@ -25,14 +25,14 @@ import { getBaseWhatsAppUrl, OFFICIAL_WHATSAPP_NUMBER } from "@/lib/whatsapp";
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const [jewelryProducts, beautyProducts, flashProducts] = await Promise.all([
-    getStoreProducts({ universe: "JEWELRY", limit: 8 }),
-    getStoreProducts({ universe: "BEAUTY_SKIN_HAIR", limit: 8 }),
-    getStoreProducts({ featured: true, limit: 8 }),
+  const [jewelryProducts = [], beautyProducts = [], flashProducts = []] = await Promise.all([
+    getStoreProducts({ universe: "JEWELRY", limit: 8 }).catch(() => []),
+    getStoreProducts({ universe: "BEAUTY_SKIN_HAIR", limit: 8 }).catch(() => []),
+    getStoreProducts({ featured: true, limit: 8 }).catch(() => []),
   ]);
 
-  const jewelryCover = jewelryProducts[0]?.images?.[0]?.url || LUXURY_FALLBACK_IMAGE;
-  const beautyCover = beautyProducts[0]?.images?.[0]?.url || LUXURY_FALLBACK_IMAGE;
+  const jewelryCover = jewelryProducts?.[0]?.images?.[0]?.url || LUXURY_FALLBACK_IMAGE;
+  const beautyCover = beautyProducts?.[0]?.images?.[0]?.url || LUXURY_FALLBACK_IMAGE;
 
 
   const whatsAppUrl = getBaseWhatsAppUrl(OFFICIAL_WHATSAPP_NUMBER);

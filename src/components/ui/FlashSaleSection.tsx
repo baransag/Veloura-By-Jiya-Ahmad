@@ -37,8 +37,9 @@ export function FlashSaleSection({ products }: FlashSaleProps) {
   }, []);
 
   // Filter products with sale price or take first 4
-  const saleProducts = products.filter((p) => p.salePrice && p.salePrice < p.price).slice(0, 4);
-  const displayItems = saleProducts.length > 0 ? saleProducts : products.slice(0, 4);
+  const safeProducts = Array.isArray(products) ? products : [];
+  const saleProducts = safeProducts.filter((p) => p.salePrice && p.salePrice < p.price).slice(0, 4);
+  const displayItems = saleProducts.length > 0 ? saleProducts : safeProducts.slice(0, 4);
 
   if (displayItems.length === 0) return null;
 
@@ -107,11 +108,10 @@ export function FlashSaleSection({ products }: FlashSaleProps) {
               >
                 <div>
                   <div className="relative aspect-square rounded-xl overflow-hidden bg-[#FFF0F3] mb-3">
-                    <Image
+                    <img
                       src={imgUrl}
                       alt={prod.name}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-gradient-to-r from-[#8E1B3B] to-[#C2185B] text-white text-[10px] font-bold shadow-xs">
                       -{discountPct}%

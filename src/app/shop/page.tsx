@@ -29,7 +29,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
   // Fetch dynamic categories configured by Admin
   const dynamicCategories = await getStoreCategories(
     activeUniverse === "ALL" || activeUniverse === "DEALS" ? undefined : activeUniverse
-  );
+  ).catch(() => []);
 
   // Fetch products
   const products = await getStoreProducts({
@@ -39,7 +39,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
     search: searchQuery,
     sort,
     deals: isDealsUniverse,
-  });
+  }).catch(() => []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FFF5F8] via-[#FFF8FA] to-[#FFF0F4] py-8 sm:py-14 text-[#25050D]">
