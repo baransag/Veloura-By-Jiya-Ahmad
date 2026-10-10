@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Zap, Timer, ArrowRight, ShoppingBag, Flame } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
-import { LUXURY_FALLBACK_IMAGE } from "@/lib/catalog-data";
+import { LUXURY_FALLBACK_IMAGE, DEFAULT_JEWELRY_SHOWCASE, DEFAULT_BEAUTY_SHOWCASE } from "@/lib/catalog-data";
 
 interface FlashSaleProps {
   products: any[];
@@ -39,9 +39,16 @@ export function FlashSaleSection({ products }: FlashSaleProps) {
   // Filter products with sale price or take first 4
   const safeProducts = Array.isArray(products) ? products : [];
   const saleProducts = safeProducts.filter((p) => p.salePrice && p.salePrice < p.price).slice(0, 4);
-  const displayItems = saleProducts.length > 0 ? saleProducts : safeProducts.slice(0, 4);
-
-  if (displayItems.length === 0) return null;
+  const candidateItems = saleProducts.length > 0 ? saleProducts : safeProducts.slice(0, 4);
+  const displayItems =
+    candidateItems.length > 0
+      ? candidateItems
+      : [
+          DEFAULT_JEWELRY_SHOWCASE[0],
+          DEFAULT_BEAUTY_SHOWCASE[0],
+          DEFAULT_JEWELRY_SHOWCASE[3],
+          DEFAULT_BEAUTY_SHOWCASE[2],
+        ];
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

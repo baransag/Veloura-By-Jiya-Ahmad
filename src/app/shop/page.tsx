@@ -1,9 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import { getStoreProducts, getStoreCategories } from "@/lib/store-data";
-import { UNIVERSES } from "@/lib/catalog-data";
+import { UNIVERSES, DEFAULT_JEWELRY_SHOWCASE, DEFAULT_BEAUTY_SHOWCASE } from "@/lib/catalog-data";
 import { ProductCard } from "@/components/ui/ProductCard";
-import { MobileBottomBar } from "@/components/ui/MobileBottomBar";
 import { Sparkles, Flame, Search, Gem, Flower2, Layers } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -32,7 +31,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
   ).catch(() => []);
 
   // Fetch products
-  const products = await getStoreProducts({
+  let products = await getStoreProducts({
     universe: (activeUniverse === "ALL" || activeUniverse === "DEALS") ? undefined : activeUniverse,
     subCategory: subCategory && !subCategory.startsWith("All") ? subCategory : undefined,
     categorySlug: category,
@@ -40,6 +39,23 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
     sort,
     deals: isDealsUniverse,
   }).catch(() => []);
+
+  if (products.length === 0 && !searchQuery) {
+    if (activeUniverse === "JEWELRY") {
+      products = DEFAULT_JEWELRY_SHOWCASE;
+    } else if (activeUniverse === "BEAUTY_SKIN_HAIR") {
+      products = DEFAULT_BEAUTY_SHOWCASE;
+    } else if (activeUniverse === "DEALS") {
+      products = [
+        DEFAULT_JEWELRY_SHOWCASE[0],
+        DEFAULT_BEAUTY_SHOWCASE[0],
+        DEFAULT_JEWELRY_SHOWCASE[3],
+        DEFAULT_BEAUTY_SHOWCASE[2],
+      ];
+    } else {
+      products = [...DEFAULT_JEWELRY_SHOWCASE, ...DEFAULT_BEAUTY_SHOWCASE];
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FFF5F8] via-[#FFF8FA] to-[#FFF0F4] py-8 sm:py-14 text-[#25050D]">
@@ -218,7 +234,6 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
         )}
 
       </div>
-      <MobileBottomBar />
     </div>
   );
 }

@@ -1,12 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import { getStoreProducts } from "@/lib/store-data";
-import { LUXURY_FALLBACK_IMAGE } from "@/lib/catalog-data";
+import { LUXURY_FALLBACK_IMAGE, DEFAULT_JEWELRY_SHOWCASE, DEFAULT_BEAUTY_SHOWCASE } from "@/lib/catalog-data";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { HeroBanner } from "@/components/ui/HeroBanner";
 import { FlashSaleSection } from "@/components/ui/FlashSaleSection";
 import { RecentSalesToast } from "@/components/ui/RecentSalesToast";
-import { MobileBottomBar } from "@/components/ui/MobileBottomBar";
 import {
   ArrowRight,
   Sparkles,
@@ -25,11 +24,23 @@ import { getBaseWhatsAppUrl, OFFICIAL_WHATSAPP_NUMBER } from "@/lib/whatsapp";
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const [jewelryProducts = [], beautyProducts = [], flashProducts = []] = await Promise.all([
+  const [dbJewelry = [], dbBeauty = [], dbFlash = []] = await Promise.all([
     getStoreProducts({ universe: "JEWELRY", limit: 8 }).catch(() => []),
     getStoreProducts({ universe: "BEAUTY_SKIN_HAIR", limit: 8 }).catch(() => []),
     getStoreProducts({ featured: true, limit: 8 }).catch(() => []),
   ]);
+
+  const jewelryProducts = dbJewelry.length > 0 ? dbJewelry : DEFAULT_JEWELRY_SHOWCASE;
+  const beautyProducts = dbBeauty.length > 0 ? dbBeauty : DEFAULT_BEAUTY_SHOWCASE;
+  const flashProducts =
+    dbFlash.length > 0
+      ? dbFlash
+      : [
+          DEFAULT_JEWELRY_SHOWCASE[0],
+          DEFAULT_BEAUTY_SHOWCASE[0],
+          DEFAULT_JEWELRY_SHOWCASE[3],
+          DEFAULT_BEAUTY_SHOWCASE[2],
+        ];
 
   const jewelryCover = jewelryProducts?.[0]?.images?.[0]?.url || LUXURY_FALLBACK_IMAGE;
   const beautyCover = beautyProducts?.[0]?.images?.[0]?.url || LUXURY_FALLBACK_IMAGE;
@@ -117,9 +128,6 @@ export default async function HomePage() {
             <img
               src={jewelryCover}
               alt="Fine Jewellery Wing"
-              onError={(e) => {
-                (e.currentTarget as HTMLImageElement).src = LUXURY_FALLBACK_IMAGE;
-              }}
               className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#25050D]/95 via-[#25050D]/40 to-transparent" />
@@ -153,9 +161,6 @@ export default async function HomePage() {
             <img
               src={beautyCover}
               alt="Skincare & Hair Wing"
-              onError={(e) => {
-                (e.currentTarget as HTMLImageElement).src = LUXURY_FALLBACK_IMAGE;
-              }}
               className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#25050D]/95 via-[#25050D]/40 to-transparent" />
@@ -343,7 +348,6 @@ export default async function HomePage() {
       </section>
 
       <RecentSalesToast />
-      <MobileBottomBar />
     </div>
   );
 }
