@@ -131,7 +131,7 @@ export const DEFAULT_JEWELRY_SHOWCASE: CatalogItem[] = [
     isDeal: true,
     dealBadge: "ROYAL ATELIER",
     tags: ["18K Gold", "Baroque Pearl", "Bridal"],
-    images: [{ id: "img-j1", url: LUXURY_FALLBACK_IMAGE, isPrimary: true, sortOrder: 0 }],
+    images: [{ id: "img-j1", url: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80", isPrimary: true, sortOrder: 0 }],
     createdAt: "2026-10-01T00:00:00.000Z",
   },
   {
@@ -151,7 +151,7 @@ export const DEFAULT_JEWELRY_SHOWCASE: CatalogItem[] = [
     isPublished: true,
     isFeatured: true,
     tags: ["Solitaire", "Zircon", "18K Plated"],
-    images: [{ id: "img-j2", url: LUXURY_FALLBACK_IMAGE, isPrimary: true, sortOrder: 0 }],
+    images: [{ id: "img-j2", url: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80", isPrimary: true, sortOrder: 0 }],
     createdAt: "2026-10-01T00:00:00.000Z",
   },
   {
@@ -171,7 +171,7 @@ export const DEFAULT_JEWELRY_SHOWCASE: CatalogItem[] = [
     isPublished: true,
     isFeatured: true,
     tags: ["Meenakari", "Chandbalis", "Traditional"],
-    images: [{ id: "img-j3", url: LUXURY_FALLBACK_IMAGE, isPrimary: true, sortOrder: 0 }],
+    images: [{ id: "img-j3", url: "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=800&q=80", isPrimary: true, sortOrder: 0 }],
     createdAt: "2026-10-01T00:00:00.000Z",
   },
   {
@@ -193,7 +193,7 @@ export const DEFAULT_JEWELRY_SHOWCASE: CatalogItem[] = [
     isDeal: true,
     dealBadge: "HOT SELLER",
     tags: ["Tennis Bracelet", "Zircon", "Tarnish-Free"],
-    images: [{ id: "img-j4", url: LUXURY_FALLBACK_IMAGE, isPrimary: true, sortOrder: 0 }],
+    images: [{ id: "img-j4", url: "https://images.unsplash.com/photo-1611591475878-360cb4cb941e?auto=format&fit=crop&w=800&q=80", isPrimary: true, sortOrder: 0 }],
     createdAt: "2026-10-01T00:00:00.000Z",
   },
 ];
@@ -218,7 +218,7 @@ export const DEFAULT_BEAUTY_SHOWCASE: CatalogItem[] = [
     isDeal: true,
     dealBadge: "BESTSELLER",
     tags: ["Facewash", "Rose", "Silk Peptides"],
-    images: [{ id: "img-b1", url: LUXURY_FALLBACK_IMAGE, isPrimary: true, sortOrder: 0 }],
+    images: [{ id: "img-b1", url: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80", isPrimary: true, sortOrder: 0 }],
     createdAt: "2026-10-01T00:00:00.000Z",
   },
   {
@@ -238,7 +238,7 @@ export const DEFAULT_BEAUTY_SHOWCASE: CatalogItem[] = [
     isPublished: true,
     isFeatured: true,
     tags: ["Hair Oil", "Argan", "Silk Glaze"],
-    images: [{ id: "img-b2", url: LUXURY_FALLBACK_IMAGE, isPrimary: true, sortOrder: 0 }],
+    images: [{ id: "img-b2", url: "https://images.unsplash.com/photo-1608248597359-54848126b86b?auto=format&fit=crop&w=800&q=80", isPrimary: true, sortOrder: 0 }],
     createdAt: "2026-10-01T00:00:00.000Z",
   },
   {
@@ -260,7 +260,7 @@ export const DEFAULT_BEAUTY_SHOWCASE: CatalogItem[] = [
     isDeal: true,
     dealBadge: "VIRAL DROP",
     tags: ["Lip Oil", "24K Gold", "Hydration"],
-    images: [{ id: "img-b3", url: LUXURY_FALLBACK_IMAGE, isPrimary: true, sortOrder: 0 }],
+    images: [{ id: "img-b3", url: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=800&q=80", isPrimary: true, sortOrder: 0 }],
     createdAt: "2026-10-01T00:00:00.000Z",
   },
   {
@@ -280,7 +280,7 @@ export const DEFAULT_BEAUTY_SHOWCASE: CatalogItem[] = [
     isPublished: true,
     isFeatured: true,
     tags: ["Serum", "Glow", "Silk Dew"],
-    images: [{ id: "img-b4", url: LUXURY_FALLBACK_IMAGE, isPrimary: true, sortOrder: 0 }],
+    images: [{ id: "img-b4", url: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80", isPrimary: true, sortOrder: 0 }],
     createdAt: "2026-10-01T00:00:00.000Z",
   },
 ];

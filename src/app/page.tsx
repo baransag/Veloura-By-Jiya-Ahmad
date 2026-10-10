@@ -42,8 +42,12 @@ export default async function HomePage() {
           DEFAULT_BEAUTY_SHOWCASE[2],
         ];
 
-  const jewelryCover = jewelryProducts?.[0]?.images?.[0]?.url || LUXURY_FALLBACK_IMAGE;
-  const beautyCover = beautyProducts?.[0]?.images?.[0]?.url || LUXURY_FALLBACK_IMAGE;
+  const jewelryCover =
+    jewelryProducts?.[0]?.images?.[0]?.url ||
+    "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1000&q=80";
+  const beautyCover =
+    beautyProducts?.[0]?.images?.[0]?.url ||
+    "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1000&q=80";
 
 
   const whatsAppUrl = getBaseWhatsAppUrl(OFFICIAL_WHATSAPP_NUMBER);

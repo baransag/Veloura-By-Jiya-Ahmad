@@ -6,7 +6,7 @@
       "email": "admin@veloura.pk",
       "phone": "+92 321 9954325",
       "role": "ADMIN",
-      "passwordHash": "$2a$10$w09u7uR2c8i2f6TzYdGvye0bZ0b3z4q7l8m9n0p1q2r3s4t5u6v7w",
+      "passwordHash": "$2a$10$bkiZ5AKUsindNlxkOClbDuHI76jlKp5U6GPa/9B9CuGY.SS3ogQYa",
       "status": "ACTIVE",
       "createdAt": "2026-10-01T00:00:00.000Z"
     },
@@ -16,7 +16,7 @@
       "email": "admin@veloura.com",
       "phone": "+92 321 9954325",
       "role": "ADMIN",
-      "passwordHash": "$2a$10$w09u7uR2c8i2f6TzYdGvye0bZ0b3z4q7l8m9n0p1q2r3s4t5u6v7w",
+      "passwordHash": "$2a$10$bkiZ5AKUsindNlxkOClbDuHI76jlKp5U6GPa/9B9CuGY.SS3ogQYa",
       "status": "ACTIVE",
       "createdAt": "2026-10-01T00:00:00.000Z"
     }
@@ -103,5 +103,458 @@
       "createdAt": "2026-10-01T00:00:00.000Z"
     }
   ],
-  "products": []
+  "products": [
+    {
+      "id": "prod-jw-01",
+      "name": "Imperial Baroque Freshwater Pearl & Emerald Drop Necklace",
+      "slug": "imperial-baroque-pearl-emerald-necklace",
+      "description": "Handcrafted 18K gold-plated bridal choker stringed with organic natural baroque pearls and deep Colombian emerald cut drop. Hypoallergenic, tarnish-free, and presented in a velvet keepsake box.",
+      "shortDescription": "18K gold-plated bridal choker with organic baroque pearls & emerald drop.",
+      "price": 4850,
+      "salePrice": 3950,
+      "sku": "VEL-JW-01",
+      "category": {
+        "id": "cat-chokers",
+        "name": "Bridal Chokers & Necklaces",
+        "slug": "chokers-necklaces"
+      },
+      "universe": "JEWELRY",
+      "subCategory": "Bridal Chokers & Necklaces",
+      "brand": "VELOURA Haute Joaillerie",
+      "stock": 12,
+      "isPublished": true,
+      "isFeatured": true,
+      "isDeal": true,
+      "dealBadge": "ROYAL ATELIER",
+      "tags": ["18K Gold", "Baroque Pearl", "Bridal", "Emerald"],
+      "images": [
+        {
+          "id": "img-jw-01",
+          "url": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+          "alt": "Imperial Baroque Pearl Choker",
+          "isPrimary": true,
+          "sortOrder": 0
+        }
+      ],
+      "sellerId": "usr-admin-1",
+      "sellerName": "Veloura Atelier Admin",
+      "sellerShopName": "Veloura Haute Atelier",
+      "adminProfitMargin": 15,
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "prod-jw-02",
+      "name": "2-Carat Royal Tiara Crown Solitaire Ring",
+      "slug": "2-carat-royal-crown-solitaire-ring",
+      "description": "Brilliant 2-carat diamond simulant zircon set in a four-prong royal tiara crown setting with micropavé shank. Triple 18K gold-plated with mirror rhodium finish.",
+      "shortDescription": "2-carat royal solitaire ring in tiara crown setting.",
+      "price": 3400,
+      "salePrice": 2800,
+      "sku": "VEL-JW-02",
+      "category": {
+        "id": "cat-rings",
+        "name": "Rings & Solitaires",
+        "slug": "rings-solitaires"
+      },
+      "universe": "JEWELRY",
+      "subCategory": "Rings & Solitaires",
+      "brand": "VELOURA Haute Joaillerie",
+      "stock": 18,
+      "isPublished": true,
+      "isFeatured": true,
+      "isDeal": false,
+      "tags": ["Solitaire", "Zircon", "18K Plated", "Crown Ring"],
+      "images": [
+        {
+          "id": "img-jw-02",
+          "url": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80",
+          "alt": "Royal Crown Solitaire Ring",
+          "isPrimary": true,
+          "sortOrder": 0
+        }
+      ],
+      "sellerId": "usr-admin-1",
+      "sellerName": "Veloura Atelier Admin",
+      "sellerShopName": "Veloura Haute Atelier",
+      "adminProfitMargin": 15,
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "prod-jw-03",
+      "name": "Handcrafted Mughal Meenakari Pearl Chandbalis",
+      "slug": "handcrafted-mughal-meenakari-pearl-chandbalis",
+      "description": "Authentic hand-painted Meenakari floral earrings with hanging pearl clusters and 22K gold foil finish. Traditional Pakistani heritage craftsmanship.",
+      "shortDescription": "Hand-painted Mughal Meenakari chandbalis with pearl tassels.",
+      "price": 4200,
+      "salePrice": 3500,
+      "sku": "VEL-JW-03",
+      "category": {
+        "id": "cat-earrings",
+        "name": "Earrings & Traditional Jhumkas",
+        "slug": "earrings-jhumkas"
+      },
+      "universe": "JEWELRY",
+      "subCategory": "Earrings & Traditional Jhumkas",
+      "brand": "VELOURA Haute Joaillerie",
+      "stock": 9,
+      "isPublished": true,
+      "isFeatured": true,
+      "isDeal": true,
+      "dealBadge": "HERITAGE PIECE",
+      "tags": ["Meenakari", "Chandbalis", "Traditional", "Jhumkas"],
+      "images": [
+        {
+          "id": "img-jw-03",
+          "url": "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=800&q=80",
+          "alt": "Mughal Meenakari Chandbalis",
+          "isPrimary": true,
+          "sortOrder": 0
+        }
+      ],
+      "sellerId": "usr-admin-1",
+      "sellerName": "Veloura Atelier Admin",
+      "sellerShopName": "Veloura Haute Atelier",
+      "adminProfitMargin": 15,
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "prod-jw-04",
+      "name": "Celestial Pavé Diamond Zircon Tennis Bracelet",
+      "slug": "celestial-pave-diamond-zircon-tennis-bracelet",
+      "description": "Triple-layer 18K gold-plated tennis bracelet with AAAAA sparkle zircons and double security box clasp. Water-resistant and tarnish-free.",
+      "shortDescription": "Triple 18K gold-plated tennis bracelet with AAAAA zircons.",
+      "price": 3800,
+      "salePrice": 3200,
+      "sku": "VEL-JW-04",
+      "category": {
+        "id": "cat-bangles",
+        "name": "Royal Kundan & Bangles",
+        "slug": "kundan-bangles"
+      },
+      "universe": "JEWELRY",
+      "subCategory": "Royal Kundan & Bangles",
+      "brand": "VELOURA Haute Joaillerie",
+      "stock": 15,
+      "isPublished": true,
+      "isFeatured": true,
+      "isDeal": true,
+      "dealBadge": "VIRAL SPARKLE",
+      "tags": ["Tennis Bracelet", "Zircon", "Tarnish-Free"],
+      "images": [
+        {
+          "id": "img-jw-04",
+          "url": "https://images.unsplash.com/photo-1611591475878-360cb4cb941e?auto=format&fit=crop&w=800&q=80",
+          "alt": "Diamond Zircon Tennis Bracelet",
+          "isPrimary": true,
+          "sortOrder": 0
+        }
+      ],
+      "sellerId": "usr-admin-1",
+      "sellerName": "Veloura Atelier Admin",
+      "sellerShopName": "Veloura Haute Atelier",
+      "adminProfitMargin": 15,
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "prod-jw-05",
+      "name": "22K Gold Plated Polki Diamond Bridal Choker Set",
+      "slug": "22k-gold-plated-polki-diamond-bridal-choker-set",
+      "description": "Complete heirloom bridal necklace set with matching drop jhumkas and maang tikka. Set with uncut Polki glass diamonds and green hydro pearls.",
+      "shortDescription": "Complete Polki bridal necklace set with jhumkas & maang tikka.",
+      "price": 6500,
+      "salePrice": 5400,
+      "sku": "VEL-JW-05",
+      "category": {
+        "id": "cat-chokers",
+        "name": "Bridal Chokers & Necklaces",
+        "slug": "chokers-necklaces"
+      },
+      "universe": "JEWELRY",
+      "subCategory": "Bridal Chokers & Necklaces",
+      "brand": "VELOURA Haute Joaillerie",
+      "stock": 7,
+      "isPublished": true,
+      "isFeatured": true,
+      "isDeal": true,
+      "dealBadge": "BRIDAL LUXE",
+      "tags": ["Polki", "Bridal Set", "22K Plated"],
+      "images": [
+        {
+          "id": "img-jw-05",
+          "url": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
+          "alt": "Polki Diamond Bridal Choker Set",
+          "isPrimary": true,
+          "sortOrder": 0
+        }
+      ],
+      "sellerId": "usr-admin-1",
+      "sellerName": "Veloura Atelier Admin",
+      "sellerShopName": "Veloura Haute Atelier",
+      "adminProfitMargin": 15,
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "prod-jw-06",
+      "name": "Vintage Victorian Baroque Pearl Drop Earrings",
+      "slug": "vintage-victorian-baroque-pearl-drop-earrings",
+      "description": "Statement asymmetrical baroque natural pearl drops hanging from 18K gold huggie hoops. Lightweight and elegant for festive evenings.",
+      "shortDescription": "Statement natural baroque pearl drops on 18K huggies.",
+      "price": 2950,
+      "salePrice": 2400,
+      "sku": "VEL-JW-06",
+      "category": {
+        "id": "cat-earrings",
+        "name": "Earrings & Traditional Jhumkas",
+        "slug": "earrings-jhumkas"
+      },
+      "universe": "JEWELRY",
+      "subCategory": "Earrings & Traditional Jhumkas",
+      "brand": "VELOURA Haute Joaillerie",
+      "stock": 22,
+      "isPublished": true,
+      "isFeatured": true,
+      "isDeal": false,
+      "tags": ["Baroque Pearl", "Earrings", "Gold Huggies"],
+      "images": [
+        {
+          "id": "img-jw-06",
+          "url": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
+          "alt": "Baroque Pearl Drop Earrings",
+          "isPrimary": true,
+          "sortOrder": 0
+        }
+      ],
+      "sellerId": "usr-admin-1",
+      "sellerName": "Veloura Atelier Admin",
+      "sellerShopName": "Veloura Haute Atelier",
+      "adminProfitMargin": 15,
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "prod-bt-01",
+      "name": "Damask Rose & Silk Peptide Gentle Foaming Cleanser",
+      "slug": "damask-rose-silk-peptide-foaming-cleanser",
+      "description": "Ultra-gentle cloud foaming facewash infused with organic Damask rose hydrosol, bio-fermented silk peptides, and niacinamide. Maintains skin moisture barrier without stripping.",
+      "shortDescription": "Cloud foaming facewash with Damask rose & silk peptides.",
+      "price": 2450,
+      "salePrice": 1950,
+      "sku": "VEL-BT-01",
+      "category": {
+        "id": "cat-facewash",
+        "name": "Facewash & Cleansers",
+        "slug": "facewash-cleansers"
+      },
+      "universe": "BEAUTY_SKIN_HAIR",
+      "subCategory": "Facewash & Cleansers",
+      "brand": "VELOURA Botanical Atelier",
+      "stock": 35,
+      "isPublished": true,
+      "isFeatured": true,
+      "isDeal": true,
+      "dealBadge": "CLOUD FOAM",
+      "tags": ["Facewash", "Rose", "Silk Peptides"],
+      "images": [
+        {
+          "id": "img-bt-01",
+          "url": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
+          "alt": "Damask Rose Foaming Cleanser",
+          "isPrimary": true,
+          "sortOrder": 0
+        }
+      ],
+      "sellerId": "usr-admin-1",
+      "sellerName": "Veloura Atelier Admin",
+      "sellerShopName": "Veloura Haute Atelier",
+      "adminProfitMargin": 15,
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "prod-bt-02",
+      "name": "Bio-Fermented Silk Dew Glow Recovery Serum",
+      "slug": "bio-fermented-silk-dew-glow-recovery-serum",
+      "description": "Concentrated dewy barrier nectar with 5% multi-molecular hyaluronic acid, white truffle extract, and pure silk amino acids for radiant plump skin.",
+      "shortDescription": "5% HA & silk peptide dewy glow recovery serum.",
+      "price": 3600,
+      "salePrice": 2950,
+      "sku": "VEL-BT-02",
+      "category": {
+        "id": "cat-skincare",
+        "name": "Silk Skincare & Serums",
+        "slug": "silk-skincare"
+      },
+      "universe": "BEAUTY_SKIN_HAIR",
+      "subCategory": "Silk Skincare & Serums",
+      "brand": "VELOURA Botanical Atelier",
+      "stock": 25,
+      "isPublished": true,
+      "isFeatured": true,
+      "isDeal": true,
+      "dealBadge": "GLASS SKIN",
+      "tags": ["Serum", "Glow", "Silk Dew", "Hyaluronic"],
+      "images": [
+        {
+          "id": "img-bt-02",
+          "url": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80",
+          "alt": "Silk Dew Glow Recovery Serum",
+          "isPrimary": true,
+          "sortOrder": 0
+        }
+      ],
+      "sellerId": "usr-admin-1",
+      "sellerName": "Veloura Atelier Admin",
+      "sellerShopName": "Veloura Haute Atelier",
+      "adminProfitMargin": 15,
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "prod-bt-03",
+      "name": "Moroccan Cashmere Silk Nourishing Hair Oil Elixir",
+      "slug": "moroccan-cashmere-silk-nourishing-hair-oil-elixir",
+      "description": "Featherweight golden hair nectar enriched with pure cold-pressed Moroccan argan, camellia seed oil, and hydrolysed silk for 48h mirror shine and heat protection.",
+      "shortDescription": "Moroccan argan & hydrolysed silk hair oil elixir.",
+      "price": 3200,
+      "salePrice": 2650,
+      "sku": "VEL-BT-03",
+      "category": {
+        "id": "cat-hair",
+        "name": "Hair Elixirs & Fragrance",
+        "slug": "hair-fragrance"
+      },
+      "universe": "BEAUTY_SKIN_HAIR",
+      "subCategory": "Hair Elixirs & Fragrance",
+      "brand": "VELOURA Botanical Atelier",
+      "stock": 28,
+      "isPublished": true,
+      "isFeatured": true,
+      "isDeal": true,
+      "dealBadge": "MIRROR SHINE",
+      "tags": ["Hair Oil", "Argan", "Silk Glaze"],
+      "images": [
+        {
+          "id": "img-bt-03",
+          "url": "https://images.unsplash.com/photo-1608248597359-54848126b86b?auto=format&fit=crop&w=800&q=80",
+          "alt": "Cashmere Silk Hair Oil Elixir",
+          "isPrimary": true,
+          "sortOrder": 0
+        }
+      ],
+      "sellerId": "usr-admin-1",
+      "sellerName": "Veloura Atelier Admin",
+      "sellerShopName": "Veloura Haute Atelier",
+      "adminProfitMargin": 15,
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "prod-bt-04",
+      "name": "24K Gold Flecked Velvet Hydration Lip Oil",
+      "slug": "24k-gold-flecked-velvet-hydration-lip-oil",
+      "description": "Mirror-shine plumping lip glaze suspended with authentic 24K gold flakes, cold-pressed rosehip seed extract, and hyaluronic filling spheres. 12-hour weightless moisture.",
+      "shortDescription": "24K gold-infused plumping velvet lip oil nectar.",
+      "price": 1850,
+      "salePrice": 1450,
+      "sku": "VEL-BT-04",
+      "category": {
+        "id": "cat-lips",
+        "name": "Luxe Lip Care & Velvet Rouges",
+        "slug": "luxe-lips"
+      },
+      "universe": "BEAUTY_SKIN_HAIR",
+      "subCategory": "Luxe Lip Care & Velvet Rouges",
+      "brand": "VELOURA Botanical Atelier",
+      "stock": 40,
+      "isPublished": true,
+      "isFeatured": true,
+      "isDeal": true,
+      "dealBadge": "VIRAL DROP",
+      "tags": ["Lip Oil", "24K Gold", "Hydration", "Plumping"],
+      "images": [
+        {
+          "id": "img-bt-04",
+          "url": "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=800&q=80",
+          "alt": "24K Gold Velvet Lip Oil",
+          "isPrimary": true,
+          "sortOrder": 0
+        }
+      ],
+      "sellerId": "usr-admin-1",
+      "sellerName": "Veloura Atelier Admin",
+      "sellerShopName": "Veloura Haute Atelier",
+      "adminProfitMargin": 15,
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "prod-bt-05",
+      "name": "Botanical Silk Micro-Exfoliating 24K Gold Face Polish",
+      "slug": "botanical-silk-micro-exfoliating-gold-face-polish",
+      "description": "Luxurious whipped micro-polish cream with spherical jojoba beads, colloidal 24K gold, and silk protein to buff away dullness without micro-tears.",
+      "shortDescription": "24K gold & silk whipped micro-exfoliating face polish.",
+      "price": 2750,
+      "salePrice": 2200,
+      "sku": "VEL-BT-05",
+      "category": {
+        "id": "cat-facewash",
+        "name": "Facewash & Cleansers",
+        "slug": "facewash-cleansers"
+      },
+      "universe": "BEAUTY_SKIN_HAIR",
+      "subCategory": "Facewash & Cleansers",
+      "brand": "VELOURA Botanical Atelier",
+      "stock": 20,
+      "isPublished": true,
+      "isFeatured": true,
+      "isDeal": false,
+      "tags": ["Face Polish", "Exfoliator", "24K Gold"],
+      "images": [
+        {
+          "id": "img-bt-05",
+          "url": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=80",
+          "alt": "Micro-Exfoliating Face Polish",
+          "isPrimary": true,
+          "sortOrder": 0
+        }
+      ],
+      "sellerId": "usr-admin-1",
+      "sellerName": "Veloura Atelier Admin",
+      "sellerShopName": "Veloura Haute Atelier",
+      "adminProfitMargin": 15,
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "prod-bt-06",
+      "name": "Damask Rose Water Hydrosol Calming Facial Mist",
+      "slug": "damask-rose-water-hydrosol-calming-mist",
+      "description": "Steam-distilled pure Rosa Damascena floral toner with organic aloe vera and glycerin. Soothes redness, tightens pores, and preps skin for serums.",
+      "shortDescription": "Pure Damask rose steam-distilled calming facial toner.",
+      "price": 1950,
+      "salePrice": 1600,
+      "sku": "VEL-BT-06",
+      "category": {
+        "id": "cat-skincare",
+        "name": "Silk Skincare & Serums",
+        "slug": "silk-skincare"
+      },
+      "universe": "BEAUTY_SKIN_HAIR",
+      "subCategory": "Silk Skincare & Serums",
+      "brand": "VELOURA Botanical Atelier",
+      "stock": 30,
+      "isPublished": true,
+      "isFeatured": true,
+      "isDeal": false,
+      "tags": ["Rose Water", "Hydrosol", "Toner", "Mist"],
+      "images": [
+        {
+          "id": "img-bt-06",
+          "url": "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=800&q=80",
+          "alt": "Damask Rose Hydrosol Facial Mist",
+          "isPrimary": true,
+          "sortOrder": 0
+        }
+      ],
+      "sellerId": "usr-admin-1",
+      "sellerName": "Veloura Atelier Admin",
+      "sellerShopName": "Veloura Haute Atelier",
+      "adminProfitMargin": 15,
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    }
+  ]
 }
